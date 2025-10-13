@@ -1,0 +1,23 @@
+AssetBasedSystem
+with core::*;
+
+import "platform:/plugin/core.abs.model.lib/models/core.abs";
+
+/*
+ *
+ */
+DefinitionGroup mydomain_def {
+	/* Concepts of domain mydomain_def */
+	AssetType ConceptA extends (Any) {
+		description "ConceptA is ..."
+		level "1"
+		reference conceptBs : ConceptB [*] 
+	}
+	AssetType ConceptB extends (Any) {
+		description "ConceptB is ..."
+		level "1"
+	}
+	
+	/* Contracts applying to the static structure of mydomain_def models */
+	
+}
