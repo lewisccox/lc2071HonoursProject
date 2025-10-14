@@ -1,7 +1,0 @@
-@startuml
-object "A1 : ConceptA" as A1 #lavender
-object "A2 : ConceptA" as A2 #lavender
-object "B1 : ConceptB" as B1 #lavender
-A1 -> B1 : conceptBs
-A2 -> B1 : conceptBs
-@enduml
