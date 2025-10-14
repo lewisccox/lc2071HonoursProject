@@ -1,0 +1,11 @@
+@startuml
+class ConceptA  {
+}
+class ConceptB  {
+}
+
+ConceptA -> "*" ConceptB : conceptBs
+
+ConceptA -up-|>  Any
+ConceptB -up-|>  Any
+@enduml
