@@ -1,0 +1,66 @@
+@startuml
+object "Ethernet : NetworkConnector" as Ethernet #LightBlue
+object "ControlRoom : Monitor" as ControlRoom #lavender
+object "Diagnostics : Monitor" as Diagnostics #lavender
+object "DataAquisition : Monitor" as DataAquisition #lavender
+object "TurbineController : PLC" as TurbineController #lavender
+object "SteamFlowController : PLC" as SteamFlowController #lavender
+object "FeedwaterController : PLC" as FeedwaterController #lavender
+object "ReactorController : PLC" as ReactorController #lavender
+object "ReactorSensor : Sensor" as ReactorSensor #lavender
+object "ReactorActuator : Actuator" as ReactorActuator #lavender
+object "FeedwaterSensor : Sensor" as FeedwaterSensor #lavender
+object "FeedwaterActuator : Actuator" as FeedwaterActuator #lavender
+object "SteamFlowSensor : Sensor" as SteamFlowSensor #lavender
+object "SteamFlowActuator : Actuator" as SteamFlowActuator #lavender
+object "TurbineSensor : Sensor" as TurbineSensor #lavender
+object "TurbineActuator : Actuator" as TurbineActuator #lavender
+object "Turbine : IndustrialComponent" as Turbine #lavender
+object "Reactor : IndustrialComponent" as Reactor #lavender
+object "Pipe : IndustrialComponent" as Pipe #lavender
+object "SteamGenerator : IndustrialComponent" as SteamGenerator #lavender
+Diagnostics -up-> Ethernet : Connector
+ControlRoom -up-> Ethernet : Connector
+DataAquisition -up-> Ethernet : Connector
+Ethernet --> ControlRoom : Monitors
+Ethernet --> DataAquisition : Monitors
+Ethernet --> Diagnostics : Monitors
+Diagnostics -> ControlRoom : SiblingMonitor
+Diagnostics -> DataAquisition : SiblingMonitor
+DataAquisition -> Diagnostics : SiblingMonitor
+DataAquisition -> ControlRoom : SiblingMonitor
+ControlRoom -> Diagnostics : SiblingMonitor
+ControlRoom -> DataAquisition : SiblingMonitor
+Ethernet --> TurbineController : PLCs
+Ethernet --> SteamFlowController : PLCs
+Ethernet --> FeedwaterController : PLCs
+Ethernet --> ReactorController : PLCs
+ReactorController -up-> Ethernet : Connector
+TurbineController -up-> Ethernet : Connector
+SteamFlowController -up-> Ethernet : Connector
+FeedwaterController -up-> Ethernet : Connector
+TurbineController -> TurbineActuator : ChildActuator
+ReactorController -> ReactorActuator : ChildActuator
+FeedwaterController -> FeedwaterActuator : ChildActuator
+SteamFlowController -> SteamFlowActuator : ChildActuator
+SteamFlowController -> SteamFlowSensor : ChildSensor
+TurbineController -> TurbineSensor : ChildSensor
+ReactorController -> ReactorSensor : ChildSensor
+FeedwaterController -> FeedwaterSensor : ChildSensor
+FeedwaterActuator -> Pipe : ChildComponent
+ReactorActuator -> Reactor : ChildComponent
+SteamFlowActuator -> SteamGenerator : ChildComponent
+TurbineActuator -> Turbine : ChildComponent
+TurbineSensor -> Turbine : ChildComponent
+SteamFlowSensor -> SteamGenerator : ChildComponent
+ReactorSensor -> Reactor : ChildComponent
+FeedwaterSensor -> Pipe : ChildComponent
+FeedwaterSensor -> FeedwaterController : ParentPLC
+ReactorSensor -> ReactorController : ParentPLC
+SteamFlowSensor -> SteamFlowController : ParentPLC
+TurbineSensor -> TurbineController : ParentPLC
+Pipe -> FeedwaterSensor : ParentSensor
+Reactor -> ReactorSensor : ParentSensor
+Turbine -> TurbineSensor : ParentSensor
+SteamGenerator -> SteamFlowSensor : ParentSensor
+@enduml

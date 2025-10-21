@@ -1,0 +1,33 @@
+@startuml
+class NetworkConnector  {
+}
+class Monitor  {
+}
+class PLC  {
+}
+class IndustrialComponent  {
+}
+class Actuator  {
+}
+class Sensor  {
+}
+
+NetworkConnector -> "*" PLC : PLCs
+NetworkConnector -> "*" Monitor : Monitors
+Monitor -> "*" Monitor : SiblingMonitor
+Monitor -> "*" NetworkConnector : Connector
+PLC -> "*" NetworkConnector : Connector
+PLC -> "*" Actuator : ChildActuator
+PLC -> "*" Sensor : ChildSensor
+IndustrialComponent -> "*" Sensor : ParentSensor
+Actuator -> "*" IndustrialComponent : ChildComponent
+Sensor -> "*" IndustrialComponent : ChildComponent
+Sensor -> "*" PLC : ParentPLC
+
+NetworkConnector -up-|>  Any
+Monitor -up-|>  Any
+PLC -up-|>  Any
+IndustrialComponent -up-|>  Any
+Actuator -up-|>  Any
+Sensor -up-|>  Any
+@enduml

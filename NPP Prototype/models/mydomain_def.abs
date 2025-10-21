@@ -8,16 +8,43 @@ import "platform:/plugin/core.abs.model.lib/models/core.abs";
  */
 DefinitionGroup mydomain_def {
 	/* Concepts of domain mydomain_def */
-	AssetType ConceptA extends (Any) {
-		description "ConceptA is ..."
-		level "1"
-		reference conceptBs : ConceptB [*] 
+	AssetType NetworkConnector extends (Any) {
+		description "Connects two components together"
+		level "2"
+		reference PLCs : PLC[*] //
+		reference Monitors : Monitor [*] //
 	}
-	AssetType ConceptB extends (Any) {
-		description "ConceptB is ..."
+	AssetType Monitor extends (Any) {
+		description "Provides a high-level overview of component activity"
 		level "1"
+		reference SiblingMonitor : Monitor[*] // 
+		reference Connector : NetworkConnector[*]// 
+	}
+	AssetType PLC extends (Any) {
+		description "Programmable logic controller- runs arbitrary code to control industrial components"
+		level "1"
+		reference Connector : NetworkConnector [*] //
+		reference ChildActuator : Actuator[*]//
+		reference ChildSensor : Sensor[*]//
+	}
+
+	AssetType IndustrialComponent extends (Any) {
+		description "End Point Components i.e. turbines,steam generators etc."
+		level "1"
+		reference ParentSensor : Sensor[*]//
+	}
+	AssetType Actuator extends (Any) {
+		description "receives a signal from the PLC to perform an action on the industrial component"
+		level "1"
+		reference ChildComponent : IndustrialComponent[*]//
 	}
 	
+	AssetType Sensor extends (Any) {
+		description "receives input from the industrial component and takes reading as to it's status"
+		level "1"
+		reference ChildComponent : IndustrialComponent[*]//
+		reference ParentPLC : PLC [*]//
+	}
 	/* Contracts applying to the static structure of mydomain_def models */
 	
 }

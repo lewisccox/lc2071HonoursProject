@@ -1,0 +1,36 @@
+AssetBasedSystem
+import "platform:/resource/lc2071HonoursProject/NPP Prototype/models/mydomain_def.abs";
+Locale {
+	locale = ""
+	DefinitionGroup mydomain_def {
+		AssetType NetworkConnector = "NetworkConnector" {
+			description = "Connects two components together"
+			reference PLCs = "PLCs"
+			reference Monitors = "Monitors"
+		}
+		AssetType Monitor = "Monitor" {
+			description = "Provides a high-level overview of component activity"
+			reference SiblingMonitor = "SiblingMonitor"
+			reference Connector = "Connector"
+		}
+		AssetType PLC = "PLC" {
+			description = "Programmable logic controller- runs arbitrary code to control industrial components"
+			reference Connector = "Connector"
+			reference ChildActuator = "ChildActuator"
+			reference ChildSensor = "ChildSensor"
+		}
+		AssetType IndustrialComponent = "IndustrialComponent" {
+			description = "End Point Components i.e. turbines,steam generators etc."
+			reference ParentSensor = "ParentSensor"
+		}
+		AssetType Actuator = "Actuator" {
+			description = "receives a signal from the PLC to perform an action on the industrial component"
+			reference ChildComponent = "ChildComponent"
+		}
+		AssetType Sensor = "Sensor" {
+			description = "receives input from the industrial component and takes reading as to it's status"
+			reference ChildComponent = "ChildComponent"
+			reference ParentPLC = "ParentPLC"
+		}
+	}
+}
