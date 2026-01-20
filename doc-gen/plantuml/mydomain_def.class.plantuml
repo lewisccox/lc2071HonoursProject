@@ -3,21 +3,27 @@ class NetworkConnector  {
 	trafficLevel : Integer
 	trafficCapacity : Integer
 	online : Boolean
+	compromised : Boolean
 }
 class Monitor  {
 	online : Boolean
+	compromised : Boolean
 }
 class PLC  {
 	online : Boolean
+	compromised : Boolean
 }
 class IndustrialComponent  {
 	online : Boolean
+	compromised : Boolean
 }
 class Actuator  {
 	online : Boolean
+	compromised : Boolean
 }
 class Sensor  {
 	online : Boolean
+	compromised : Boolean
 }
 
 NetworkConnector -> "*" PLC : PLCs
