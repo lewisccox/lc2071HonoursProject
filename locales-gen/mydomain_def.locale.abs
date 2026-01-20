@@ -5,30 +5,38 @@ Locale {
 	DefinitionGroup mydomain_def {
 		AssetType NetworkConnector = "NetworkConnector" {
 			description = "Connects two components together"
+			attribute trafficLevel = "trafficLevel"
+			attribute trafficCapacity = "trafficCapacity"
+			attribute online = "online"
 			reference PLCs = "PLCs"
 			reference Monitors = "Monitors"
 		}
 		AssetType Monitor = "Monitor" {
 			description = "Provides a high-level overview of component activity"
+			attribute online = "online"
 			reference SiblingMonitor = "SiblingMonitor"
 			reference Connector = "Connector"
 		}
 		AssetType PLC = "PLC" {
 			description = "Programmable logic controller- runs arbitrary code to control industrial components"
+			attribute online = "online"
 			reference Connector = "Connector"
 			reference ChildActuator = "ChildActuator"
 			reference ChildSensor = "ChildSensor"
 		}
 		AssetType IndustrialComponent = "IndustrialComponent" {
 			description = "End Point Components i.e. turbines,steam generators etc."
+			attribute online = "online"
 			reference ParentSensor = "ParentSensor"
 		}
 		AssetType Actuator = "Actuator" {
 			description = "receives a signal from the PLC to perform an action on the industrial component"
+			attribute online = "online"
 			reference ChildComponent = "ChildComponent"
 		}
 		AssetType Sensor = "Sensor" {
 			description = "receives input from the industrial component and takes reading as to it's status"
+			attribute online = "online"
 			reference ChildComponent = "ChildComponent"
 			reference ParentPLC = "ParentPLC"
 		}

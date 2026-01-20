@@ -1,15 +1,23 @@
 @startuml
 class NetworkConnector  {
+	trafficLevel : Integer
+	trafficCapacity : Integer
+	online : Boolean
 }
 class Monitor  {
+	online : Boolean
 }
 class PLC  {
+	online : Boolean
 }
 class IndustrialComponent  {
+	online : Boolean
 }
 class Actuator  {
+	online : Boolean
 }
 class Sensor  {
+	online : Boolean
 }
 
 NetworkConnector -> "*" PLC : PLCs

@@ -13,26 +13,85 @@ AssetGroup  mymodel {
 	//Asset A1 : ConceptA {}
 	//Asset A2 : ConceptA {}
 	//Asset B1 : ConceptB {} 
-	Asset Ethernet : NetworkConnector {}
-	Asset ControlRoom : Monitor {}
-	Asset Diagnostics : Monitor {}
-	Asset DataAquisition : Monitor {}
-	Asset TurbineController : PLC {}
-	Asset SteamFlowController : PLC {}
-	Asset FeedwaterController : PLC {}
-	Asset ReactorController : PLC {}
-	Asset ReactorSensor : Sensor {}
-	Asset ReactorActuator : Actuator {}
-	Asset FeedwaterSensor : Sensor {}
-	Asset FeedwaterActuator : Actuator {}
-	Asset SteamFlowSensor : Sensor {}
-	Asset SteamFlowActuator : Actuator {}
-	Asset TurbineSensor : Sensor {}
-	Asset TurbineActuator : Actuator {}
-	Asset Turbine : IndustrialComponent {} 
-	Asset Reactor : IndustrialComponent {} 
-	Asset Pipe : IndustrialComponent {} 
-	Asset SteamGenerator : IndustrialComponent {} 
+	Asset Ethernet : NetworkConnector {
+		attribute trafficLevel := 0
+		attribute trafficCapacity := 1000
+		attribute online := 1
+	}
+	Asset ControlRoom : Monitor {
+		attribute online := 1
+	}
+	Asset Diagnostics : Monitor {
+		attribute online := 1
+	}
+	Asset DataAquisition : Monitor {
+		
+		attribute online := 1
+	}
+	Asset TurbineController : PLC {
+		
+		attribute online := 1
+	}
+	Asset SteamFlowController : PLC {
+		
+		attribute online := 1
+	}
+	Asset FeedwaterController : PLC {
+		
+		attribute online := 1
+	}
+	Asset ReactorController : PLC {
+		
+		attribute online := 1
+	}
+	Asset ReactorSensor : Sensor {
+		
+		attribute online := 1
+	}
+	Asset ReactorActuator : Actuator {
+		
+		attribute online := 1
+	}
+	Asset FeedwaterSensor : Sensor {
+		
+		attribute online := 1
+	}
+	Asset FeedwaterActuator : Actuator {
+		
+		attribute online := 1
+	}
+	Asset SteamFlowSensor : Sensor {
+		
+		attribute online := 1
+	}
+	Asset SteamFlowActuator : Actuator {
+		
+		attribute online := 1
+	}
+	Asset TurbineSensor : Sensor {
+		
+		attribute online := 1
+	}
+	Asset TurbineActuator : Actuator {
+		
+		attribute online := 1
+	}
+	Asset Turbine : IndustrialComponent {
+		
+		attribute online := 1
+	} 
+	Asset Reactor : IndustrialComponent {
+		
+		attribute online := 1
+	} 
+	Asset Pipe : IndustrialComponent {
+		
+		attribute online := 1
+	} 
+	Asset SteamGenerator : IndustrialComponent {
+		
+		attribute online := 1
+	} 
 	
 	
 	// list of links between mymodel assets
@@ -41,6 +100,15 @@ AssetGroup  mymodel {
 	link  Diagnostics to Ethernet as Monitor::Connector
 	link  ControlRoom to Ethernet as Monitor::Connector
 	link  DataAquisition to Ethernet as Monitor::Connector
+	link Ethernet to ReactorController as NetworkConnector::PLCs
+	link ReactorController to ReactorActuator as PLC::ChildActuator
+	link ReactorController to Ethernet as PLC::Connector
+	link ReactorActuator to Reactor as Actuator::ChildComponent
+	link ReactorController to ReactorSensor as PLC::ChildSensor
+	link ReactorSensor to ReactorController as Sensor::ParentPLC
+	link ReactorSensor to Reactor as Sensor::ChildComponent
+	link Reactor to ReactorSensor as IndustrialComponent::ParentSensor
+
 	link Ethernet to ControlRoom as NetworkConnector::Monitors
 	link Ethernet to DataAquisition as NetworkConnector::Monitors
 	link Ethernet to Diagnostics as NetworkConnector::Monitors
@@ -53,33 +121,25 @@ AssetGroup  mymodel {
 	link Ethernet to TurbineController as NetworkConnector::PLCs
 	link Ethernet to SteamFlowController as NetworkConnector::PLCs
 	link Ethernet to FeedwaterController as NetworkConnector::PLCs
-	link Ethernet to ReactorController as NetworkConnector::PLCs
-	link ReactorController to Ethernet as PLC::Connector
 	link TurbineController to Ethernet as PLC::Connector
 	link SteamFlowController to Ethernet as PLC::Connector
 	link FeedwaterController to Ethernet as PLC::Connector
 	link TurbineController to TurbineActuator as PLC::ChildActuator
-	link ReactorController to ReactorActuator as PLC::ChildActuator
 	link FeedwaterController to FeedwaterActuator as PLC::ChildActuator
 	link SteamFlowController to SteamFlowActuator as PLC::ChildActuator
 	link SteamFlowController to SteamFlowSensor as PLC::ChildSensor
 	link TurbineController to TurbineSensor as PLC::ChildSensor
-	link ReactorController to ReactorSensor as PLC::ChildSensor
 	link FeedwaterController to FeedwaterSensor as PLC::ChildSensor
 	link FeedwaterActuator to Pipe as Actuator::ChildComponent
-	link ReactorActuator to Reactor as Actuator::ChildComponent
 	link SteamFlowActuator to SteamGenerator as Actuator::ChildComponent
 	link TurbineActuator to Turbine as Actuator::ChildComponent
 	link TurbineSensor to Turbine as Sensor::ChildComponent
 	link SteamFlowSensor to SteamGenerator as Sensor::ChildComponent
-	link ReactorSensor to Reactor as Sensor::ChildComponent
 	link FeedwaterSensor to Pipe as Sensor::ChildComponent
 	link FeedwaterSensor to FeedwaterController as Sensor::ParentPLC
-	link ReactorSensor to ReactorController as Sensor::ParentPLC
 	link SteamFlowSensor to SteamFlowController as Sensor::ParentPLC
 	link TurbineSensor to TurbineController as Sensor::ParentPLC
 	link Pipe to FeedwaterSensor as IndustrialComponent::ParentSensor
-	link Reactor to ReactorSensor as IndustrialComponent::ParentSensor
 	link Turbine to TurbineSensor as IndustrialComponent::ParentSensor
 	link SteamGenerator to SteamFlowSensor as IndustrialComponent::ParentSensor
 }
