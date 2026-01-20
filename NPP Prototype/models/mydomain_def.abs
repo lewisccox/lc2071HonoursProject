@@ -16,6 +16,7 @@ DefinitionGroup mydomain_def {
 		attribute trafficLevel : Integer [1]
 		attribute trafficCapacity : Integer [1] //maximum possible bandwidth in mbps
 		attribute online : Boolean [1]
+		attribute compromised : Boolean [1]
 	}
 	AssetType Monitor extends (Any) {
 		description "Provides a high-level overview of component activity"
@@ -23,6 +24,7 @@ DefinitionGroup mydomain_def {
 		reference SiblingMonitor : Monitor[*] // 
 		reference Connector : NetworkConnector[*]// 
 		attribute online : Boolean [1]
+		attribute compromised : Boolean [1]
 	}
 	AssetType PLC extends (Any) {
 		description "Programmable logic controller- runs arbitrary code to control industrial components"
@@ -31,6 +33,7 @@ DefinitionGroup mydomain_def {
 		reference ChildActuator : Actuator[*]//
 		reference ChildSensor : Sensor[*]//
 		attribute online : Boolean [1]
+		attribute compromised : Boolean [1]
 	}
 
 	AssetType IndustrialComponent extends (Any) {
@@ -38,12 +41,14 @@ DefinitionGroup mydomain_def {
 		level "1"
 		reference ParentSensor : Sensor[*]//
 		attribute online : Boolean [1]
+		attribute compromised : Boolean [1]
 	}
 	AssetType Actuator extends (Any) {
 		description "receives a signal from the PLC to perform an action on the industrial component"
 		level "1"
 		reference ChildComponent : IndustrialComponent[*]//
 		attribute online : Boolean [1]
+		attribute compromised : Boolean [1]
 	}
 	
 	AssetType Sensor extends (Any) {
@@ -52,6 +57,7 @@ DefinitionGroup mydomain_def {
 		reference ChildComponent : IndustrialComponent[*]//
 		reference ParentPLC : PLC [*]//
 		attribute online : Boolean [1]
+		attribute compromised : Boolean [1]
 	}
 	/* Contracts applying to the static structure of mydomain_def models */
 	

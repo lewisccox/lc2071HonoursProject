@@ -8,18 +8,21 @@ Locale {
 			attribute trafficLevel = "trafficLevel"
 			attribute trafficCapacity = "trafficCapacity"
 			attribute online = "online"
+			attribute compromised = "compromised"
 			reference PLCs = "PLCs"
 			reference Monitors = "Monitors"
 		}
 		AssetType Monitor = "Monitor" {
 			description = "Provides a high-level overview of component activity"
 			attribute online = "online"
+			attribute compromised = "compromised"
 			reference SiblingMonitor = "SiblingMonitor"
 			reference Connector = "Connector"
 		}
 		AssetType PLC = "PLC" {
 			description = "Programmable logic controller- runs arbitrary code to control industrial components"
 			attribute online = "online"
+			attribute compromised = "compromised"
 			reference Connector = "Connector"
 			reference ChildActuator = "ChildActuator"
 			reference ChildSensor = "ChildSensor"
@@ -27,16 +30,19 @@ Locale {
 		AssetType IndustrialComponent = "IndustrialComponent" {
 			description = "End Point Components i.e. turbines,steam generators etc."
 			attribute online = "online"
+			attribute compromised = "compromised"
 			reference ParentSensor = "ParentSensor"
 		}
 		AssetType Actuator = "Actuator" {
 			description = "receives a signal from the PLC to perform an action on the industrial component"
 			attribute online = "online"
+			attribute compromised = "compromised"
 			reference ChildComponent = "ChildComponent"
 		}
 		AssetType Sensor = "Sensor" {
 			description = "receives input from the industrial component and takes reading as to it's status"
 			attribute online = "online"
+			attribute compromised = "compromised"
 			reference ChildComponent = "ChildComponent"
 			reference ParentPLC = "ParentPLC"
 		}

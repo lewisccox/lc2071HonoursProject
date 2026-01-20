@@ -17,78 +17,98 @@ AssetGroup  mymodel {
 		attribute trafficLevel := 0
 		attribute trafficCapacity := 1000
 		attribute online := 1
+		attribute compromised := 0
 	}
 	Asset ControlRoom : Monitor {
 		attribute online := 1
+		attribute compromised := 0
 	}
 	Asset Diagnostics : Monitor {
 		attribute online := 1
+		attribute compromised := 0
 	}
 	Asset DataAquisition : Monitor {
 		
+		attribute compromised := 0
 		attribute online := 1
 	}
 	Asset TurbineController : PLC {
+		attribute compromised := 0
 		
 		attribute online := 1
 	}
 	Asset SteamFlowController : PLC {
 		
 		attribute online := 1
+		attribute compromised := 0
 	}
 	Asset FeedwaterController : PLC {
 		
+		attribute compromised := 0
 		attribute online := 1
 	}
 	Asset ReactorController : PLC {
+		attribute compromised := 0
 		
 		attribute online := 1
 	}
 	Asset ReactorSensor : Sensor {
 		
 		attribute online := 1
+		attribute compromised := 0
 	}
 	Asset ReactorActuator : Actuator {
 		
+		attribute compromised := 0
 		attribute online := 1
 	}
 	Asset FeedwaterSensor : Sensor {
+		attribute compromised := 0
 		
 		attribute online := 1
 	}
 	Asset FeedwaterActuator : Actuator {
 		
 		attribute online := 1
+		attribute compromised := 0
 	}
 	Asset SteamFlowSensor : Sensor {
 		
+		attribute compromised := 0
 		attribute online := 1
 	}
 	Asset SteamFlowActuator : Actuator {
+		attribute compromised := 0
 		
 		attribute online := 1
 	}
 	Asset TurbineSensor : Sensor {
 		
 		attribute online := 1
+		attribute compromised := 0
 	}
 	Asset TurbineActuator : Actuator {
 		
+		attribute compromised := 0
 		attribute online := 1
 	}
 	Asset Turbine : IndustrialComponent {
+		attribute compromised := 0
 		
 		attribute online := 1
 	} 
 	Asset Reactor : IndustrialComponent {
 		
 		attribute online := 1
+		attribute compromised := 0
 	} 
 	Asset Pipe : IndustrialComponent {
 		
+		attribute compromised := 0
 		attribute online := 1
 	} 
 	Asset SteamGenerator : IndustrialComponent {
+		attribute compromised := 0
 		
 		attribute online := 1
 	} 
