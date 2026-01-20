@@ -6,7 +6,7 @@ import "platform:/plugin/core.abs.model.lib/models/core.abs";
 /*
  *
  */
-DefinitionGroup mydomain_def {
+DefinitionGroup NPPDomain_def {
 	/* Concepts of domain mydomain_def */
 	AssetType NetworkConnector extends (Any) {
 		description "Connects two components together"

@@ -2,10 +2,10 @@ AssetBasedSystem
 
 // namespace shortcuts    
 with core::*; 
-with mydomain_def::*;
+with NPPDomain_def::*;
 
 import "platform:/plugin/core.abs.model.lib/models/core.abs";
-import "mydomain_def.abs";
+import "NPPDomain_def.abs";
 
 AssetGroup  mymodel {
 	
