@@ -1,0 +1,11 @@
+AssetBasedSystem
+with NPPDomain_def::* from "NPPDomain_def.abs";
+with NPPModelTemplate::* from "NPPModelTemplate.abs";
+
+AssetGroup StuxnetGoals {
+	Goal goal1 {
+		
+	}
+	
+
+}

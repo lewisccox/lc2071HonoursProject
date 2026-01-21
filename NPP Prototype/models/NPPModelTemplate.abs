@@ -7,7 +7,7 @@ with NPPDomain_def::*;
 import "platform:/plugin/core.abs.model.lib/models/core.abs";
 import "NPPDomain_def.abs";
 
-AssetGroup  mymodel {
+AssetGroup  NPPModelTemplate {
 	
 	// list of mymodel assets
 	//Asset A1 : ConceptA {}
