@@ -22,35 +22,56 @@ AssetGroup  NPPModelTemplate {
 	Asset ControlRoom : Monitor {
 		attribute online := 1
 		attribute compromised := 0
+		attribute OS := "Windows"
+		attribute SoftwareRelease := 2007
+		attribute Infected :=0
 	}
 	Asset Diagnostics : Monitor {
 		attribute online := 1
 		attribute compromised := 0
+		attribute OS := "Windows"
+		attribute SoftwareRelease := 2007
+		attribute Infected :=0
 	}
-	Asset DataAquisition : Monitor {
+	Asset DataAcquisition : Monitor {
 		
 		attribute compromised := 0
 		attribute online := 1
+		attribute SoftwareRelease := 2007
+		attribute Infected :=0
+		attribute OS := "Windows"
 	}
 	Asset TurbineController : PLC {
 		attribute compromised := 0
 		
+		attribute SoftwareRelease := 2007
+		attribute Infected :=0
 		attribute online := 1
+		attribute OS := "Siemen's WinCC"
 	}
 	Asset SteamFlowController : PLC {
 		
+		attribute SoftwareRelease := 2007
+		attribute Infected :=0
 		attribute online := 1
 		attribute compromised := 0
+		attribute OS := "Siemen's WinCC"
 	}
 	Asset FeedwaterController : PLC {
 		
+		attribute Infected :=0
+		attribute SoftwareRelease := 2007
 		attribute compromised := 0
 		attribute online := 1
+		attribute OS := "Siemen's WinCC"
 	}
 	Asset ReactorController : PLC {
 		attribute compromised := 0
 		
+		attribute SoftwareRelease := 2007
 		attribute online := 1
+		attribute OS := "Siemen's WinCC"
+		attribute Infected :=0
 	}
 	Asset ReactorSensor : Sensor {
 		
@@ -119,7 +140,7 @@ AssetGroup  NPPModelTemplate {
 	//link A2 to B1  as ConceptA::conceptBs
 	link  Diagnostics to Ethernet as Monitor::Connector
 	link  ControlRoom to Ethernet as Monitor::Connector
-	link  DataAquisition to Ethernet as Monitor::Connector
+	link  DataAcquisition to Ethernet as Monitor::Connector
 	link Ethernet to ReactorController as NetworkConnector::PLCs
 	link ReactorController to ReactorActuator as PLC::ChildActuator
 	link ReactorController to Ethernet as PLC::Connector
@@ -130,14 +151,14 @@ AssetGroup  NPPModelTemplate {
 	link Reactor to ReactorSensor as IndustrialComponent::ParentSensor
 
 	link Ethernet to ControlRoom as NetworkConnector::Monitors
-	link Ethernet to DataAquisition as NetworkConnector::Monitors
+	link Ethernet to DataAcquisition as NetworkConnector::Monitors
 	link Ethernet to Diagnostics as NetworkConnector::Monitors
 	link Diagnostics to ControlRoom as Monitor::SiblingMonitor
-	link Diagnostics to DataAquisition as Monitor::SiblingMonitor
-	link DataAquisition to Diagnostics as Monitor::SiblingMonitor
-	link DataAquisition to ControlRoom as Monitor::SiblingMonitor
+	link Diagnostics to DataAcquisition as Monitor::SiblingMonitor
+	link DataAcquisition to Diagnostics as Monitor::SiblingMonitor
+	link DataAcquisition to ControlRoom as Monitor::SiblingMonitor
 	link ControlRoom to Diagnostics as Monitor::SiblingMonitor
-	link ControlRoom to DataAquisition as Monitor::SiblingMonitor
+	link ControlRoom to DataAcquisition as Monitor::SiblingMonitor
 	link Ethernet to TurbineController as NetworkConnector::PLCs
 	link Ethernet to SteamFlowController as NetworkConnector::PLCs
 	link Ethernet to FeedwaterController as NetworkConnector::PLCs

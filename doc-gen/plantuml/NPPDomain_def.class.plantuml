@@ -8,10 +8,16 @@ class NetworkConnector  {
 class Monitor  {
 	online : Boolean
 	compromised : Boolean
+	OS : String
+	SoftwareRelease : Integer
+	Infected : Boolean
 }
 class PLC  {
 	online : Boolean
 	compromised : Boolean
+	OS : String
+	SoftwareRelease : Integer
+	Infected : Boolean
 }
 class IndustrialComponent  {
 	online : Boolean

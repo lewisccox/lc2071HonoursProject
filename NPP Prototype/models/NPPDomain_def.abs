@@ -25,6 +25,9 @@ DefinitionGroup NPPDomain_def {
 		reference Connector : NetworkConnector[*]// 
 		attribute online : Boolean [1]
 		attribute compromised : Boolean [1]
+		attribute OS : String [1]
+		attribute SoftwareRelease : Integer [1]
+		attribute Infected : Boolean [1]
 	}
 	AssetType PLC extends (Any) {
 		description "Programmable logic controller- runs arbitrary code to control industrial components"
@@ -34,6 +37,9 @@ DefinitionGroup NPPDomain_def {
 		reference ChildSensor : Sensor[*]//
 		attribute online : Boolean [1]
 		attribute compromised : Boolean [1]
+		attribute OS : String [1]
+		attribute SoftwareRelease : Integer [1]
+		attribute Infected : Boolean [1]
 	}
 
 	AssetType IndustrialComponent extends (Any) {

@@ -2,7 +2,7 @@
 object "Ethernet : NetworkConnector" as Ethernet #LightBlue
 object "ControlRoom : Monitor" as ControlRoom #lavender
 object "Diagnostics : Monitor" as Diagnostics #lavender
-object "DataAquisition : Monitor" as DataAquisition #lavender
+object "DataAcquisition : Monitor" as DataAcquisition #lavender
 object "TurbineController : PLC" as TurbineController #lavender
 object "SteamFlowController : PLC" as SteamFlowController #lavender
 object "FeedwaterController : PLC" as FeedwaterController #lavender
@@ -21,7 +21,7 @@ object "Pipe : IndustrialComponent" as Pipe #lavender
 object "SteamGenerator : IndustrialComponent" as SteamGenerator #lavender
 Diagnostics -up-> Ethernet : Connector
 ControlRoom -up-> Ethernet : Connector
-DataAquisition -up-> Ethernet : Connector
+DataAcquisition -up-> Ethernet : Connector
 Ethernet --> ReactorController : PLCs
 ReactorController -> ReactorActuator : ChildActuator
 ReactorController -up-> Ethernet : Connector
@@ -31,14 +31,14 @@ ReactorSensor -> ReactorController : ParentPLC
 ReactorSensor -> Reactor : ChildComponent
 Reactor -> ReactorSensor : ParentSensor
 Ethernet --> ControlRoom : Monitors
-Ethernet --> DataAquisition : Monitors
+Ethernet --> DataAcquisition : Monitors
 Ethernet --> Diagnostics : Monitors
 Diagnostics -> ControlRoom : SiblingMonitor
-Diagnostics -> DataAquisition : SiblingMonitor
-DataAquisition -> Diagnostics : SiblingMonitor
-DataAquisition -> ControlRoom : SiblingMonitor
+Diagnostics -> DataAcquisition : SiblingMonitor
+DataAcquisition -> Diagnostics : SiblingMonitor
+DataAcquisition -> ControlRoom : SiblingMonitor
 ControlRoom -> Diagnostics : SiblingMonitor
-ControlRoom -> DataAquisition : SiblingMonitor
+ControlRoom -> DataAcquisition : SiblingMonitor
 Ethernet --> TurbineController : PLCs
 Ethernet --> SteamFlowController : PLCs
 Ethernet --> FeedwaterController : PLCs
