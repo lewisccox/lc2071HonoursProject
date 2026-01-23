@@ -10,134 +10,131 @@ import "NPPDomain_def.abs";
 AssetGroup  NPPModelTemplate {
 	
 	// list of mymodel assets
-	//Asset A1 : ConceptA {}
+	//Asset Atrue : ConceptA {}
 	//Asset A2 : ConceptA {}
-	//Asset B1 : ConceptB {} 
+	//Asset Btrue : ConceptB {} 
 	Asset Ethernet : NetworkConnector {
-		attribute trafficLevel := 0
+		attribute trafficLevel := 1
 		attribute trafficCapacity := 1000
-		attribute online := 1
-		attribute compromised := 0
+		attribute online := true
+		attribute compromised := false
 	}
 	Asset ControlRoom : Monitor {
-		attribute online := 1
-		attribute compromised := 0
+		attribute online := true
+		attribute compromised := false
 		attribute OS := "Windows"
 		attribute SoftwareRelease := 2007
-		attribute Infected :=0
+		attribute Infected :=false
 	}
 	Asset Diagnostics : Monitor {
-		attribute online := 1
-		attribute compromised := 0
+		attribute online := true
+		attribute compromised := false
 		attribute OS := "Windows"
 		attribute SoftwareRelease := 2007
-		attribute Infected :=0
+		attribute Infected :=true
 	}
 	Asset DataAcquisition : Monitor {
 		
-		attribute compromised := 0
-		attribute online := 1
+		attribute compromised := false
+		attribute online := true
 		attribute SoftwareRelease := 2007
-		attribute Infected :=0
+		attribute Infected :=true
 		attribute OS := "Windows"
 	}
 	Asset TurbineController : PLC {
-		attribute compromised := 0
+		attribute compromised := false
 		
 		attribute SoftwareRelease := 2007
-		attribute Infected :=0
-		attribute online := 1
+		attribute Infected :=false
+		attribute online := true
 		attribute OS := "Siemen's WinCC"
 	}
 	Asset SteamFlowController : PLC {
 		
 		attribute SoftwareRelease := 2007
-		attribute Infected :=0
-		attribute online := 1
-		attribute compromised := 0
+		attribute Infected :=false
+		attribute online := true
+		attribute compromised := false
 		attribute OS := "Siemen's WinCC"
 	}
 	Asset FeedwaterController : PLC {
 		
-		attribute Infected :=0
+		attribute Infected :=false
 		attribute SoftwareRelease := 2007
-		attribute compromised := 0
-		attribute online := 1
+		attribute compromised := false
+		attribute online := true
 		attribute OS := "Siemen's WinCC"
 	}
 	Asset ReactorController : PLC {
-		attribute compromised := 0
+		attribute compromised := false
 		
 		attribute SoftwareRelease := 2007
-		attribute online := 1
+		attribute online := true
 		attribute OS := "Siemen's WinCC"
-		attribute Infected :=0
+		attribute Infected :=false
 	}
 	Asset ReactorSensor : Sensor {
 		
-		attribute online := 1
-		attribute compromised := 0
+		attribute online := true
+		attribute compromised := false
 	}
 	Asset ReactorActuator : Actuator {
 		
-		attribute compromised := 0
-		attribute online := 1
+		attribute compromised := false
+		attribute online := true
 	}
 	Asset FeedwaterSensor : Sensor {
-		attribute compromised := 0
+		attribute compromised := false
 		
-		attribute online := 1
+		attribute online := true
 	}
 	Asset FeedwaterActuator : Actuator {
 		
-		attribute online := 1
-		attribute compromised := 0
+		attribute online := true
+		attribute compromised := false
 	}
 	Asset SteamFlowSensor : Sensor {
 		
-		attribute compromised := 0
-		attribute online := 1
+		attribute compromised := false
+		attribute online := true
 	}
 	Asset SteamFlowActuator : Actuator {
-		attribute compromised := 0
+		attribute compromised := false
 		
-		attribute online := 1
+		attribute online := true
 	}
 	Asset TurbineSensor : Sensor {
 		
-		attribute online := 1
-		attribute compromised := 0
+		attribute online := true
+		attribute compromised := false
 	}
 	Asset TurbineActuator : Actuator {
 		
-		attribute compromised := 0
-		attribute online := 1
+		attribute compromised := false
+		attribute online := true
 	}
 	Asset Turbine : IndustrialComponent {
-		attribute compromised := 0
+		attribute compromised := false
 		
-		attribute online := 1
+		attribute online := true
 	} 
 	Asset Reactor : IndustrialComponent {
 		
-		attribute online := 1
-		attribute compromised := 0
+		attribute online := true
+		attribute compromised := false
 	} 
 	Asset Pipe : IndustrialComponent {
 		
-		attribute compromised := 0
-		attribute online := 1
+		attribute compromised := false
+		attribute online := true
 	} 
 	Asset SteamGenerator : IndustrialComponent {
-		attribute compromised := 0
+		attribute compromised := false
 		
-		attribute online := 1
+		attribute online := true
 	} 
 	
 	
-	// list of links between mymodel assets
-	//link A1 to B1  as ConceptA::conceptBs
-	//link A2 to B1  as ConceptA::conceptBs
 	link  Diagnostics to Ethernet as Monitor::Connector
 	link  ControlRoom to Ethernet as Monitor::Connector
 	link  DataAcquisition to Ethernet as Monitor::Connector
