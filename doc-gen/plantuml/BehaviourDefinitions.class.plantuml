@@ -1,0 +1,62 @@
+@startuml
+class Actuator  {
+	online : Boolean
+	compromised : Boolean
+}
+class IndustrialComponent  {
+	online : Boolean
+	compromised : Boolean
+}
+class ContainableByAny  {
+}
+class Sensor  {
+	online : Boolean
+	compromised : Boolean
+}
+class PLC  {
+	online : Boolean
+	compromised : Boolean
+	OS : String
+	SoftwareRelease : Integer
+	Infected : Boolean
+}
+class Any  {
+}
+class Monitor  {
+	online : Boolean
+	compromised : Boolean
+	OS : String
+	SoftwareRelease : Integer
+	Infected : Boolean
+	void EthernetCompromised()
+	void DeviceInfectsNetwork()
+}
+class NetworkConnector  {
+	trafficLevel : Integer
+	trafficCapacity : Integer
+	online : Boolean
+	compromised : Boolean
+	void EthernetCompromised()
+	void DeviceInfectsNetwork()
+}
+
+Actuator -> "*" IndustrialComponent : ChildComponent
+IndustrialComponent -> "*" Sensor : ParentSensor
+ContainableByAny -> "0..1" Any : containedBy
+Sensor -> "*" IndustrialComponent : ChildComponent
+Sensor -> "*" PLC : ParentPLC
+PLC -> "*" NetworkConnector : Connector
+PLC -> "*" Actuator : ChildActuator
+PLC -> "*" Sensor : ChildSensor
+Monitor -> "*" Monitor : SiblingMonitor
+Monitor -> "*" NetworkConnector : Connector
+NetworkConnector -> "*" PLC : PLCs
+NetworkConnector -> "*" Monitor : Monitors
+
+Actuator -up-|>  Any
+IndustrialComponent -up-|>  Any
+Sensor -up-|>  Any
+PLC -up-|>  Any
+Monitor -up-|>  Any
+NetworkConnector -up-|>  Any
+@enduml
