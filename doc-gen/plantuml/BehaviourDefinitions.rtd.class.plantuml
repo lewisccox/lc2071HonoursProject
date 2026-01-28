@@ -1,29 +1,29 @@
 @startuml
 title RuntimeData and behavior
-class Actuator  {
+class Monitor  {
+}
+class Any  {
 }
 class IndustrialComponent  {
 }
 class ContainableByAny  {
 }
-class Sensor  {
-}
 class PLC  {
-}
-class Any  {
-}
-class Monitor  {
 }
 class NetworkConnector  {
 	EthernetCompromised(, PrimaryMonitor : **Monitor**, )
 	DeviceInfectsNetwork(, InfectedMonitor : **Monitor**, )
 }
+class Sensor  {
+}
+class Actuator  {
+}
 
 
-Actuator -up-|>  Any
-IndustrialComponent -up-|>  Any
-Sensor -up-|>  Any
-PLC -up-|>  Any
 Monitor -up-|>  Any
+IndustrialComponent -up-|>  Any
+PLC -up-|>  Any
 NetworkConnector -up-|>  Any
+Sensor -up-|>  Any
+Actuator -up-|>  Any
 @enduml

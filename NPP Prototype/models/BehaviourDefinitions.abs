@@ -1,4 +1,5 @@
 AssetBasedSystem
+with core::*;
 with NPPDomain_def::* from "NPPDomain_def.abs";
 with NPPModelTemplate::* from "NPPModelTemplate.abs";
 
@@ -19,14 +20,14 @@ DefinitionGroup BehaviourDefinitions {
 			AnEthernet.compromised == true 
 
 		action {
-			PrimaryMonitor.Infected.assign(true);
+			PrimaryMonitor.compromised.assign(true);
 			//destZone.alarms.filter({alarm  -> alarm.isActive}).forAll({ alarm -> alarm.isTriggered.assign(true)});
 
 		}
 	}
 	GuardedAction DeviceInfectsNetwork(ANetwork: NetworkConnector, InfectedMonitor: Monitor){
 		guard=
-		ANetwork.Monitors.core::contains(InfectedMonitor)&&
+		InfectedMonitor.Connector.contains(ANetwork)&&
 		InfectedMonitor.Infected == true	
 		action{
 			ANetwork.compromised.assign(true);

@@ -1,4 +1,5 @@
 AssetBasedSystem
+with core::*;
 with NPPDomain_def::* from "NPPDomain_def.abs";
 with NPPModelTemplate::* from "NPPModelTemplate.abs";
 with BehaviourDefinitions::* from "BehaviourDefinitions.abs";
@@ -8,15 +9,12 @@ AssetGroup StuxnetGoals {
 		description "Infect Network"
 		pre = //a PC on or connected to the NPP network is infected with stuxnet 
 		//operating system must be windows 
-		(DataAcquisition.Infected == true && DataAcquisition.OS == "Windows")||
-		(Diagnostics.Infected == true && Diagnostics.OS == "Windows")||
-		(ControlRoom.Infected == true && DataAcquisition.OS == "Windows") 
+		(DataAcquisition.Infected == true)||// && DataAcquisition.OS == "Windows")||
+		(Diagnostics.Infected == true)||// && Diagnostics.OS == "Windows")||
+		(ControlRoom.Infected == true )//&& ControlRoom.OS == "Windows") 
 		post = //other PCs on the network will be infected with stuxnet 
 		//control room compromised = true 
-		Ethernet.compromised == true &&
-		DataAcquisition.Infected == true &&
-		Diagnostics.Infected == true &&
-		ControlRoom.Infected == true 
+		Ethernet.compromised == true 
 	}
 	
 	Goal Step2{
