@@ -15,10 +15,10 @@ DefinitionGroup BehaviourDefinitions {
 //		// guard = (zone1.itemsInZone.contains(item) && zone2.itemsInZone.contains(item) ) implies  (zone1 == zone2)
 //		guard = ! (zone1.itemsInZone.contains(item) && zone2.itemsInZone.contains(item) &&  (zone1 != zone2) )
 //	}
-	GuardedAction EthernetCompromised(AnEthernet : NetworkConnector, PrimaryMonitor : Monitor ) {
+	GuardedAction NetworkCompromised(AnEthernet : NetworkConnector, PrimaryMonitor : Monitor ) {
 		guard = 
-			AnEthernet.compromised == true 
-
+			AnEthernet.compromised == true &&
+			PrimaryMonitor.Connector.contains(AnEthernet)
 		action {
 			PrimaryMonitor.compromised.assign(true);
 			//destZone.alarms.filter({alarm  -> alarm.isActive}).forAll({ alarm -> alarm.isTriggered.assign(true)});
@@ -33,4 +33,23 @@ DefinitionGroup BehaviourDefinitions {
 			ANetwork.compromised.assign(true);
 		}		
 	}
+	
+	GuardedAction MonitorInfectsPLC(ANetwork: NetworkConnector, InfectedMonitor: Monitor, VictimPLC : PLC){
+		guard=
+		InfectedMonitor.Connector.contains(ANetwork)&&
+		InfectedMonitor.compromised == true &&
+		ANetwork.PLCs.contains(VictimPLC)
+		action{
+			VictimPLC.compromised.assign(true);
+		}		
+	}
+	GuardedAction PLCMotorDestroyed ( VictimActuator: Actuator ,CompromisedPLC : PLC){
+		guard=
+		CompromisedPLC.compromised == true &&
+		CompromisedPLC.ChildActuator.contains(VictimActuator)
+		action{
+			VictimActuator.compromised.assign(true);
+		}		
+	}
+	
 }

@@ -3,9 +3,13 @@ import "platform:/resource/lc2071HonoursProject/NPP Prototype/models/BehaviourDe
 Locale {
 	locale = ""
 	DefinitionGroup BehaviourDefinitions {
-		Guard EthernetCompromised = "EthernetCompromised" {
+		Guard NetworkCompromised = "NetworkCompromised" {
 		}
 		Guard DeviceInfectsNetwork = "DeviceInfectsNetwork" {
+		}
+		Guard MonitorInfectsPLC = "MonitorInfectsPLC" {
+		}
+		Guard PLCMotorDestroyed = "PLCMotorDestroyed" {
 		}
 	}
 }

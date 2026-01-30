@@ -1,62 +1,67 @@
 @startuml
-class Monitor  {
-	online : Boolean
-	compromised : Boolean
-	OS : String
-	SoftwareRelease : Integer
-	Infected : Boolean
-	void EthernetCompromised()
-	void DeviceInfectsNetwork()
-}
-class Any  {
-}
-class IndustrialComponent  {
-	online : Boolean
-	compromised : Boolean
-}
-class ContainableByAny  {
-}
 class PLC  {
 	online : Boolean
 	compromised : Boolean
 	OS : String
 	SoftwareRelease : Integer
 	Infected : Boolean
+	void MonitorInfectsPLC()
+	void PLCMotorDestroyed()
+}
+class Sensor  {
+	online : Boolean
+	compromised : Boolean
+}
+class Any  {
 }
 class NetworkConnector  {
 	trafficLevel : Integer
 	trafficCapacity : Integer
 	online : Boolean
 	compromised : Boolean
-	void EthernetCompromised()
+	void NetworkCompromised()
+	void MonitorInfectsPLC()
 	void DeviceInfectsNetwork()
-}
-class Sensor  {
-	online : Boolean
-	compromised : Boolean
 }
 class Actuator  {
 	online : Boolean
 	compromised : Boolean
+	void PLCMotorDestroyed()
+}
+class ContainableByAny  {
+}
+class Monitor  {
+	online : Boolean
+	compromised : Boolean
+	OS : String
+	SoftwareRelease : Integer
+	Infected : Boolean
+	void NetworkCompromised()
+	void MonitorInfectsPLC()
+	void DeviceInfectsNetwork()
+}
+class IndustrialComponent  {
+	online : Boolean
+	compromised : Boolean
 }
 
-Monitor -> "*" Monitor : SiblingMonitor
-Monitor -> "*" NetworkConnector : Connector
-IndustrialComponent -> "*" Sensor : ParentSensor
-ContainableByAny -> "0..1" Any : containedBy
 PLC -> "*" NetworkConnector : Connector
 PLC -> "*" Actuator : ChildActuator
 PLC -> "*" Sensor : ChildSensor
-NetworkConnector -> "*" PLC : PLCs
-NetworkConnector -> "*" Monitor : Monitors
 Sensor -> "*" IndustrialComponent : ChildComponent
 Sensor -> "*" PLC : ParentPLC
+NetworkConnector -> "*" PLC : PLCs
+NetworkConnector -> "*" Monitor : Monitors
 Actuator -> "*" IndustrialComponent : ChildComponent
+ContainableByAny -> "0..1" Any : containedBy
+Monitor -> "*" Monitor : SiblingMonitor
+Monitor -> "*" NetworkConnector : Connector
+IndustrialComponent -> "*" Sensor : ParentSensor
 
+PLC -up-|>  Any
+Sensor -up-|>  Any
+NetworkConnector -up-|>  Any
+Actuator -up-|>  Any
 Monitor -up-|>  Any
 IndustrialComponent -up-|>  Any
-PLC -up-|>  Any
-NetworkConnector -up-|>  Any
-Sensor -up-|>  Any
-Actuator -up-|>  Any
 @enduml
