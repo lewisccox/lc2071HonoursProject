@@ -1,0 +1,18 @@
+AssetBasedSystem
+with core::*;
+with NPPDomain_def::* from "NPPDomain_def.abs";
+with NPPModelTemplate::* from "NPPModelTemplate.abs";
+with BehaviourDefinitions::* from "BehaviourDefinitions.abs";
+
+AssetGroup StuxnetGoals {
+	Goal Step1 {
+		description "Stuxnet destroys reactor motor"
+		pre = 
+		(DataAcquisition.Infected == true)||// && DataAcquisition.OS == "Windows")||
+		(Diagnostics.Infected == true)||// && Diagnostics.OS == "Windows")||
+		(ControlRoom.Infected == true )//&& ControlRoom.OS == "Windows") 
+		post = 
+		ReactorActuator.online == false
+	}
+	
+}
