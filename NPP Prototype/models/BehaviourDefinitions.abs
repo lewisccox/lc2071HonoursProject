@@ -17,27 +17,27 @@ DefinitionGroup BehaviourDefinitions {
 //	}
 	GuardedAction NetworkCompromised(AnEthernet : NetworkConnector, PrimaryMonitor : Monitor ) {
 		guard = 
-			AnEthernet.compromised == true &&
+			AnEthernet.NetworkCompromised == true &&
 			PrimaryMonitor.Connector.contains(AnEthernet)
 		action {
-			PrimaryMonitor.compromised.assign(true);
+			PrimaryMonitor.MonitorCompromised.assign(true);
 			//destZone.alarms.filter({alarm  -> alarm.isActive}).forAll({ alarm -> alarm.isTriggered.assign(true)});
 
 		}
 	}
-	GuardedAction DeviceInfectsNetwork(ANetwork: NetworkConnector, InfectedMonitor: Monitor){
+	GuardedAction DeviceCompromisesNetwork(VictimNetwork: NetworkConnector, InfectedMonitor: Monitor){
 		guard=
-		InfectedMonitor.Connector.contains(ANetwork)&&
-		InfectedMonitor.Infected == true	
+		InfectedMonitor.Connector.contains(VictimNetwork)&&
+		InfectedMonitor.MonitorInfected == true	
 		action{
-			ANetwork.compromised.assign(true);
+			VictimNetwork.NetworkCompromised.assign(true);
 		}		
 	}
 	
 	GuardedAction MonitorInfectsPLC(ANetwork: NetworkConnector, InfectedMonitor: Monitor, VictimPLC : PLC){
 		guard=
 		InfectedMonitor.Connector.contains(ANetwork)&&
-		InfectedMonitor.compromised == true &&
+		InfectedMonitor.MonitorCompromised == true &&
 		ANetwork.PLCs.contains(VictimPLC)
 		action{
 			VictimPLC.compromised.assign(true);

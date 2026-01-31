@@ -3,14 +3,14 @@ class NetworkConnector  {
 	trafficLevel : Integer
 	trafficCapacity : Integer
 	online : Boolean
-	compromised : Boolean
+	NetworkCompromised : Boolean
 }
 class Monitor  {
 	online : Boolean
-	compromised : Boolean
+	MonitorCompromised : Boolean
 	OS : String
 	SoftwareRelease : Integer
-	Infected : Boolean
+	MonitorInfected : Boolean
 }
 class PLC  {
 	online : Boolean

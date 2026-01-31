@@ -18,29 +18,26 @@ AssetGroup  NPPModelTemplate {
 		attribute trafficLevel := 1
 		attribute trafficCapacity := 1000
 		attribute online := true
-		attribute compromised := true
+		attribute NetworkCompromised := false
 	}
 	Asset ControlRoom : Monitor {
 		attribute online := true
-		attribute compromised := false
 		attribute OS := "Windows"
 		attribute SoftwareRelease := 2007
-		attribute Infected :=true
+		attribute MonitorInfected := false
 	}
 	Asset Diagnostics : Monitor {
 		attribute online := true
-		attribute compromised := false
 		attribute OS := "Windows"
 		attribute SoftwareRelease := 2007
-		attribute Infected :=true
+		attribute MonitorInfected := true
 	}
 	Asset DataAcquisition : Monitor {
 		
-		attribute compromised := false
 		attribute online := true
 		attribute SoftwareRelease := 2007
-		attribute Infected :=true
 		attribute OS := "Windows"
+		attribute MonitorInfected := true
 	}
 	Asset TurbineController : PLC {
 		attribute compromised := false

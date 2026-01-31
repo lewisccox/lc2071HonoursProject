@@ -5,7 +5,7 @@ Locale {
 	DefinitionGroup BehaviourDefinitions {
 		Guard NetworkCompromised = "NetworkCompromised" {
 		}
-		Guard DeviceInfectsNetwork = "DeviceInfectsNetwork" {
+		Guard DeviceCompromisesNetwork = "DeviceCompromisesNetwork" {
 		}
 		Guard MonitorInfectsPLC = "MonitorInfectsPLC" {
 		}

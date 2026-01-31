@@ -3,29 +3,29 @@ title RuntimeData and behavior
 class Actuator  {
 	PLCMotorDestroyed(, CompromisedPLC : **PLC**, )
 }
-class IndustrialComponent  {
-}
-class Monitor  {
-}
 class PLC  {
+}
+class Any  {
+}
+class Sensor  {
 }
 class ContainableByAny  {
 }
 class NetworkConnector  {
-	DeviceInfectsNetwork(, InfectedMonitor : **Monitor**, )
 	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, )
+	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, )
 	NetworkCompromised(, PrimaryMonitor : **Monitor**, )
 }
-class Sensor  {
+class IndustrialComponent  {
 }
-class Any  {
+class Monitor  {
 }
 
 
 Actuator -up-|>  Any
+PLC -up-|>  Any
+Sensor -up-|>  Any
+NetworkConnector -up-|>  Any
 IndustrialComponent -up-|>  Any
 Monitor -up-|>  Any
-PLC -up-|>  Any
-NetworkConnector -up-|>  Any
-Sensor -up-|>  Any
 @enduml

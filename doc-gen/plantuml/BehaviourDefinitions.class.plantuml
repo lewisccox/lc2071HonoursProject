@@ -4,20 +4,6 @@ class Actuator  {
 	compromised : Boolean
 	void PLCMotorDestroyed()
 }
-class IndustrialComponent  {
-	online : Boolean
-	compromised : Boolean
-}
-class Monitor  {
-	online : Boolean
-	compromised : Boolean
-	OS : String
-	SoftwareRelease : Integer
-	Infected : Boolean
-	void DeviceInfectsNetwork()
-	void MonitorInfectsPLC()
-	void NetworkCompromised()
-}
 class PLC  {
 	online : Boolean
 	compromised : Boolean
@@ -27,41 +13,55 @@ class PLC  {
 	void MonitorInfectsPLC()
 	void PLCMotorDestroyed()
 }
+class Any  {
+}
+class Sensor  {
+	online : Boolean
+	compromised : Boolean
+}
 class ContainableByAny  {
 }
 class NetworkConnector  {
 	trafficLevel : Integer
 	trafficCapacity : Integer
 	online : Boolean
-	compromised : Boolean
-	void DeviceInfectsNetwork()
+	NetworkCompromised : Boolean
 	void MonitorInfectsPLC()
+	void DeviceCompromisesNetwork()
 	void NetworkCompromised()
 }
-class Sensor  {
+class IndustrialComponent  {
 	online : Boolean
 	compromised : Boolean
 }
-class Any  {
+class Monitor  {
+	online : Boolean
+	MonitorCompromised : Boolean
+	OS : String
+	SoftwareRelease : Integer
+	MonitorInfected : Boolean
+	void MonitorInfectsPLC()
+	void DeviceCompromisesNetwork()
+	void NetworkCompromised()
 }
 
 Actuator -> "*" IndustrialComponent : ChildComponent
-IndustrialComponent -> "*" Sensor : ParentSensor
-Monitor -> "*" Monitor : SiblingMonitor
-Monitor -> "*" NetworkConnector : Connector
 PLC -> "*" NetworkConnector : Connector
 PLC -> "*" Actuator : ChildActuator
 PLC -> "*" Sensor : ChildSensor
+Sensor -> "*" IndustrialComponent : ChildComponent
+Sensor -> "*" PLC : ParentPLC
 ContainableByAny -> "0..1" Any : containedBy
 NetworkConnector -> "*" PLC : PLCs
 NetworkConnector -> "*" Monitor : Monitors
-Sensor -> "*" IndustrialComponent : ChildComponent
-Sensor -> "*" PLC : ParentPLC
+IndustrialComponent -> "*" Sensor : ParentSensor
+Monitor -> "*" Monitor : SiblingMonitor
+Monitor -> "*" NetworkConnector : Connector
 
 Actuator -up-|>  Any
+PLC -up-|>  Any
+Sensor -up-|>  Any
+NetworkConnector -up-|>  Any
 IndustrialComponent -up-|>  Any
 Monitor -up-|>  Any
-PLC -up-|>  Any
-NetworkConnector -up-|>  Any
-Sensor -up-|>  Any
 @enduml

@@ -8,17 +8,17 @@ Locale {
 			attribute trafficLevel = "trafficLevel"
 			attribute trafficCapacity = "trafficCapacity"
 			attribute online = "online"
-			attribute compromised = "compromised"
+			attribute NetworkCompromised = "NetworkCompromised"
 			reference PLCs = "PLCs"
 			reference Monitors = "Monitors"
 		}
 		AssetType Monitor = "Monitor" {
 			description = "Provides a high-level overview of component activity"
 			attribute online = "online"
-			attribute compromised = "compromised"
+			attribute MonitorCompromised = "MonitorCompromised"
 			attribute OS = "OS"
 			attribute SoftwareRelease = "SoftwareRelease"
-			attribute Infected = "Infected"
+			attribute MonitorInfected = "MonitorInfected"
 			reference SiblingMonitor = "SiblingMonitor"
 			reference Connector = "Connector"
 		}

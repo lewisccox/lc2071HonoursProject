@@ -9,23 +9,23 @@ AssetGroup StuxnetGoals {
 		description "Infect Network"
 		pre = //a PC on or connected to the NPP network is infected with stuxnet 
 		//operating system must be windows 
-		(DataAcquisition.Infected == true)||// && DataAcquisition.OS == "Windows")||
-		(Diagnostics.Infected == true)||// && Diagnostics.OS == "Windows")||
-		(ControlRoom.Infected == true )//&& ControlRoom.OS == "Windows") 
+		(DataAcquisition.MonitorInfected == true)||// && DataAcquisition.OS == "Windows")||
+		(Diagnostics.MonitorInfected == true)||// && Diagnostics.OS == "Windows")||
+		(ControlRoom.MonitorInfected == true )//&& ControlRoom.OS == "Windows") 
 		post = //other PCs on the network will be infected with stuxnet 
 		//control room compromised = true 
-		Ethernet.compromised == true 
+		Ethernet.NetworkCompromised == true 
 	}
 	
 	Goal Step2{
 		description "Take advantage of zero-day exploits"
 		pre = //zero-day exploits unpatched (operating system version older than 2008)
 		//unpatched Jmicron and Realtek keys 
-		Ethernet.compromised == true &&
-		ControlRoom.Infected == true //&&
+		Ethernet.NetworkCompromised == true &&
+		ControlRoom.MonitorInfected == true //&&
 		//ControlRoom.SoftwareRelease > 2008
 		post = //remote code execution enabled, kernel mode rootkit installed 
-		ControlRoom.compromised == true
+		ControlRoom.MonitorCompromised == true
 
 
 	}
@@ -33,7 +33,7 @@ AssetGroup StuxnetGoals {
 		description "PLC software compromised"
 		pre=//kernel mode rootkit installed
 		//PLC operating system is Siemen's WinCC/PCS 7 SCADA
-		ControlRoom.compromised == true &&
+		ControlRoom.MonitorCompromised == true &&
 		ReactorController.OS == "Siemen's WinCC"
 		post=//Motor PLC = compromised
 		ReactorController.compromised == true
