@@ -16,7 +16,7 @@ DefinitionGroup NPPDomain_def {
 		attribute trafficLevel : Integer [1]
 		attribute trafficCapacity : Integer [1] //maximum possible bandwidth in mbps
 		attribute online : Boolean [1]
-		attribute compromised : Boolean [1]
+		attribute compromised : Boolean [1] default false
 	}
 	AssetType Monitor extends (Any) {
 		description "Provides a high-level overview of component activity"
@@ -24,10 +24,10 @@ DefinitionGroup NPPDomain_def {
 		reference SiblingMonitor : Monitor[*] // 
 		reference Connector : NetworkConnector[*]// 
 		attribute online : Boolean [1]
-		attribute compromised : Boolean [1]
+		attribute compromised : Boolean [1] default false
 		attribute OS : String [1]
 		attribute SoftwareRelease : Integer [1]
-		attribute Infected : Boolean [1]
+		attribute Infected : Boolean [1] default false
 	}
 	AssetType PLC extends (Any) {
 		description "Programmable logic controller- runs arbitrary code to control industrial components"

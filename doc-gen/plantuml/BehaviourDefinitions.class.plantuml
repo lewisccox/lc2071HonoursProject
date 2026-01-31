@@ -1,4 +1,23 @@
 @startuml
+class Actuator  {
+	online : Boolean
+	compromised : Boolean
+	void PLCMotorDestroyed()
+}
+class IndustrialComponent  {
+	online : Boolean
+	compromised : Boolean
+}
+class Monitor  {
+	online : Boolean
+	compromised : Boolean
+	OS : String
+	SoftwareRelease : Integer
+	Infected : Boolean
+	void DeviceInfectsNetwork()
+	void MonitorInfectsPLC()
+	void NetworkCompromised()
+}
 class PLC  {
 	online : Boolean
 	compromised : Boolean
@@ -8,60 +27,41 @@ class PLC  {
 	void MonitorInfectsPLC()
 	void PLCMotorDestroyed()
 }
-class Sensor  {
-	online : Boolean
-	compromised : Boolean
-}
-class Any  {
+class ContainableByAny  {
 }
 class NetworkConnector  {
 	trafficLevel : Integer
 	trafficCapacity : Integer
 	online : Boolean
 	compromised : Boolean
-	void NetworkCompromised()
-	void MonitorInfectsPLC()
 	void DeviceInfectsNetwork()
-}
-class Actuator  {
-	online : Boolean
-	compromised : Boolean
-	void PLCMotorDestroyed()
-}
-class ContainableByAny  {
-}
-class Monitor  {
-	online : Boolean
-	compromised : Boolean
-	OS : String
-	SoftwareRelease : Integer
-	Infected : Boolean
-	void NetworkCompromised()
 	void MonitorInfectsPLC()
-	void DeviceInfectsNetwork()
+	void NetworkCompromised()
 }
-class IndustrialComponent  {
+class Sensor  {
 	online : Boolean
 	compromised : Boolean
+}
+class Any  {
 }
 
+Actuator -> "*" IndustrialComponent : ChildComponent
+IndustrialComponent -> "*" Sensor : ParentSensor
+Monitor -> "*" Monitor : SiblingMonitor
+Monitor -> "*" NetworkConnector : Connector
 PLC -> "*" NetworkConnector : Connector
 PLC -> "*" Actuator : ChildActuator
 PLC -> "*" Sensor : ChildSensor
-Sensor -> "*" IndustrialComponent : ChildComponent
-Sensor -> "*" PLC : ParentPLC
+ContainableByAny -> "0..1" Any : containedBy
 NetworkConnector -> "*" PLC : PLCs
 NetworkConnector -> "*" Monitor : Monitors
-Actuator -> "*" IndustrialComponent : ChildComponent
-ContainableByAny -> "0..1" Any : containedBy
-Monitor -> "*" Monitor : SiblingMonitor
-Monitor -> "*" NetworkConnector : Connector
-IndustrialComponent -> "*" Sensor : ParentSensor
+Sensor -> "*" IndustrialComponent : ChildComponent
+Sensor -> "*" PLC : ParentPLC
 
-PLC -up-|>  Any
-Sensor -up-|>  Any
-NetworkConnector -up-|>  Any
 Actuator -up-|>  Any
-Monitor -up-|>  Any
 IndustrialComponent -up-|>  Any
+Monitor -up-|>  Any
+PLC -up-|>  Any
+NetworkConnector -up-|>  Any
+Sensor -up-|>  Any
 @enduml

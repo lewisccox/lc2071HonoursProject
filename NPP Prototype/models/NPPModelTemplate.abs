@@ -2,7 +2,8 @@ AssetBasedSystem
 
 // namespace shortcuts    
 with core::*; 
-with NPPDomain_def::*;
+with NPPDomain_def::* from "NPPDomain_def.abs";
+with BehaviourDefinitions::* from "BehaviourDefinitions.abs";
 
 import "platform:/plugin/core.abs.model.lib/models/core.abs";
 import "NPPDomain_def.abs";
@@ -17,14 +18,14 @@ AssetGroup  NPPModelTemplate {
 		attribute trafficLevel := 1
 		attribute trafficCapacity := 1000
 		attribute online := true
-		attribute compromised := false
+		attribute compromised := true
 	}
 	Asset ControlRoom : Monitor {
 		attribute online := true
 		attribute compromised := false
 		attribute OS := "Windows"
 		attribute SoftwareRelease := 2007
-		attribute Infected :=false
+		attribute Infected :=true
 	}
 	Asset Diagnostics : Monitor {
 		attribute online := true

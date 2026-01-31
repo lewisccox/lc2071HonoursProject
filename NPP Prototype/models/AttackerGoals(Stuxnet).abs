@@ -22,8 +22,8 @@ AssetGroup StuxnetGoals {
 		pre = //zero-day exploits unpatched (operating system version older than 2008)
 		//unpatched Jmicron and Realtek keys 
 		Ethernet.compromised == true &&
-		ControlRoom.Infected == true &&
-		ControlRoom.SoftwareRelease > 2008
+		ControlRoom.Infected == true //&&
+		//ControlRoom.SoftwareRelease > 2008
 		post = //remote code execution enabled, kernel mode rootkit installed 
 		ControlRoom.compromised == true
 
