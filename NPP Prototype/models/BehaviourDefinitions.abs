@@ -15,6 +15,14 @@ DefinitionGroup BehaviourDefinitions {
 //		// guard = (zone1.itemsInZone.contains(item) && zone2.itemsInZone.contains(item) ) implies  (zone1 == zone2)
 //		guard = ! (zone1.itemsInZone.contains(item) && zone2.itemsInZone.contains(item) &&  (zone1 != zone2) )
 //	}
+	GuardedAction DeviceCompromisesNetwork(VictimNetwork: NetworkConnector, InfectedMonitor: Monitor){
+		guard=
+		InfectedMonitor.Connector.contains(VictimNetwork)&&
+		InfectedMonitor.MonitorInfected == true	
+		action{
+			VictimNetwork.NetworkCompromised.assign(true);
+		}		
+	}
 	GuardedAction NetworkCompromised(AnEthernet : NetworkConnector, PrimaryMonitor : Monitor ) {
 		guard = 
 			AnEthernet.NetworkCompromised == true &&
@@ -25,19 +33,13 @@ DefinitionGroup BehaviourDefinitions {
 
 		}
 	}
-	GuardedAction DeviceCompromisesNetwork(VictimNetwork: NetworkConnector, InfectedMonitor: Monitor){
-		guard=
-		InfectedMonitor.Connector.contains(VictimNetwork)&&
-		InfectedMonitor.MonitorInfected == true	
-		action{
-			VictimNetwork.NetworkCompromised.assign(true);
-		}		
-	}
 	
-	GuardedAction MonitorInfectsPLC(ANetwork: NetworkConnector, InfectedMonitor: Monitor, VictimPLC : PLC){
+	GuardedAction MonitorInfectsPLC(ANetwork: NetworkConnector, InfectedMonitor: Monitor, VictimPLC : PLC, AMalware : Malware){
 		guard=
 		InfectedMonitor.Connector.contains(ANetwork)&&
 		InfectedMonitor.MonitorCompromised == true &&
+		VictimPLC.PLCOS == AMalware.CompatablePLCOS &&
+		AMalware.InfectedMonitors.contains(InfectedMonitor) &&
 		ANetwork.PLCs.contains(VictimPLC)
 		action{
 			VictimPLC.compromised.assign(true);

@@ -16,7 +16,7 @@ Locale {
 			description = "Provides a high-level overview of component activity"
 			attribute online = "online"
 			attribute MonitorCompromised = "MonitorCompromised"
-			attribute OS = "OS"
+			attribute MonitorOS = "MonitorOS"
 			attribute SoftwareRelease = "SoftwareRelease"
 			attribute MonitorInfected = "MonitorInfected"
 			reference SiblingMonitor = "SiblingMonitor"
@@ -26,7 +26,7 @@ Locale {
 			description = "Programmable logic controller- runs arbitrary code to control industrial components"
 			attribute online = "online"
 			attribute compromised = "compromised"
-			attribute OS = "OS"
+			attribute PLCOS = "PLCOS"
 			attribute SoftwareRelease = "SoftwareRelease"
 			attribute Infected = "Infected"
 			reference Connector = "Connector"
@@ -51,6 +51,11 @@ Locale {
 			attribute compromised = "compromised"
 			reference ChildComponent = "ChildComponent"
 			reference ParentPLC = "ParentPLC"
+		}
+		AssetType Malware = "Malware" {
+			description = "A malicious software existing on devices in an NPP network"
+			attribute CompatablePLCOS = "CompatablePLCOS"
+			reference InfectedMonitors = "InfectedMonitors"
 		}
 	}
 }

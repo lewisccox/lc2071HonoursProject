@@ -31,13 +31,13 @@ AssetGroup StuxnetGoals {
 	}
 	Goal Step3 {
 		description "PLC software compromised"
-		pre=//kernel mode rootkit installed
-		//PLC operating system is Siemen's WinCC/PCS 7 SCADA
-		ControlRoom.MonitorCompromised == true &&
-		ReactorController.OS == "Siemen's WinCC"
-		post=//Motor PLC = compromised
-		ReactorController.compromised == true
-		}
+		pre = //kernel mode rootkit installed
+			//PLC operating system is Siemen's WinCC/PCS 7 SCADA
+			//ControlRoom.MonitorCompromised == true //&&
+			ReactorController.PLCOS == Stuxnet.CompatablePLCOS
+		post = //Motor PLC = compromised
+			ReactorController.compromised == true
+	}
 		
 	Goal Step4 {
 		description "Destroy Motor "

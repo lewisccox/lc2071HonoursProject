@@ -1,5 +1,6 @@
 @startuml
 object "Ethernet : NetworkConnector" as Ethernet #LightBlue
+object "Stuxnet : Malware" as Stuxnet #lavender
 object "ControlRoom : Monitor" as ControlRoom #lavender
 object "Diagnostics : Monitor" as Diagnostics #lavender
 object "DataAcquisition : Monitor" as DataAcquisition #lavender
@@ -63,4 +64,5 @@ TurbineSensor -> TurbineController : ParentPLC
 Pipe -> FeedwaterSensor : ParentSensor
 Turbine -> TurbineSensor : ParentSensor
 SteamGenerator -> SteamFlowSensor : ParentSensor
+Stuxnet -> ControlRoom : InfectedMonitors
 @enduml

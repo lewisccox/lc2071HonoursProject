@@ -8,14 +8,14 @@ class NetworkConnector  {
 class Monitor  {
 	online : Boolean
 	MonitorCompromised : Boolean
-	OS : String
+	MonitorOS : String
 	SoftwareRelease : Integer
 	MonitorInfected : Boolean
 }
 class PLC  {
 	online : Boolean
 	compromised : Boolean
-	OS : String
+	PLCOS : String
 	SoftwareRelease : Integer
 	Infected : Boolean
 }
@@ -31,6 +31,9 @@ class Sensor  {
 	online : Boolean
 	compromised : Boolean
 }
+class Malware  {
+	CompatablePLCOS : String
+}
 
 NetworkConnector -> "*" PLC : PLCs
 NetworkConnector -> "*" Monitor : Monitors
@@ -43,6 +46,7 @@ IndustrialComponent -> "*" Sensor : ParentSensor
 Actuator -> "*" IndustrialComponent : ChildComponent
 Sensor -> "*" IndustrialComponent : ChildComponent
 Sensor -> "*" PLC : ParentPLC
+Malware -> "*" Monitor : InfectedMonitors
 
 NetworkConnector -up-|>  Any
 Monitor -up-|>  Any
@@ -50,4 +54,5 @@ PLC -up-|>  Any
 IndustrialComponent -up-|>  Any
 Actuator -up-|>  Any
 Sensor -up-|>  Any
+Malware -up-|>  Any
 @enduml

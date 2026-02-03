@@ -20,15 +20,17 @@ AssetGroup  NPPModelTemplate {
 		attribute online := true
 		attribute NetworkCompromised := false
 	}
+	Asset Stuxnet :Malware {
+		attribute CompatablePLCOS := "Siemen's WinCC"
+	}
 	Asset ControlRoom : Monitor {
 		attribute online := true
-		attribute OS := "Windows"
 		attribute SoftwareRelease := 2007
 		attribute MonitorInfected := false
+		attribute MonitorCompromised := true
 	}
 	Asset Diagnostics : Monitor {
 		attribute online := true
-		attribute OS := "Windows"
 		attribute SoftwareRelease := 2007
 		attribute MonitorInfected := true
 	}
@@ -36,7 +38,6 @@ AssetGroup  NPPModelTemplate {
 		
 		attribute online := true
 		attribute SoftwareRelease := 2007
-		attribute OS := "Windows"
 		attribute MonitorInfected := true
 	}
 	Asset TurbineController : PLC {
@@ -45,7 +46,7 @@ AssetGroup  NPPModelTemplate {
 		attribute SoftwareRelease := 2007
 		attribute Infected :=false
 		attribute online := true
-		attribute OS := "Siemen's WinCC"
+		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset SteamFlowController : PLC {
 		
@@ -53,7 +54,7 @@ AssetGroup  NPPModelTemplate {
 		attribute Infected :=false
 		attribute online := true
 		attribute compromised := false
-		attribute OS := "Siemen's WinCC"
+		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset FeedwaterController : PLC {
 		
@@ -61,14 +62,14 @@ AssetGroup  NPPModelTemplate {
 		attribute SoftwareRelease := 2007
 		attribute compromised := false
 		attribute online := true
-		attribute OS := "Siemen's WinCC"
+		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset ReactorController : PLC {
 		attribute compromised := false
 		
 		attribute SoftwareRelease := 2007
 		attribute online := true
-		attribute OS := "Siemen's WinCC"
+		attribute PLCOS := "Siemen's WinCC"
 		attribute Infected :=false
 	}
 	Asset ReactorSensor : Sensor {
@@ -178,4 +179,5 @@ AssetGroup  NPPModelTemplate {
 	link Pipe to FeedwaterSensor as IndustrialComponent::ParentSensor
 	link Turbine to TurbineSensor as IndustrialComponent::ParentSensor
 	link SteamGenerator to SteamFlowSensor as IndustrialComponent::ParentSensor
+	link Stuxnet to ControlRoom as Malware::InfectedMonitors
 }

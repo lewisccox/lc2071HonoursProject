@@ -25,7 +25,7 @@ DefinitionGroup NPPDomain_def {
 		reference Connector : NetworkConnector[*] default []// 
 		attribute online : Boolean [1] default true
 		attribute MonitorCompromised : Boolean [1] default false
-		attribute OS : String [1] default "Windows"
+		attribute MonitorOS : String [1] default "Windows"
 		attribute SoftwareRelease : Integer [1] default 2025
 		attribute MonitorInfected : Boolean [1] default false
 	}
@@ -37,7 +37,7 @@ DefinitionGroup NPPDomain_def {
 		reference ChildSensor : Sensor[*] default []//
 		attribute online : Boolean [1] default true
 		attribute compromised : Boolean [1] default false
-		attribute OS : String [1] default "Windows"
+		attribute PLCOS : String [1] default "Windows"
 		attribute SoftwareRelease : Integer [1] default 2025
 		attribute Infected : Boolean [1] default false
 	}
@@ -64,6 +64,13 @@ DefinitionGroup NPPDomain_def {
 		reference ParentPLC : PLC [*] default []//
 		attribute online : Boolean [1] default true
 		attribute compromised : Boolean [1] default true
+	}
+	
+	AssetType Malware extends (Any){
+		description "A malicious software existing on devices in an NPP network"
+		level "1"
+		reference InfectedMonitors : Monitor [*] default []
+		attribute CompatablePLCOS : String [1] default ""
 	}
 	/* Contracts applying to the static structure of mydomain_def models */
 	

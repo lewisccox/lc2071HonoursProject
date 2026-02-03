@@ -1,31 +1,34 @@
 @startuml
 title RuntimeData and behavior
+class Monitor  {
+}
 class Actuator  {
 	PLCMotorDestroyed(, CompromisedPLC : **PLC**, )
 }
-class PLC  {
-}
-class Any  {
+class Malware  {
 }
 class Sensor  {
 }
 class ContainableByAny  {
 }
 class NetworkConnector  {
-	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, )
 	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, )
 	NetworkCompromised(, PrimaryMonitor : **Monitor**, )
+	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
+}
+class PLC  {
+}
+class Any  {
 }
 class IndustrialComponent  {
 }
-class Monitor  {
-}
 
 
+Monitor -up-|>  Any
 Actuator -up-|>  Any
-PLC -up-|>  Any
+Malware -up-|>  Any
 Sensor -up-|>  Any
 NetworkConnector -up-|>  Any
+PLC -up-|>  Any
 IndustrialComponent -up-|>  Any
-Monitor -up-|>  Any
 @enduml
