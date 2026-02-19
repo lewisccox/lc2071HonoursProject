@@ -22,6 +22,8 @@ AssetGroup  NPPModelTemplate {
 	}
 	Asset Stuxnet :Malware {
 		attribute CompatablePLCOS := "Siemen's WinCC"
+		attribute CompatableMonitorOS := "Windows"
+		attribute CompatableSoftwareDate := 2008
 	}
 	Asset ControlRoom : Monitor {
 		attribute online := true

@@ -10,7 +10,7 @@ DefinitionGroup NPPDomain_def {
 	/* Concepts of domain mydomain_def */
 	AssetType NetworkConnector extends (Any) {
 		description "Connects two components together"
-		level "2"
+		level "4"
 		reference PLCs : PLC[*] default []//
 		reference Monitors : Monitor [*] default []//
 		attribute trafficLevel : Integer [1] default 0
@@ -20,18 +20,18 @@ DefinitionGroup NPPDomain_def {
 	}
 	AssetType Monitor extends (Any) {
 		description "Provides a high-level overview of component activity"
-		level "1"
+		level "3"
 		reference SiblingMonitor : Monitor[*] default []// 
 		reference Connector : NetworkConnector[*] default []// 
 		attribute online : Boolean [1] default true
 		attribute MonitorCompromised : Boolean [1] default false
 		attribute MonitorOS : String [1] default "Windows"
-		attribute SoftwareRelease : Integer [1] default 2025
+		attribute SoftwareRelease : Integer [1] default 2026
 		attribute MonitorInfected : Boolean [1] default false
 	}
 	AssetType PLC extends (Any) {
 		description "Programmable logic controller- runs arbitrary code to control industrial components"
-		level "1"
+		level "2"
 		reference Connector : NetworkConnector [*] default []//
 		reference ChildActuator : Actuator[*] default []//
 		reference ChildSensor : Sensor[*] default []//
@@ -51,7 +51,7 @@ DefinitionGroup NPPDomain_def {
 	}
 	AssetType Actuator extends (Any) {
 		description "receives a signal from the PLC to perform an action on the industrial component"
-		level "1"
+		level "2"
 		reference ChildComponent : IndustrialComponent[*] default []//
 		attribute online : Boolean [1] default true
 		attribute compromised : Boolean [1] default true
@@ -59,7 +59,7 @@ DefinitionGroup NPPDomain_def {
 	
 	AssetType Sensor extends (Any) {
 		description "receives input from the industrial component and takes reading as to it's status"
-		level "1"
+		level "2"
 		reference ChildComponent : IndustrialComponent[*]default []//
 		reference ParentPLC : PLC [*] default []//
 		attribute online : Boolean [1] default true
@@ -68,8 +68,10 @@ DefinitionGroup NPPDomain_def {
 	
 	AssetType Malware extends (Any){
 		description "A malicious software existing on devices in an NPP network"
-		level "1"
+		level "2"
 		reference InfectedMonitors : Monitor [*] default []
+		attribute CompatableSoftwareDate : Integer [1] default 2026
+		attribute CompatableMonitorOS : String [1] default ""
 		attribute CompatablePLCOS : String [1] default ""
 	}
 	/* Contracts applying to the static structure of mydomain_def models */

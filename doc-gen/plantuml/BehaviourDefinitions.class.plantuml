@@ -1,4 +1,21 @@
 @startuml
+class NetworkConnector  {
+	trafficLevel : Integer
+	trafficCapacity : Integer
+	online : Boolean
+	NetworkCompromised : Boolean
+	void DeviceCompromisesNetwork()
+	void NetworkCompromised()
+	void MonitorInfectsPLC()
+}
+class Any  {
+}
+class Malware  {
+	CompatableSoftwareDate : Integer
+	CompatableMonitorOS : String
+	CompatablePLCOS : String
+	void MonitorInfectsPLC()
+}
 class Monitor  {
 	online : Boolean
 	MonitorCompromised : Boolean
@@ -9,29 +26,11 @@ class Monitor  {
 	void NetworkCompromised()
 	void MonitorInfectsPLC()
 }
-class Actuator  {
-	online : Boolean
-	compromised : Boolean
-	void PLCMotorDestroyed()
-}
-class Malware  {
-	CompatablePLCOS : String
-	void MonitorInfectsPLC()
+class ContainableByAny  {
 }
 class Sensor  {
 	online : Boolean
 	compromised : Boolean
-}
-class ContainableByAny  {
-}
-class NetworkConnector  {
-	trafficLevel : Integer
-	trafficCapacity : Integer
-	online : Boolean
-	NetworkCompromised : Boolean
-	void DeviceCompromisesNetwork()
-	void NetworkCompromised()
-	void MonitorInfectsPLC()
 }
 class PLC  {
 	online : Boolean
@@ -42,32 +41,35 @@ class PLC  {
 	void PLCMotorDestroyed()
 	void MonitorInfectsPLC()
 }
-class Any  {
-}
 class IndustrialComponent  {
 	online : Boolean
 	compromised : Boolean
 }
+class Actuator  {
+	online : Boolean
+	compromised : Boolean
+	void PLCMotorDestroyed()
+}
 
-Monitor -> "*" Monitor : SiblingMonitor
-Monitor -> "*" NetworkConnector : Connector
-Actuator -> "*" IndustrialComponent : ChildComponent
-Malware -> "*" Monitor : InfectedMonitors
-Sensor -> "*" IndustrialComponent : ChildComponent
-Sensor -> "*" PLC : ParentPLC
-ContainableByAny -> "0..1" Any : containedBy
 NetworkConnector -> "*" PLC : PLCs
 NetworkConnector -> "*" Monitor : Monitors
+Malware -> "*" Monitor : InfectedMonitors
+Monitor -> "*" Monitor : SiblingMonitor
+Monitor -> "*" NetworkConnector : Connector
+ContainableByAny -> "0..1" Any : containedBy
+Sensor -> "*" IndustrialComponent : ChildComponent
+Sensor -> "*" PLC : ParentPLC
 PLC -> "*" NetworkConnector : Connector
 PLC -> "*" Actuator : ChildActuator
 PLC -> "*" Sensor : ChildSensor
 IndustrialComponent -> "*" Sensor : ParentSensor
+Actuator -> "*" IndustrialComponent : ChildComponent
 
-Monitor -up-|>  Any
-Actuator -up-|>  Any
-Malware -up-|>  Any
-Sensor -up-|>  Any
 NetworkConnector -up-|>  Any
+Malware -up-|>  Any
+Monitor -up-|>  Any
+Sensor -up-|>  Any
 PLC -up-|>  Any
 IndustrialComponent -up-|>  Any
+Actuator -up-|>  Any
 @enduml

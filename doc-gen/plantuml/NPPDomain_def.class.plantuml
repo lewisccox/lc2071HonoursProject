@@ -32,6 +32,8 @@ class Sensor  {
 	compromised : Boolean
 }
 class Malware  {
+	CompatableSoftwareDate : Integer
+	CompatableMonitorOS : String
 	CompatablePLCOS : String
 }
 
