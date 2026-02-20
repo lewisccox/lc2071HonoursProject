@@ -147,7 +147,6 @@ AssetGroup  NPPModelTemplate {
 	link ReactorSensor to ReactorController as Sensor::ParentPLC
 	link ReactorSensor to Reactor as Sensor::ChildComponent
 	link Reactor to ReactorSensor as IndustrialComponent::ParentSensor
-
 	link Ethernet to ControlRoom as NetworkConnector::Monitors
 	link Ethernet to DataAcquisition as NetworkConnector::Monitors
 	link Ethernet to Diagnostics as NetworkConnector::Monitors

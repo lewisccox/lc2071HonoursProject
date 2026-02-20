@@ -1,0 +1,68 @@
+@startuml
+object "Ethernet : NetworkConnector" as Ethernet #Wheat
+object "Stuxnet : Malware" as Stuxnet #LightBlue
+object "ControlRoom : Monitor" as ControlRoom #Aquamarine
+object "Diagnostics : Monitor" as Diagnostics #Aquamarine
+object "DataAcquisition : Monitor" as DataAcquisition #Aquamarine
+object "TurbineController : PLC" as TurbineController #LightBlue
+object "SteamFlowController : PLC" as SteamFlowController #LightBlue
+object "FeedwaterController : PLC" as FeedwaterController #LightBlue
+object "ReactorController : PLC" as ReactorController #LightBlue
+object "ReactorSensor : Sensor" as ReactorSensor #LightBlue
+object "ReactorActuator : Actuator" as ReactorActuator #LightBlue
+object "FeedwaterSensor : Sensor" as FeedwaterSensor #LightBlue
+object "FeedwaterActuator : Actuator" as FeedwaterActuator #LightBlue
+object "SteamFlowSensor : Sensor" as SteamFlowSensor #LightBlue
+object "SteamFlowActuator : Actuator" as SteamFlowActuator #LightBlue
+object "TurbineSensor : Sensor" as TurbineSensor #LightBlue
+object "TurbineActuator : Actuator" as TurbineActuator #LightBlue
+object "Turbine : IndustrialComponent" as Turbine #lavender
+object "Reactor : IndustrialComponent" as Reactor #lavender
+object "Pipe : IndustrialComponent" as Pipe #lavender
+object "SteamGenerator : IndustrialComponent" as SteamGenerator #lavender
+Diagnostics -up-> Ethernet : Connector
+ControlRoom -up-> Ethernet : Connector
+DataAcquisition -up-> Ethernet : Connector
+Ethernet --> ReactorController : PLCs
+ReactorController -> ReactorActuator : ChildActuator
+ReactorController -up-> Ethernet : Connector
+ReactorActuator --> Reactor : ChildComponent
+ReactorController -> ReactorSensor : ChildSensor
+ReactorSensor -> ReactorController : ParentPLC
+ReactorSensor --> Reactor : ChildComponent
+Reactor -up-> ReactorSensor : ParentSensor
+Ethernet --> ControlRoom : Monitors
+Ethernet --> DataAcquisition : Monitors
+Ethernet --> Diagnostics : Monitors
+Diagnostics -> ControlRoom : SiblingMonitor
+Diagnostics -> DataAcquisition : SiblingMonitor
+DataAcquisition -> Diagnostics : SiblingMonitor
+DataAcquisition -> ControlRoom : SiblingMonitor
+ControlRoom -> Diagnostics : SiblingMonitor
+ControlRoom -> DataAcquisition : SiblingMonitor
+Ethernet --> TurbineController : PLCs
+Ethernet --> SteamFlowController : PLCs
+Ethernet --> FeedwaterController : PLCs
+TurbineController -up-> Ethernet : Connector
+SteamFlowController -up-> Ethernet : Connector
+FeedwaterController -up-> Ethernet : Connector
+TurbineController -> TurbineActuator : ChildActuator
+FeedwaterController -> FeedwaterActuator : ChildActuator
+SteamFlowController -> SteamFlowActuator : ChildActuator
+SteamFlowController -> SteamFlowSensor : ChildSensor
+TurbineController -> TurbineSensor : ChildSensor
+FeedwaterController -> FeedwaterSensor : ChildSensor
+FeedwaterActuator --> Pipe : ChildComponent
+SteamFlowActuator --> SteamGenerator : ChildComponent
+TurbineActuator --> Turbine : ChildComponent
+TurbineSensor --> Turbine : ChildComponent
+SteamFlowSensor --> SteamGenerator : ChildComponent
+FeedwaterSensor --> Pipe : ChildComponent
+FeedwaterSensor -> FeedwaterController : ParentPLC
+SteamFlowSensor -> SteamFlowController : ParentPLC
+TurbineSensor -> TurbineController : ParentPLC
+Pipe -up-> FeedwaterSensor : ParentSensor
+Turbine -up-> TurbineSensor : ParentSensor
+SteamGenerator -up-> SteamFlowSensor : ParentSensor
+Stuxnet -up-> ControlRoom : InfectedMonitors
+@enduml

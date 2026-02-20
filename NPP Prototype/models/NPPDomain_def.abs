@@ -20,7 +20,7 @@ DefinitionGroup NPPDomain_def {
 	}
 	AssetType Monitor extends (Any) {
 		description "Provides a high-level overview of component activity"
-		level "3"
+		level "4"
 		reference SiblingMonitor : Monitor[*] default []// 
 		reference Connector : NetworkConnector[*] default []// 
 		attribute online : Boolean [1] default true
@@ -31,7 +31,7 @@ DefinitionGroup NPPDomain_def {
 	}
 	AssetType PLC extends (Any) {
 		description "Programmable logic controller- runs arbitrary code to control industrial components"
-		level "2"
+		level "3"
 		reference Connector : NetworkConnector [*] default []//
 		reference ChildActuator : Actuator[*] default []//
 		reference ChildSensor : Sensor[*] default []//
