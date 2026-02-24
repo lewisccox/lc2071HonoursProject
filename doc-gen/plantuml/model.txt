@@ -1059,7 +1059,7 @@ object "<$turbine> Turbine : IndustrialComponent" as Turbine #lavender
 object "<$reactor> Reactor : IndustrialComponent" as Reactor #lavender
 object "<$water> Pipe : IndustrialComponent" as Pipe #lavender
 object "<$steam> SteamGenerator : IndustrialComponent" as SteamGenerator #lavender
-Diagnostics -up-> Ethernet : Connector
+Diagnostics -up-> Ethernet : Connector 
 ControlRoom -up-> Ethernet : Connector
 DataAcquisition -up-> Ethernet : Connector
 Ethernet --> ReactorController : PLCs

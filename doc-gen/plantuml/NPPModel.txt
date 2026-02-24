@@ -1,4 +1,4 @@
-@enduml
+@startuml
 sprite $virus [100x100/16] {
 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -1034,70 +1034,70 @@ sprite $water [100x100/16] {
 00000000000000000000000000000000000000000000000000000000000000000000FFFFFFFFFF0000000000000000000000
 }
 
-@startuml
-ControlRoom -> DataAcquisition : SiblingMonitor
-ControlRoom -> Diagnostics : SiblingMonitor
-ControlRoom -up-> Ethernet : Connector
-DataAcquisition -> ControlRoom : SiblingMonitor
-DataAcquisition -> Diagnostics : SiblingMonitor
-DataAcquisition -up-> Ethernet : Connector
-Diagnostics -> ControlRoom : SiblingMonitor
-Diagnostics -> DataAcquisition : SiblingMonitor
+object "<$connector> Ethernet : NetworkConnector" as Ethernet #Wheat
+object "<$virus> Stuxnet : Malware" as Stuxnet #LightBlue
+object "<$monitor> ControlRoom : Monitor" as ControlRoom #Aquamarine
+object "<$monitor> Diagnostics : Monitor" as Diagnostics #Aquamarine
+object "<$monitor> DataAcquisition : Monitor" as DataAcquisition #Aquamarine
+object "<$circuit> TurbineController : PLC" as TurbineController #LightBlue
+object "<$circuit> SteamFlowController : PLC" as SteamFlowController #LightBlue
+object "<$circuit> FeedwaterController : PLC" as FeedwaterController #LightBlue
+object "<$circuit> ReactorController : PLC" as ReactorController #LightBlue
+object "<$sensor> ReactorSensor : Sensor" as ReactorSensor #LightBlue
+object "<$actuator> ReactorActuator : Actuator" as ReactorActuator #LightBlue
+object "<$sensor> FeedwaterSensor : Sensor" as FeedwaterSensor #LightBlue
+object "<$actuator> FeedwaterActuator : Actuator" as FeedwaterActuator #LightBlue
+object "<$sensor> SteamFlowSensor : Sensor" as SteamFlowSensor #LightBlue
+object "<$actuator> SteamFlowActuator : Actuator" as SteamFlowActuator #LightBlue
+object "<$sensor> TurbineSensor : Sensor" as TurbineSensor #LightBlue
+object "<$actuator> TurbineActuator : Actuator" as TurbineActuator #LightBlue
+object "<$turbine> Turbine : IndustrialComponent" as Turbine #lavender
+object "<$reactor> Reactor : IndustrialComponent" as Reactor #lavender
+object "<$water> Pipe : IndustrialComponent" as Pipe #lavender
+object "<$steam> SteamGenerator : IndustrialComponent" as SteamGenerator #lavender
 Diagnostics -up-> Ethernet : Connector
+ControlRoom -up-> Ethernet : Connector
+DataAcquisition -up-> Ethernet : Connector
+Ethernet --> ReactorController : PLCs
+ReactorController -> ReactorActuator : ChildActuator
+ReactorController -up-> Ethernet : Connector
+ReactorActuator --> Reactor : ChildComponent
+ReactorController -> ReactorSensor : ChildSensor
+ReactorSensor -> ReactorController : ParentPLC
+ReactorSensor --> Reactor : ChildComponent
+Reactor -up-> ReactorSensor : ParentSensor
 Ethernet --> ControlRoom : Monitors
 Ethernet --> DataAcquisition : Monitors
 Ethernet --> Diagnostics : Monitors
-Ethernet --> FeedwaterController : PLCs
-Ethernet --> ReactorController : PLCs
-Ethernet --> SteamFlowController : PLCs
+Diagnostics -> ControlRoom : SiblingMonitor
+Diagnostics -> DataAcquisition : SiblingMonitor
+DataAcquisition -> Diagnostics : SiblingMonitor
+DataAcquisition -> ControlRoom : SiblingMonitor
+ControlRoom -> Diagnostics : SiblingMonitor
+ControlRoom -> DataAcquisition : SiblingMonitor
 Ethernet --> TurbineController : PLCs
-FeedwaterActuator --> Pipe : ChildComponent
-FeedwaterController -> FeedwaterActuator : ChildActuator
-FeedwaterController -> FeedwaterSensor : ChildSensor
+Ethernet --> SteamFlowController : PLCs
+Ethernet --> FeedwaterController : PLCs
+TurbineController -up-> Ethernet : Connector
+SteamFlowController -up-> Ethernet : Connector
 FeedwaterController -up-> Ethernet : Connector
-FeedwaterSensor --> Pipe : ChildComponent
-FeedwaterSensor -> FeedwaterController : ParentPLC
-Pipe -up-> FeedwaterSensor : ParentSensor
-Reactor -up-> ReactorSensor : ParentSensor
-ReactorActuator --> Reactor : ChildComponent
-ReactorController -> ReactorActuator : ChildActuator
-ReactorController -> ReactorSensor : ChildSensor
-ReactorController -up-> Ethernet : Connector
-ReactorSensor --> Reactor : ChildComponent
-ReactorSensor -> ReactorController : ParentPLC
-SteamFlowActuator --> SteamGenerator : ChildComponent
+TurbineController -> TurbineActuator : ChildActuator
+FeedwaterController -> FeedwaterActuator : ChildActuator
 SteamFlowController -> SteamFlowActuator : ChildActuator
 SteamFlowController -> SteamFlowSensor : ChildSensor
-SteamFlowController -up-> Ethernet : Connector
+TurbineController -> TurbineSensor : ChildSensor
+FeedwaterController -> FeedwaterSensor : ChildSensor
+FeedwaterActuator --> Pipe : ChildComponent
+SteamFlowActuator --> SteamGenerator : ChildComponent
+TurbineActuator --> Turbine : ChildComponent
+TurbineSensor --> Turbine : ChildComponent
 SteamFlowSensor --> SteamGenerator : ChildComponent
+FeedwaterSensor --> Pipe : ChildComponent
+FeedwaterSensor -> FeedwaterController : ParentPLC
 SteamFlowSensor -> SteamFlowController : ParentPLC
+TurbineSensor -> TurbineController : ParentPLC
+Pipe -up-> FeedwaterSensor : ParentSensor
+Turbine -up-> TurbineSensor : ParentSensor
 SteamGenerator -up-> SteamFlowSensor : ParentSensor
 Stuxnet -up-> ControlRoom : InfectedMonitors
-Turbine -up-> TurbineSensor : ParentSensor
-TurbineActuator --> Turbine : ChildComponent
-TurbineController -> TurbineActuator : ChildActuator
-TurbineController -> TurbineSensor : ChildSensor
-TurbineController -up-> Ethernet : Connector
-TurbineSensor --> Turbine : ChildComponent
-TurbineSensor -> TurbineController : ParentPLC
-object "ControlRoom : Monitor" as ControlRoom #Aquamarine
-object "DataAcquisition : Monitor" as DataAcquisition #Aquamarine
-object "Diagnostics : Monitor" as Diagnostics #Aquamarine
-object "Ethernet : NetworkConnector" as Ethernet #Wheat
-object "FeedwaterActuator : Actuator" as FeedwaterActuator #LightBlue
-object "FeedwaterController : PLC" as FeedwaterController #LightBlue
-object "FeedwaterSensor : Sensor" as FeedwaterSensor #LightBlue
-object "Pipe : IndustrialComponent" as Pipe #lavender
-object "Reactor : IndustrialComponent" as Reactor #lavender
-object "ReactorActuator : Actuator" as ReactorActuator #LightBlue
-object "ReactorController : PLC" as ReactorController #LightBlue
-object "ReactorSensor : Sensor" as ReactorSensor #LightBlue
-object "SteamFlowActuator : Actuator" as SteamFlowActuator #LightBlue
-object "SteamFlowController : PLC" as SteamFlowController #LightBlue
-object "SteamFlowSensor : Sensor" as SteamFlowSensor #LightBlue
-object "SteamGenerator : IndustrialComponent" as SteamGenerator #lavender
-object "Stuxnet : Malware" as Stuxnet #LightBlue
-object "Turbine : IndustrialComponent" as Turbine #lavender
-object "TurbineActuator : Actuator" as TurbineActuator #LightBlue
-object "TurbineController : PLC" as TurbineController #LightBlue
-object "TurbineSensor : Sensor" as TurbineSensor #LightBlue
+@enduml
