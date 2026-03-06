@@ -74,6 +74,11 @@ DefinitionGroup NPPDomain_def {
 		attribute CompatableMonitorOS : String [1] default ""
 		attribute CompatablePLCOS : String [1] default ""
 	}
+	AssetType SafeguardSystem extends (Any){
+		description "System responsible for automatic shutdown in the event of a catastrophe"
+		level "3"
+		attribute online : Boolean [1] default true
+	}
 	/* Contracts applying to the static structure of mydomain_def models */
 	
 }

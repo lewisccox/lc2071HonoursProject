@@ -45,12 +45,20 @@ DefinitionGroup BehaviourDefinitions {
 			VictimPLC.compromised.assign(true);
 		}		
 	}
-	GuardedAction PLCMotorDestroyed ( VictimActuator: Actuator ,CompromisedPLC : PLC){
+	GuardedAction ReactorMotorDestroyed ( VictimActuator: Actuator ,CompromisedPLC : PLC){
 		guard=
 		CompromisedPLC.compromised == true &&
 		CompromisedPLC.ChildActuator.contains(VictimActuator)
 		action{
 			VictimActuator.compromised.assign(true);
+		}		
+	}
+	GuardedAction SafeGuardsDeactivateCompromisedSystem ( Safeguard : SafeguardSystem,  CompromisedActuator : Actuator){
+		guard=
+		CompromisedActuator.compromised == true &&
+		Safeguard.online == true
+		action{
+				CompromisedActuator.online.assign(false);
 		}		
 	}
 	

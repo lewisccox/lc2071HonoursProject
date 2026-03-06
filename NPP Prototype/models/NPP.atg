@@ -1,0 +1,72 @@
+AtsyraGoalModel {
+	defaults {
+		genericAllLocked {
+			
+			frontdoor.open = false,	
+			welcomeDeskGate.open = false,	
+			welcomeDeskToStorageAccess.open = false,	
+			sideDoor1.open = false,
+			sideDoor1.locked = true,	
+			window1.open = false,	
+			window2.open = false,	
+			storageSideDoor1.open = false,	
+			storageSideDoor2.open = false,
+			storageSideDoor2.locked = true,
+			
+			alarm1.triggered = false,
+			alarm1.enabled = true
+		}
+	}
+	types {
+		InternalType Boolean
+		SystemType Access
+		SystemType Alarm
+		SystemType Attacker
+		SystemType Item
+		SystemType Zone
+	}
+	features {
+		const true(Boolean)
+		const false(Boolean)
+		const exterior(Zone)
+		const lobby(Zone)
+		const welcomeDesk(Zone)
+		const corridor1(Zone)
+		const corridor2(Zone)
+		const lugageStorage(Zone)
+		const inaccessibleZone(Zone)
+		const frontdoor(Access)
+		frontdoor.open(Boolean)
+		const welcomeDeskGate(Access)
+		welcomeDeskGate.open(Boolean)
+		const welcomeDeskToStorageAccess(Access)
+		welcomeDeskToStorageAccess.open(Boolean)
+		const sideDoor1(Access)
+		sideDoor1.open(Boolean)
+		sideDoor1.locked(Boolean)
+		const window1(Access)
+		window1.open(Boolean)
+		const window2(Access)
+		window2.open(Boolean)
+		const storageSideDoor1(Access)
+		storageSideDoor1.open(Boolean)
+		const storageSideDoor2(Access)
+		storageSideDoor2.open(Boolean)
+		storageSideDoor2.locked(Boolean)
+		const alarm1(Alarm)
+		alarm1.triggered(Boolean)
+		alarm1.enabled(Boolean)
+		alarm1.location(Zone)
+		const receptionistBadge(Item)
+		receptionistBadge.location(Zone)
+		receptionistBadge.owner(Attacker)
+		const key1(Item)
+		key1.location(Zone)
+		key1.owner(Attacker)
+		const document(Item)
+		document.location(Zone)
+		document.owner(Attacker)
+		const thief(Attacker)
+		thief.location(Zone)
+	}
+}

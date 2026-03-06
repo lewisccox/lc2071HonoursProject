@@ -14,7 +14,10 @@ AssetGroup StuxnetGoals {
 		(ControlRoom.MonitorInfected == true  && ControlRoom.MonitorOS == Stuxnet.CompatableMonitorOS )
 		post = //other PCs on the network will be infected with stuxnet 
 		//control room compromised = true 
-		Ethernet.NetworkCompromised == true 
+		//Ethernet.NetworkCompromised == true 
+		//ControlRoom.MonitorCompromised == true
+		//ReactorController.compromised == true
+		ReactorActuator.online == false
 	}
 	
 	Goal Step2{

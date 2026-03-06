@@ -5,13 +5,18 @@ with NPPModelTemplate::* from "NPPModelTemplate.abs";
 with BehaviourDefinitions::* from "BehaviourDefinitions.abs";
 
 AssetGroup StuxnetGoals {
-	Goal Step1 {
-		description "Stuxnet destroys reactor motor"
-		pre = 
-		(DataAcquisition.MonitorInfected == true)||// && DataAcquisition.OS == "Windows")||
-		(Diagnostics.MonitorInfected == true)||// && Diagnostics.OS == "Windows")||
-		(ControlRoom.MonitorInfected == true )//&& ControlRoom.OS == "Windows") 
-		post = 
+	Goal Stuxnet {
+		description "Infect Network"
+		pre = //a PC on or connected to the NPP network is infected with stuxnet 
+		//operating system must be windows 
+		(DataAcquisition.MonitorInfected == true  && DataAcquisition.MonitorOS == Stuxnet.CompatableMonitorOS )||
+		(Diagnostics.MonitorInfected == true  && Diagnostics.MonitorOS == Stuxnet.CompatableMonitorOS )||
+		(ControlRoom.MonitorInfected == true  && ControlRoom.MonitorOS == Stuxnet.CompatableMonitorOS )
+		post = //other PCs on the network will be infected with stuxnet 
+		//control room compromised = true 
+		//Ethernet.NetworkCompromised == true 
+		//ControlRoom.MonitorCompromised == true
+		//ReactorController.compromised == true
 		ReactorActuator.online == false
 	}
 	

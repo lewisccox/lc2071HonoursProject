@@ -1,0 +1,128 @@
+import "MySmallHotel_definition.atg"
+
+AtsyraGoalModel {
+	atsyragoals {
+		Goal main_goal  {
+			pre with genericAllLocked:
+				//attacker location
+				thief.location = exterior
+				//item not owned by the attacker
+				and document.location = lugageStorage
+				// the attacker is not detected by the alarm
+				and receptionistBadge.location = welcomeDesk
+				and key1.location = welcomeDesk
+				and not alarm1.triggered
+			post : 
+				thief.location = exterior 
+				// attacker has the document
+				and document.owner = thief
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+		}
+		Goal acquireBadge_goal  {
+			pre with genericAllLocked:
+				//attacker location
+				thief.location = exterior
+				//item not owned by the attacker
+				and document.location = lugageStorage
+				// the attacker is not detected by the alarm
+				and receptionistBadge.location = welcomeDesk
+				and key1.location = welcomeDesk
+				and not alarm1.triggered
+			post : 
+				// attacker has the badge
+				receptionistBadge.owner = thief
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+		}
+		Goal acquireDocumentThanksToBadge_goal  {
+			pre :
+				// attacker has the badge
+				receptionistBadge.owner = thief
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+			post : 
+				thief.location = exterior 
+				// attacker has the document
+				and document.owner = thief
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+		}
+		Goal accessCorridor1_goal  {
+			pre with genericAllLocked:
+				//attacker location
+				thief.location = exterior
+				//item not owned by the attacker
+				and document.location = lugageStorage
+				// the attacker is not detected by the alarm
+				and receptionistBadge.location = welcomeDesk
+				and key1.location = welcomeDesk
+				and not alarm1.triggered
+			post : 
+				// attacker is in corridor 1
+				thief.location = corridor1
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+		}
+		Goal acquireDocumentViaCorridor1_goal  {
+			pre :
+				// attacker is in corridor 1
+				thief.location = corridor1
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+			post : 
+				thief.location = exterior 
+				// attacker has the document
+				and document.owner = thief
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+		}
+		Goal acquireKey_goal  {
+			pre with genericAllLocked:
+				//attacker location
+				thief.location = exterior
+				//item not owned by the attacker
+				and document.location = lugageStorage
+				// the attacker is not detected by the alarm
+				and receptionistBadge.location = welcomeDesk
+				and key1.location = welcomeDesk
+				and not alarm1.triggered
+			post : 
+				// attacker has the key
+				key1.owner = thief
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+		}
+		Goal acquireDocumentThanksToKey_goal  {
+			pre :
+				// attacker has the key
+				receptionistBadge.owner = thief
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+			post : 
+				thief.location = exterior 
+				// attacker has the document
+				and document.owner = thief
+				// the attacker is not detected by the alarm
+				and not alarm1.triggered
+		}
+	}
+	trees {
+		main_tree_via_badge_undermatched [main_goal] 
+			SAND (	acquireBadge_tree [acquireBadge_goal],
+				acquireDocumentThanksToBadge_tree[acquireDocumentThanksToBadge_goal]
+			) 
+			
+		// actually accessCorridor1_tree is unreachable
+		main_tree_via_corridor1_undermatched [main_goal] 
+			SAND (	accessCorridor1_tree [accessCorridor1_goal],
+				acquireDocumentViaCorridor1_tree[acquireDocumentViaCorridor1_goal]
+			)	
+		main_tree_via_key_undermatched [main_goal] 
+			SAND (	acquireKey_tree [acquireKey_goal],
+				acquireDocumentThanksToKey_tree[acquireDocumentThanksToKey_goal]
+			)
+		main_tree_matched [main_goal] 
+			OR (	main_tree_via_badge_undermatched, main_tree_via_key_undermatched	)
+	}
+}

@@ -1,34 +1,67 @@
 @startuml
 title RuntimeData and behavior
-class NetworkConnector  {
-	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, )
-	NetworkCompromised(, PrimaryMonitor : **Monitor**, )
-	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
-}
-class Any  {
-}
-class Malware  {
-}
-class Monitor  {
-}
-class ContainableByAny  {
-}
-class Sensor  {
-}
-class PLC  {
+class IndustrialComponent  {
 }
 class IndustrialComponent  {
 }
+class PLC  {
+}
+class Monitor  {
+}
 class Actuator  {
-	PLCMotorDestroyed(, CompromisedPLC : **PLC**, )
+	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
+}
+class Malware  {
+}
+class NetworkConnector  {
+	NetworkCompromised(, PrimaryMonitor : **Monitor**, )
+	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, )
+	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
+}
+class NetworkConnector  {
+	NetworkCompromised(, PrimaryMonitor : **Monitor**, )
+	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
+	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, )
+}
+class ContainableByAny  {
+}
+class SafeguardSystem  {
+	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, )
+}
+class Actuator  {
+	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
+}
+class Sensor  {
+}
+class Malware  {
+}
+class Sensor  {
+}
+class SafeguardSystem  {
+	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, )
+}
+class Monitor  {
+}
+class Any  {
+}
+class PLC  {
 }
 
 
-NetworkConnector -up-|>  Any
-Malware -up-|>  Any
-Monitor -up-|>  Any
-Sensor -up-|>  Any
-PLC -up-|>  Any
 IndustrialComponent -up-|>  Any
+IndustrialComponent -up-|>  Any
+PLC -up-|>  Any
+Monitor -up-|>  Any
 Actuator -up-|>  Any
+Malware -up-|>  Any
+NetworkConnector -up-|>  Any
+NetworkConnector -up-|>  Any
+SafeguardSystem -up-|>  Any
+Actuator -up-|>  Any
+Sensor -up-|>  Any
+Malware -up-|>  Any
+Sensor -up-|>  Any
+SafeguardSystem -up-|>  Any
+Monitor -up-|>  Any
+PLC -up-|>  Any
 @enduml

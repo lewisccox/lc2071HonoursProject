@@ -36,6 +36,9 @@ class Malware  {
 	CompatableMonitorOS : String
 	CompatablePLCOS : String
 }
+class SafeguardSystem  {
+	online : Boolean
+}
 
 NetworkConnector -> "*" PLC : PLCs
 NetworkConnector -> "*" Monitor : Monitors
@@ -57,4 +60,5 @@ IndustrialComponent -up-|>  Any
 Actuator -up-|>  Any
 Sensor -up-|>  Any
 Malware -up-|>  Any
+SafeguardSystem -up-|>  Any
 @enduml

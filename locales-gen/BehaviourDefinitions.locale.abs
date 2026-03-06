@@ -9,7 +9,9 @@ Locale {
 		}
 		Guard MonitorInfectsPLC = "MonitorInfectsPLC" {
 		}
-		Guard PLCMotorDestroyed = "PLCMotorDestroyed" {
+		Guard ReactorMotorDestroyed = "ReactorMotorDestroyed" {
+		}
+		Guard SafeGuardsDeactivateCompromisedSystem = "SafeGuardsDeactivateCompromisedSystem" {
 		}
 	}
 }

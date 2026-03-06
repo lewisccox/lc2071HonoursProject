@@ -59,5 +59,9 @@ Locale {
 			attribute CompatablePLCOS = "CompatablePLCOS"
 			reference InfectedMonitors = "InfectedMonitors"
 		}
+		AssetType SafeguardSystem = "SafeguardSystem" {
+			description = "System responsible for automatic shutdown in the event of a catastrophe"
+			attribute online = "online"
+		}
 	}
 }
