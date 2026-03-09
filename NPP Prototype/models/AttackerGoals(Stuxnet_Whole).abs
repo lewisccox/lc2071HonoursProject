@@ -17,7 +17,7 @@ AssetGroup StuxnetGoals {
 		//Ethernet.NetworkCompromised == true 
 		//ControlRoom.MonitorCompromised == true
 		//ReactorController.compromised == true
-		ReactorActuator.online == false
+		ReactorActuator.ActuatorOnline == false
 	}
 	
 }

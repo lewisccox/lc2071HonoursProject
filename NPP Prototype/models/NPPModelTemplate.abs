@@ -10,14 +10,10 @@ import "NPPDomain_def.abs";
 
 AssetGroup  NPPModelTemplate {
 	
-	// list of mymodel assets
-	//Asset Atrue : ConceptA {}
-	//Asset A2 : ConceptA {}
-	//Asset Btrue : ConceptB {} 
+	//Assets with empty brackets where there should be attributes have only default values for their attributes
 	Asset Ethernet : NetworkConnector {
 		attribute trafficLevel := 1
 		attribute trafficCapacity := 1000
-		attribute online := true
 		attribute NetworkCompromised := false
 	}
 	Asset Stuxnet :Malware {
@@ -26,125 +22,81 @@ AssetGroup  NPPModelTemplate {
 		attribute CompatableSoftwareDate := 2008
 	}
 	Asset ControlRoom : Monitor {
-		attribute online := true
 		attribute SoftwareRelease := 2007
 		attribute MonitorInfected := false
 		attribute MonitorCompromised :=false
 	}
 	Asset Diagnostics : Monitor {
-		attribute online := true
 		attribute SoftwareRelease := 2007
 		attribute MonitorInfected := true
 	}
 	Asset DataAcquisition : Monitor {
 		
-		attribute online := true
 		attribute SoftwareRelease := 2007
 		attribute MonitorInfected := true
 	}
 	Asset TurbineController : PLC {
-		attribute compromised := false
 		
 		attribute SoftwareRelease := 2007
-		attribute Infected :=false
-		attribute online := true
 		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset SteamFlowController : PLC {
 		
 		attribute SoftwareRelease := 2007
-		attribute Infected :=false
-		attribute online := true
-		attribute compromised := false
 		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset FeedwaterController : PLC {
 		
-		attribute Infected :=false
 		attribute SoftwareRelease := 2007
-		attribute compromised := false
-		attribute online := true
 		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset ReactorController : PLC {
-		attribute compromised := false
 		
 		attribute SoftwareRelease := 2007
-		attribute online := true
 		attribute PLCOS := "Siemen's WinCC"
-		attribute Infected :=false
 	}
 	Asset ReactorSensor : Sensor {
 		
-		attribute online := true
-		attribute compromised := false
 	}
 	Asset ReactorActuator : Actuator {
 		
-		attribute compromised := false
-		attribute online := true
 	}
 	Asset FeedwaterSensor : Sensor {
-		attribute compromised := false
-		
-		attribute online := true
 	}
 	Asset FeedwaterActuator : Actuator {
 		
-		attribute online := true
-		attribute compromised := false
 	}
 	Asset SteamFlowSensor : Sensor {
 		
-		attribute compromised := false
-		attribute online := true
 	}
 	Asset SteamFlowActuator : Actuator {
-		attribute compromised := false
-		
-		attribute online := true
 	}
 	Asset TurbineSensor : Sensor {
 		
-		attribute online := true
-		attribute compromised := false
 	}
 	Asset TurbineActuator : Actuator {
 		
-		attribute compromised := false
-		attribute online := true
 	}
 	Asset Turbine : IndustrialComponent {
-		attribute compromised := false
-		
-		attribute online := true
 	} 
 	Asset Reactor : IndustrialComponent {
 		
-		attribute online := true
-		attribute compromised := false
 	} 
 	Asset Pipe : IndustrialComponent {
 		
-		attribute compromised := false
-		attribute online := true
 	} 
 	Asset SteamGenerator : IndustrialComponent {
-		attribute compromised := false
-		
-		attribute online := true
 	} 
 	Asset SafeGuarding : SafeguardSystem {
-		attribute online := true	
 	}
 	
 	
-	link  Diagnostics to Ethernet as Monitor::Connector
-	link  ControlRoom to Ethernet as Monitor::Connector
-	link  DataAcquisition to Ethernet as Monitor::Connector
+	link  Diagnostics to Ethernet as Monitor::MonitorConnector
+	link  ControlRoom to Ethernet as Monitor::MonitorConnector
+	link  DataAcquisition to Ethernet as Monitor::MonitorConnector
 	link Ethernet to ReactorController as NetworkConnector::PLCs
 	link ReactorController to ReactorActuator as PLC::ChildActuator
-	link ReactorController to Ethernet as PLC::Connector
+	link ReactorController to Ethernet as PLC::PLCConnector
 	link ReactorActuator to Reactor as Actuator::ChildComponent
 	link ReactorController to ReactorSensor as PLC::ChildSensor
 	link ReactorSensor to ReactorController as Sensor::ParentPLC
@@ -162,9 +114,9 @@ AssetGroup  NPPModelTemplate {
 	link Ethernet to TurbineController as NetworkConnector::PLCs
 	link Ethernet to SteamFlowController as NetworkConnector::PLCs
 	link Ethernet to FeedwaterController as NetworkConnector::PLCs
-	link TurbineController to Ethernet as PLC::Connector
-	link SteamFlowController to Ethernet as PLC::Connector
-	link FeedwaterController to Ethernet as PLC::Connector
+	link TurbineController to Ethernet as PLC::PLCConnector
+	link SteamFlowController to Ethernet as PLC::PLCConnector
+	link FeedwaterController to Ethernet as PLC::PLCConnector
 	link TurbineController to TurbineActuator as PLC::ChildActuator
 	link FeedwaterController to FeedwaterActuator as PLC::ChildActuator
 	link SteamFlowController to SteamFlowActuator as PLC::ChildActuator

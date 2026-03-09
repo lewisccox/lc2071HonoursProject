@@ -21,12 +21,12 @@ object "Reactor : IndustrialComponent" as Reactor #lavender
 object "Pipe : IndustrialComponent" as Pipe #lavender
 object "SteamGenerator : IndustrialComponent" as SteamGenerator #lavender
 object "SafeGuarding : SafeguardSystem" as SafeGuarding #Aquamarine
-Diagnostics -> Ethernet : Connector
-ControlRoom -> Ethernet : Connector
-DataAcquisition -> Ethernet : Connector
+Diagnostics -> Ethernet : MonitorConnector
+ControlRoom -> Ethernet : MonitorConnector
+DataAcquisition -> Ethernet : MonitorConnector
 Ethernet --> ReactorController : PLCs
 ReactorController --> ReactorActuator : ChildActuator
-ReactorController -up-> Ethernet : Connector
+ReactorController -up-> Ethernet : PLCConnector
 ReactorActuator --> Reactor : ChildComponent
 ReactorController --> ReactorSensor : ChildSensor
 ReactorSensor -up-> ReactorController : ParentPLC
@@ -44,9 +44,9 @@ ControlRoom -> DataAcquisition : SiblingMonitor
 Ethernet --> TurbineController : PLCs
 Ethernet --> SteamFlowController : PLCs
 Ethernet --> FeedwaterController : PLCs
-TurbineController -up-> Ethernet : Connector
-SteamFlowController -up-> Ethernet : Connector
-FeedwaterController -up-> Ethernet : Connector
+TurbineController -up-> Ethernet : PLCConnector
+SteamFlowController -up-> Ethernet : PLCConnector
+FeedwaterController -up-> Ethernet : PLCConnector
 TurbineController --> TurbineActuator : ChildActuator
 FeedwaterController --> FeedwaterActuator : ChildActuator
 SteamFlowController --> SteamFlowActuator : ChildActuator

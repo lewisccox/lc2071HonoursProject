@@ -7,48 +7,48 @@ Locale {
 			description = "Connects two components together"
 			attribute trafficLevel = "trafficLevel"
 			attribute trafficCapacity = "trafficCapacity"
-			attribute online = "online"
+			attribute ConnectorOnline = "ConnectorOnline"
 			attribute NetworkCompromised = "NetworkCompromised"
 			reference PLCs = "PLCs"
 			reference Monitors = "Monitors"
 		}
 		AssetType Monitor = "Monitor" {
 			description = "Provides a high-level overview of component activity"
-			attribute online = "online"
+			attribute MonitorOnline = "MonitorOnline"
 			attribute MonitorCompromised = "MonitorCompromised"
 			attribute MonitorOS = "MonitorOS"
 			attribute SoftwareRelease = "SoftwareRelease"
 			attribute MonitorInfected = "MonitorInfected"
 			reference SiblingMonitor = "SiblingMonitor"
-			reference Connector = "Connector"
+			reference MonitorConnector = "MonitorConnector"
 		}
 		AssetType PLC = "PLC" {
 			description = "Programmable logic controller- runs arbitrary code to control industrial components"
-			attribute online = "online"
-			attribute compromised = "compromised"
+			attribute PLCOnline = "PLCOnline"
+			attribute PLCCompromised = "PLCCompromised"
 			attribute PLCOS = "PLCOS"
 			attribute SoftwareRelease = "SoftwareRelease"
-			attribute Infected = "Infected"
-			reference Connector = "Connector"
+			attribute PLCInfected = "PLCInfected"
+			reference PLCConnector = "PLCConnector"
 			reference ChildActuator = "ChildActuator"
 			reference ChildSensor = "ChildSensor"
 		}
 		AssetType IndustrialComponent = "IndustrialComponent" {
 			description = "End Point Components i.e. turbines,steam generators etc."
-			attribute online = "online"
-			attribute compromised = "compromised"
+			attribute ComponentOnline = "ComponentOnline"
+			attribute ComponentCompromised = "ComponentCompromised"
 			reference ParentSensor = "ParentSensor"
 		}
 		AssetType Actuator = "Actuator" {
 			description = "receives a signal from the PLC to perform an action on the industrial component"
-			attribute online = "online"
-			attribute compromised = "compromised"
+			attribute ActuatorOnline = "ActuatorOnline"
+			attribute ActuatorCompromised = "ActuatorCompromised"
 			reference ChildComponent = "ChildComponent"
 		}
 		AssetType Sensor = "Sensor" {
 			description = "receives input from the industrial component and takes reading as to it's status"
-			attribute online = "online"
-			attribute compromised = "compromised"
+			attribute SensorOnline = "SensorOnline"
+			attribute SensorCompromised = "SensorCompromised"
 			reference ChildComponent = "ChildComponent"
 			reference ParentPLC = "ParentPLC"
 		}
@@ -61,7 +61,7 @@ Locale {
 		}
 		AssetType SafeguardSystem = "SafeguardSystem" {
 			description = "System responsible for automatic shutdown in the event of a catastrophe"
-			attribute online = "online"
+			attribute SafeguardOnline = "SafeguardOnline"
 		}
 	}
 }

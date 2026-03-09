@@ -15,15 +15,15 @@ DefinitionGroup NPPDomain_def {
 		reference Monitors : Monitor [*] default []//
 		attribute trafficLevel : Integer [1] default 0
 		attribute trafficCapacity : Integer [1] default 1000 //maximum possible bandwidth in mbps
-		attribute online : Boolean [1] default true
+		attribute ConnectorOnline : Boolean [1] default true
 		attribute NetworkCompromised : Boolean [1] default false
 	}
 	AssetType Monitor extends (Any) {
 		description "Provides a high-level overview of component activity"
 		level "4"
 		reference SiblingMonitor : Monitor[*] default []// 
-		reference Connector : NetworkConnector[*] default []// 
-		attribute online : Boolean [1] default true
+		reference MonitorConnector : NetworkConnector[*] default []// 
+		attribute MonitorOnline : Boolean [1] default true
 		attribute MonitorCompromised : Boolean [1] default false
 		attribute MonitorOS : String [1] default "Windows"
 		attribute SoftwareRelease : Integer [1] default 2026
@@ -32,29 +32,29 @@ DefinitionGroup NPPDomain_def {
 	AssetType PLC extends (Any) {
 		description "Programmable logic controller- runs arbitrary code to control industrial components"
 		level "3"
-		reference Connector : NetworkConnector [*] default []//
+		reference PLCConnector : NetworkConnector [*] default []//
 		reference ChildActuator : Actuator[*] default []//
 		reference ChildSensor : Sensor[*] default []//
-		attribute online : Boolean [1] default true
-		attribute compromised : Boolean [1] default false
+		attribute PLCOnline : Boolean [1] default true
+		attribute PLCCompromised : Boolean [1] default false
 		attribute PLCOS : String [1] default "Windows"
 		attribute SoftwareRelease : Integer [1] default 2025
-		attribute Infected : Boolean [1] default false
+		attribute PLCInfected : Boolean [1] default false
 	}
 
 	AssetType IndustrialComponent extends (Any) {
 		description "End Point Components i.e. turbines,steam generators etc."
 		level "1"
 		reference ParentSensor : Sensor[*] default []//
-		attribute online : Boolean [1] default true
-		attribute compromised : Boolean [1] default true
+		attribute ComponentOnline : Boolean [1] default true
+		attribute ComponentCompromised : Boolean [1] default true
 	}
 	AssetType Actuator extends (Any) {
 		description "receives a signal from the PLC to perform an action on the industrial component"
 		level "2"
 		reference ChildComponent : IndustrialComponent[*] default []//
-		attribute online : Boolean [1] default true
-		attribute compromised : Boolean [1] default true
+		attribute ActuatorOnline : Boolean [1] default true
+		attribute ActuatorCompromised : Boolean [1] default true
 	}
 	
 	AssetType Sensor extends (Any) {
@@ -62,8 +62,8 @@ DefinitionGroup NPPDomain_def {
 		level "2"
 		reference ChildComponent : IndustrialComponent[*]default []//
 		reference ParentPLC : PLC [*] default []//
-		attribute online : Boolean [1] default true
-		attribute compromised : Boolean [1] default true
+		attribute SensorOnline : Boolean [1] default true
+		attribute SensorCompromised : Boolean [1] default true
 	}
 	
 	AssetType Malware extends (Any){
@@ -77,7 +77,7 @@ DefinitionGroup NPPDomain_def {
 	AssetType SafeguardSystem extends (Any){
 		description "System responsible for automatic shutdown in the event of a catastrophe"
 		level "3"
-		attribute online : Boolean [1] default true
+		attribute SafeguardOnline : Boolean [1] default true
 	}
 	/* Contracts applying to the static structure of mydomain_def models */
 	

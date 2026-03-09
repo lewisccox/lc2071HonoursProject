@@ -2,34 +2,34 @@
 class NetworkConnector  {
 	trafficLevel : Integer
 	trafficCapacity : Integer
-	online : Boolean
+	ConnectorOnline : Boolean
 	NetworkCompromised : Boolean
 }
 class Monitor  {
-	online : Boolean
+	MonitorOnline : Boolean
 	MonitorCompromised : Boolean
 	MonitorOS : String
 	SoftwareRelease : Integer
 	MonitorInfected : Boolean
 }
 class PLC  {
-	online : Boolean
-	compromised : Boolean
+	PLCOnline : Boolean
+	PLCCompromised : Boolean
 	PLCOS : String
 	SoftwareRelease : Integer
-	Infected : Boolean
+	PLCInfected : Boolean
 }
 class IndustrialComponent  {
-	online : Boolean
-	compromised : Boolean
+	ComponentOnline : Boolean
+	ComponentCompromised : Boolean
 }
 class Actuator  {
-	online : Boolean
-	compromised : Boolean
+	ActuatorOnline : Boolean
+	ActuatorCompromised : Boolean
 }
 class Sensor  {
-	online : Boolean
-	compromised : Boolean
+	SensorOnline : Boolean
+	SensorCompromised : Boolean
 }
 class Malware  {
 	CompatableSoftwareDate : Integer
@@ -37,14 +37,14 @@ class Malware  {
 	CompatablePLCOS : String
 }
 class SafeguardSystem  {
-	online : Boolean
+	SafeguardOnline : Boolean
 }
 
 NetworkConnector -> "*" PLC : PLCs
 NetworkConnector -> "*" Monitor : Monitors
 Monitor -> "*" Monitor : SiblingMonitor
-Monitor -> "*" NetworkConnector : Connector
-PLC -> "*" NetworkConnector : Connector
+Monitor -> "*" NetworkConnector : MonitorConnector
+PLC -> "*" NetworkConnector : PLCConnector
 PLC -> "*" Actuator : ChildActuator
 PLC -> "*" Sensor : ChildSensor
 IndustrialComponent -> "*" Sensor : ParentSensor
