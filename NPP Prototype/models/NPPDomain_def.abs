@@ -47,14 +47,14 @@ DefinitionGroup NPPDomain_def {
 		level "1"
 		reference ParentSensor : Sensor[*] default []//
 		attribute ComponentOnline : Boolean [1] default true
-		attribute ComponentCompromised : Boolean [1] default true
+		attribute ComponentCompromised : Boolean [1] default false
 	}
 	AssetType Actuator extends (Any) {
 		description "receives a signal from the PLC to perform an action on the industrial component"
 		level "2"
 		reference ChildComponent : IndustrialComponent[*] default []//
 		attribute ActuatorOnline : Boolean [1] default true
-		attribute ActuatorCompromised : Boolean [1] default true
+		attribute ActuatorCompromised : Boolean [1] default false
 	}
 	
 	AssetType Sensor extends (Any) {
@@ -63,7 +63,7 @@ DefinitionGroup NPPDomain_def {
 		reference ChildComponent : IndustrialComponent[*]default []//
 		reference ParentPLC : PLC [*] default []//
 		attribute SensorOnline : Boolean [1] default true
-		attribute SensorCompromised : Boolean [1] default true
+		attribute SensorCompromised : Boolean [1] default false
 	}
 	
 	AssetType Malware extends (Any){

@@ -1,38 +1,38 @@
 @startuml
 title RuntimeData and behavior
+class SafeguardSystem  {
+	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, ActuatorComponent : **IndustrialComponent**, )
+}
 class Sensor  {
+}
+class Malware  {
 }
 class Actuator  {
 	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
 }
-class NetworkConnector  {
-	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, )
-	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
-	NetworkCompromised(, PrimaryMonitor : **Monitor**, CulpritMalware : **Malware**, )
-}
-class Monitor  {
-}
-class PLC  {
-}
-class SafeguardSystem  {
-	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, )
-}
-class Malware  {
-}
-class Any  {
+class IndustrialComponent  {
 }
 class ContainableByAny  {
 }
-class IndustrialComponent  {
+class Any  {
+}
+class NetworkConnector  {
+	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
+	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, )
+	NetworkCompromised(, PrimaryMonitor : **Monitor**, CulpritMalware : **Malware**, )
+}
+class PLC  {
+}
+class Monitor  {
 }
 
 
-Sensor -up-|>  Any
-Actuator -up-|>  Any
-NetworkConnector -up-|>  Any
-Monitor -up-|>  Any
-PLC -up-|>  Any
 SafeguardSystem -up-|>  Any
+Sensor -up-|>  Any
 Malware -up-|>  Any
+Actuator -up-|>  Any
 IndustrialComponent -up-|>  Any
+NetworkConnector -up-|>  Any
+PLC -up-|>  Any
+Monitor -up-|>  Any
 @enduml

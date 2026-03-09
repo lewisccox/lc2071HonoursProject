@@ -51,15 +51,17 @@ DefinitionGroup BehaviourDefinitions {
 		CompromisedPLC.PLCCompromised == true &&
 		CompromisedPLC.ChildActuator.contains(VictimActuator)
 		action{
+			VictimActuator.ActuatorOnline.assign(false);
 			VictimActuator.ActuatorCompromised.assign(true);
 		}		
 	}
-	GuardedAction SafeGuardsDeactivateCompromisedSystem ( Safeguard : SafeguardSystem,  CompromisedActuator : Actuator){
+	GuardedAction SafeGuardsDeactivateCompromisedSystem ( Safeguard : SafeguardSystem,  CompromisedActuator : Actuator, ActuatorComponent : IndustrialComponent){
 		guard=
-		CompromisedActuator.ActuatorCompromised == true &&
-		Safeguard.SafeguardOnline == true
+		CompromisedActuator.ActuatorOnline == false &&
+		Safeguard.SafeguardOnline == true &&
+		CompromisedActuator.ChildComponent.contains(ActuatorComponent)
 		action{
-				CompromisedActuator.ActuatorOnline.assign(false);
+			ActuatorComponent.ComponentOnline.assign(false);
 		}		
 	}
 	
