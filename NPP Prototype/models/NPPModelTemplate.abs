@@ -22,37 +22,37 @@ AssetGroup  NPPModelTemplate {
 		attribute CompatableSoftwareDate := 2008
 	}
 	Asset ControlRoom : Monitor {
-		attribute SoftwareRelease := 2007
+		attribute MonitorSoftwareRelease := 2007
 		attribute MonitorInfected := false
 		attribute MonitorCompromised :=false
 	}
 	Asset Diagnostics : Monitor {
-		attribute SoftwareRelease := 2007
+		attribute MonitorSoftwareRelease := 2007
 		attribute MonitorInfected := true
 	}
 	Asset DataAcquisition : Monitor {
 		
-		attribute SoftwareRelease := 2007
+		attribute MonitorSoftwareRelease := 2007
 		attribute MonitorInfected := true
 	}
 	Asset TurbineController : PLC {
 		
-		attribute SoftwareRelease := 2007
+		attribute PLCSoftwareRelease := 2007
 		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset SteamFlowController : PLC {
 		
-		attribute SoftwareRelease := 2007
+		attribute PLCSoftwareRelease := 2007
 		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset FeedwaterController : PLC {
 		
-		attribute SoftwareRelease := 2007
+		attribute PLCSoftwareRelease := 2007
 		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset ReactorController : PLC {
 		
-		attribute SoftwareRelease := 2007
+		attribute PLCSoftwareRelease := 2007
 		attribute PLCOS := "Siemen's WinCC"
 	}
 	Asset ReactorSensor : Sensor {

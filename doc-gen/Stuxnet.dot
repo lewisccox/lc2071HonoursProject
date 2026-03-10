@@ -29,6 +29,18 @@ digraph Stuxnet {
 	"MonitorInfectsPLC(Ethernet, ControlRoom, ReactorController, Stuxnet)" -> "ReactorMotorDestroyed(ReactorActuator, ReactorController)" [label="4::2"];
 	"ReactorMotorDestroyed(ReactorActuator, ReactorController)" -> "SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" [label="4::3"];
 	"SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" -> "end" [label="4::4"];
+	edge [color = 6];
+	"begin" -> "NetworkCompromised(Ethernet, ControlRoom, Stuxnet)" [label="5::0"];
+	"NetworkCompromised(Ethernet, ControlRoom, Stuxnet)" -> "MonitorInfectsPLC(Ethernet, ControlRoom, ReactorController, Stuxnet)" [label="5::1"];
+	"MonitorInfectsPLC(Ethernet, ControlRoom, ReactorController, Stuxnet)" -> "ReactorMotorDestroyed(ReactorActuator, ReactorController)" [label="5::2"];
+	"ReactorMotorDestroyed(ReactorActuator, ReactorController)" -> "SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" [label="5::3"];
+	"SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" -> "end" [label="5::4"];
+	edge [color = 7];
+	"begin" -> "NetworkCompromised(Ethernet, ControlRoom, Stuxnet)" [label="6::0"];
+	"NetworkCompromised(Ethernet, ControlRoom, Stuxnet)" -> "MonitorInfectsPLC(Ethernet, ControlRoom, ReactorController, Stuxnet)" [label="6::1"];
+	"MonitorInfectsPLC(Ethernet, ControlRoom, ReactorController, Stuxnet)" -> "ReactorMotorDestroyed(ReactorActuator, ReactorController)" [label="6::2"];
+	"ReactorMotorDestroyed(ReactorActuator, ReactorController)" -> "SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" [label="6::3"];
+	"SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" -> "end" [label="6::4"];
 	{ rank = source; "begin"; }
 	{ rank = sink; "end"; }
 }

@@ -1,17 +1,10 @@
 @startuml
-class SafeguardSystem  {
-	SafeguardOnline : Boolean
-	void SafeGuardsDeactivateCompromisedSystem()
-}
-class Sensor  {
-	SensorOnline : Boolean
-	SensorCompromised : Boolean
-}
 class Malware  {
 	CompatableSoftwareDate : Integer
 	CompatableMonitorOS : String
 	CompatablePLCOS : String
 	void MonitorInfectsPLC()
+	void DeviceCompromisesNetwork()
 	void NetworkCompromised()
 }
 class Actuator  {
@@ -20,14 +13,7 @@ class Actuator  {
 	void SafeGuardsDeactivateCompromisedSystem()
 	void ReactorMotorDestroyed()
 }
-class IndustrialComponent  {
-	ComponentOnline : Boolean
-	ComponentCompromised : Boolean
-	void SafeGuardsDeactivateCompromisedSystem()
-}
 class ContainableByAny  {
-}
-class Any  {
 }
 class NetworkConnector  {
 	trafficLevel : Integer
@@ -42,42 +28,57 @@ class PLC  {
 	PLCOnline : Boolean
 	PLCCompromised : Boolean
 	PLCOS : String
-	SoftwareRelease : Integer
+	PLCSoftwareRelease : Integer
 	PLCInfected : Boolean
-	void MonitorInfectsPLC()
 	void ReactorMotorDestroyed()
+	void MonitorInfectsPLC()
+}
+class IndustrialComponent  {
+	ComponentOnline : Boolean
+	ComponentCompromised : Boolean
+	void SafeGuardsDeactivateCompromisedSystem()
 }
 class Monitor  {
 	MonitorOnline : Boolean
 	MonitorCompromised : Boolean
 	MonitorOS : String
-	SoftwareRelease : Integer
+	MonitorSoftwareRelease : Integer
 	MonitorInfected : Boolean
 	void MonitorInfectsPLC()
 	void DeviceCompromisesNetwork()
 	void NetworkCompromised()
 }
+class SafeguardSystem  {
+	SafeguardOnline : Boolean
+	void SafeGuardsDeactivateCompromisedSystem()
+}
+class Sensor  {
+	SensorOnline : Boolean
+	SensorCompromised : Boolean
+}
+class Any  {
+}
 
-Sensor -> "*" IndustrialComponent : ChildComponent
-Sensor -> "*" PLC : ParentPLC
 Malware -> "*" Monitor : InfectedMonitors
 Actuator -> "*" IndustrialComponent : ChildComponent
-IndustrialComponent -> "*" Sensor : ParentSensor
 ContainableByAny -> "0..1" Any : containedBy
 NetworkConnector -> "*" PLC : PLCs
 NetworkConnector -> "*" Monitor : Monitors
 PLC -> "*" NetworkConnector : PLCConnector
 PLC -> "*" Actuator : ChildActuator
 PLC -> "*" Sensor : ChildSensor
+IndustrialComponent -> "*" Sensor : ParentSensor
 Monitor -> "*" Monitor : SiblingMonitor
 Monitor -> "*" NetworkConnector : MonitorConnector
+Sensor -> "*" IndustrialComponent : ChildComponent
+Sensor -> "*" PLC : ParentPLC
 
-SafeguardSystem -up-|>  Any
-Sensor -up-|>  Any
 Malware -up-|>  Any
 Actuator -up-|>  Any
-IndustrialComponent -up-|>  Any
 NetworkConnector -up-|>  Any
 PLC -up-|>  Any
+IndustrialComponent -up-|>  Any
 Monitor -up-|>  Any
+SafeguardSystem -up-|>  Any
+Sensor -up-|>  Any
 @enduml

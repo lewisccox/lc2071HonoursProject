@@ -26,7 +26,7 @@ DefinitionGroup NPPDomain_def {
 		attribute MonitorOnline : Boolean [1] default true
 		attribute MonitorCompromised : Boolean [1] default false
 		attribute MonitorOS : String [1] default "Windows"
-		attribute SoftwareRelease : Integer [1] default 2026
+		attribute MonitorSoftwareRelease : Integer [1] default 2026
 		attribute MonitorInfected : Boolean [1] default false
 	}
 	AssetType PLC extends (Any) {
@@ -38,7 +38,7 @@ DefinitionGroup NPPDomain_def {
 		attribute PLCOnline : Boolean [1] default true
 		attribute PLCCompromised : Boolean [1] default false
 		attribute PLCOS : String [1] default "Windows"
-		attribute SoftwareRelease : Integer [1] default 2025
+		attribute PLCSoftwareRelease : Integer [1] default 2025
 		attribute PLCInfected : Boolean [1] default false
 	}
 

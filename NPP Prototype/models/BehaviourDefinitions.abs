@@ -15,10 +15,13 @@ DefinitionGroup BehaviourDefinitions {
 //		// guard = (zone1.itemsInZone.contains(item) && zone2.itemsInZone.contains(item) ) implies  (zone1 == zone2)
 //		guard = ! (zone1.itemsInZone.contains(item) && zone2.itemsInZone.contains(item) &&  (zone1 != zone2) )
 //	}
-	GuardedAction DeviceCompromisesNetwork(VictimNetwork: NetworkConnector, InfectedMonitor: Monitor){
+	GuardedAction DeviceCompromisesNetwork(VictimNetwork: NetworkConnector, InfectedMonitor: Monitor, CulpritMalware : Malware){
 		guard=
 		InfectedMonitor.MonitorConnector.contains(VictimNetwork)&&
-		InfectedMonitor.MonitorInfected == true	
+		InfectedMonitor.MonitorInfected == true	&&
+		InfectedMonitor.MonitorOS == CulpritMalware.CompatableMonitorOS &&
+		InfectedMonitor.MonitorSoftwareRelease <= CulpritMalware.CompatableSoftwareDate 
+
 		action{
 			VictimNetwork.NetworkCompromised.assign(true);
 		}		
@@ -27,6 +30,7 @@ DefinitionGroup BehaviourDefinitions {
 		guard = 
 			AnEthernet.NetworkCompromised == true &&
 			PrimaryMonitor.MonitorOS == CulpritMalware.CompatableMonitorOS &&
+			PrimaryMonitor.MonitorSoftwareRelease <= CulpritMalware.CompatableSoftwareDate &&
 			PrimaryMonitor.MonitorConnector.contains(AnEthernet)
 		action {
 			PrimaryMonitor.MonitorCompromised.assign(true);
@@ -41,6 +45,7 @@ DefinitionGroup BehaviourDefinitions {
 		InfectedMonitor.MonitorCompromised == true &&
 		VictimPLC.PLCOS == AMalware.CompatablePLCOS &&
 		AMalware.InfectedMonitors.contains(InfectedMonitor) &&
+		VictimPLC.PLCSoftwareRelease <= AMalware.CompatableSoftwareDate &&
 		ANetwork.PLCs.contains(VictimPLC)
 		action{
 			VictimPLC.PLCCompromised.assign(true);

@@ -9,14 +9,14 @@ class Monitor  {
 	MonitorOnline : Boolean
 	MonitorCompromised : Boolean
 	MonitorOS : String
-	SoftwareRelease : Integer
+	MonitorSoftwareRelease : Integer
 	MonitorInfected : Boolean
 }
 class PLC  {
 	PLCOnline : Boolean
 	PLCCompromised : Boolean
 	PLCOS : String
-	SoftwareRelease : Integer
+	PLCSoftwareRelease : Integer
 	PLCInfected : Boolean
 }
 class IndustrialComponent  {
