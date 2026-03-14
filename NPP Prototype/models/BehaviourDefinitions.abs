@@ -3,6 +3,7 @@ with core::*;
 with NPPDomain_def::* from "NPPDomain_def.abs";
 with NPPModelTemplate::* from "NPPModelTemplate.abs";
 
+
 DefinitionGroup BehaviourDefinitions {
 //	AssetTypeAspect Attacker {
 //		// @runtime
@@ -69,5 +70,6 @@ DefinitionGroup BehaviourDefinitions {
 			ActuatorComponent.ComponentOnline.assign(false);
 		}		
 	}
+	
 	
 }

@@ -1,38 +1,79 @@
 @startuml
 title RuntimeData and behavior
+class IndustrialComponent  {
+}
+class Monitor  {
+}
+class SensitiveFile  {
+}
 class Malware  {
+}
+class SafeguardSystem  {
+	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, ActuatorComponent : **IndustrialComponent**, )
+}
+class ContainableByAny  {
+}
+class Malware  {
+}
+class SafeguardSystem  {
+	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, ActuatorComponent : **IndustrialComponent**, )
+}
+class PLC  {
+}
+class Sensor  {
 }
 class Actuator  {
 	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
 }
-class ContainableByAny  {
+class Any  {
 }
 class NetworkConnector  {
+	NetworkCompromised(, PrimaryMonitor : **Monitor**, CulpritMalware : **Malware**, )
 	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
 	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, CulpritMalware : **Malware**, )
-	NetworkCompromised(, PrimaryMonitor : **Monitor**, CulpritMalware : **Malware**, )
 }
-class PLC  {
+class Operator  {
 }
 class IndustrialComponent  {
 }
 class Monitor  {
 }
-class SafeguardSystem  {
-	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, ActuatorComponent : **IndustrialComponent**, )
+class Actuator  {
+	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
+}
+class PLC  {
+}
+class NetworkConnector  {
+	NetworkCompromised(, PrimaryMonitor : **Monitor**, CulpritMalware : **Malware**, )
+	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
+	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, CulpritMalware : **Malware**, )
 }
 class Sensor  {
 }
-class Any  {
+class SensitiveFile  {
+}
+class Operator  {
 }
 
 
-Malware -up-|>  Any
-Actuator -up-|>  Any
-NetworkConnector -up-|>  Any
-PLC -up-|>  Any
 IndustrialComponent -up-|>  Any
 Monitor -up-|>  Any
+SensitiveFile -up-|>  Any
+Malware -up-|>  Any
 SafeguardSystem -up-|>  Any
+Malware -up-|>  Any
+SafeguardSystem -up-|>  Any
+PLC -up-|>  Any
 Sensor -up-|>  Any
+Actuator -up-|>  Any
+NetworkConnector -up-|>  Any
+Operator -up-|>  Any
+IndustrialComponent -up-|>  Any
+Monitor -up-|>  Any
+Actuator -up-|>  Any
+PLC -up-|>  Any
+NetworkConnector -up-|>  Any
+Sensor -up-|>  Any
+SensitiveFile -up-|>  Any
+Operator -up-|>  Any
 @enduml

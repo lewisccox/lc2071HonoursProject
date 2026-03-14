@@ -1,0 +1,11 @@
+AssetBasedSystem
+import "platform:/resource/lc2071HonoursProject/NPP Prototype/models/KHNPBehaviourDefinitions.abs";
+Locale {
+	locale = ""
+	DefinitionGroup BehaviourDefinitions {
+		Guard PhisingEmailSent = "PhisingEmailSent" {
+		}
+		Guard PhishingEmailOpened = "PhishingEmailOpened" {
+		}
+	}
+}

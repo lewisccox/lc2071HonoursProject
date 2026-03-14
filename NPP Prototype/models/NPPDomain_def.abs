@@ -9,14 +9,16 @@ import "platform:/plugin/core.abs.model.lib/models/core.abs";
 DefinitionGroup NPPDomain_def {
 	/* Concepts of domain mydomain_def */
 	AssetType NetworkConnector extends (Any) {
-		description "Connects two components together"
+		description "Connects network components together"
 		level "4"
 		reference PLCs : PLC[*] default []//
 		reference Monitors : Monitor [*] default []//
+		reference LinkedNetworkConnectors : NetworkConnector [*] default []
 		attribute trafficLevel : Integer [1] default 0
 		attribute trafficCapacity : Integer [1] default 1000 //maximum possible bandwidth in mbps
 		attribute ConnectorOnline : Boolean [1] default true
 		attribute NetworkCompromised : Boolean [1] default false
+
 	}
 	AssetType Monitor extends (Any) {
 		description "Provides a high-level overview of component activity"
@@ -28,6 +30,8 @@ DefinitionGroup NPPDomain_def {
 		attribute MonitorOS : String [1] default "Windows"
 		attribute MonitorSoftwareRelease : Integer [1] default 2026
 		attribute MonitorInfected : Boolean [1] default false
+		attribute SoftwarePresent : String [*] default []
+		attribute IP : String [1] default "192.168.0.1"
 	}
 	AssetType PLC extends (Any) {
 		description "Programmable logic controller- runs arbitrary code to control industrial components"
@@ -70,14 +74,32 @@ DefinitionGroup NPPDomain_def {
 		description "A malicious software existing on devices in an NPP network"
 		level "2"
 		reference InfectedMonitors : Monitor [*] default []
+		attribute OwnerIP : String [1] default "0.0.0.0"
 		attribute CompatableSoftwareDate : Integer [1] default 2026
 		attribute CompatableMonitorOS : String [1] default ""
 		attribute CompatablePLCOS : String [1] default ""
+		attribute RequiredSoftware : String [*] default []
 	}
 	AssetType SafeguardSystem extends (Any){
 		description "System responsible for automatic shutdown in the event of a catastrophe"
 		level "3"
 		attribute SafeguardOnline : Boolean [1] default true
+	}
+	AssetType SensitiveFile extends (Any){
+		description "Files which public should not be allowed access to"	
+		reference ExistsOnMonitors : Monitor [*] default []
+		reference CompromisedByMalware : Malware [*] default []
+	}
+	
+	AssetType Operator extends (Any){
+		description "Employee within the facility operating network device"
+		level "4"
+		attribute PhishingEmailReceived : Boolean [1] default false 
+		attribute PhishingEmailOpened : Boolean [1] default false
+		attribute Email : String [1] default ""
+		attribute TrustedEmails : String [*] default []
+		attribute isHacker : Boolean [1] default false
+		reference OperatesMonitor : Monitor [1] 
 	}
 	/* Contracts applying to the static structure of mydomain_def models */
 	

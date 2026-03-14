@@ -4,13 +4,14 @@ Locale {
 	locale = ""
 	DefinitionGroup NPPDomain_def {
 		AssetType NetworkConnector = "NetworkConnector" {
-			description = "Connects two components together"
+			description = "Connects network components together"
 			attribute trafficLevel = "trafficLevel"
 			attribute trafficCapacity = "trafficCapacity"
 			attribute ConnectorOnline = "ConnectorOnline"
 			attribute NetworkCompromised = "NetworkCompromised"
 			reference PLCs = "PLCs"
 			reference Monitors = "Monitors"
+			reference LinkedNetworkConnectors = "LinkedNetworkConnectors"
 		}
 		AssetType Monitor = "Monitor" {
 			description = "Provides a high-level overview of component activity"
@@ -19,6 +20,8 @@ Locale {
 			attribute MonitorOS = "MonitorOS"
 			attribute MonitorSoftwareRelease = "MonitorSoftwareRelease"
 			attribute MonitorInfected = "MonitorInfected"
+			attribute SoftwarePresent = "SoftwarePresent"
+			attribute IP = "IP"
 			reference SiblingMonitor = "SiblingMonitor"
 			reference MonitorConnector = "MonitorConnector"
 		}
@@ -54,14 +57,30 @@ Locale {
 		}
 		AssetType Malware = "Malware" {
 			description = "A malicious software existing on devices in an NPP network"
+			attribute OwnerIP = "OwnerIP"
 			attribute CompatableSoftwareDate = "CompatableSoftwareDate"
 			attribute CompatableMonitorOS = "CompatableMonitorOS"
 			attribute CompatablePLCOS = "CompatablePLCOS"
+			attribute RequiredSoftware = "RequiredSoftware"
 			reference InfectedMonitors = "InfectedMonitors"
 		}
 		AssetType SafeguardSystem = "SafeguardSystem" {
 			description = "System responsible for automatic shutdown in the event of a catastrophe"
 			attribute SafeguardOnline = "SafeguardOnline"
+		}
+		AssetType SensitiveFile = "SensitiveFile" {
+			description = "Files which public should not be allowed access to"
+			reference ExistsOnMonitors = "ExistsOnMonitors"
+			reference CompromisedByMalware = "CompromisedByMalware"
+		}
+		AssetType Operator = "Operator" {
+			description = "Employee within the facility operating network device"
+			attribute PhishingEmailReceived = "PhishingEmailReceived"
+			attribute PhishingEmailOpened = "PhishingEmailOpened"
+			attribute Email = "Email"
+			attribute TrustedEmails = "TrustedEmails"
+			attribute isHacker = "isHacker"
+			reference OperatesMonitor = "OperatesMonitor"
 		}
 	}
 }

@@ -1,6 +1,12 @@
 @startuml
 object "Ethernet : NetworkConnector" as Ethernet #Wheat
-object "Stuxnet : Malware" as Stuxnet #LightBlue
+object "ControlRoomOperator : Operator" as ControlRoomOperator #Wheat
+object "KimsukyHacker : Operator" as KimsukyHacker #Wheat
+object "KimsukyMonitor : Monitor" as KimsukyMonitor #Wheat
+object "DiagnosticsOperator : Operator" as DiagnosticsOperator #Wheat
+object "ExternalEmailServer : NetworkConnector" as ExternalEmailServer #Wheat
+object "HackerWifi : NetworkConnector" as HackerWifi #Wheat
+object "HANGMAN : Malware" as HANGMAN #LightBlue
 object "ControlRoom : Monitor" as ControlRoom #Wheat
 object "Diagnostics : Monitor" as Diagnostics #Wheat
 object "DataAcquisition : Monitor" as DataAcquisition #Wheat
@@ -66,5 +72,14 @@ TurbineSensor -up-> TurbineController : ParentPLC
 Pipe -up-> FeedwaterSensor : ParentSensor
 Turbine -up-> TurbineSensor : ParentSensor
 SteamGenerator -up-> SteamFlowSensor : ParentSensor
-Stuxnet -up-> ControlRoom : InfectedMonitors
+Ethernet -> ExternalEmailServer : LinkedNetworkConnectors
+ExternalEmailServer -> HackerWifi : LinkedNetworkConnectors
+ExternalEmailServer -> Ethernet : LinkedNetworkConnectors
+KHNPNuclearSecrets -up-> ControlRoom : ExistsOnMonitors
+ControlRoomOperator -> ControlRoom : OperatesMonitor
+KimsukyHacker -> KimsukyMonitor : OperatesMonitor
+KimsukyMonitor -> HackerWifi : MonitorConnector
+HackerWifi -> KimsukyMonitor : Monitors
+HackerWifi -> ExternalEmailServer : LinkedNetworkConnectors
+DiagnosticsOperator -> Diagnostics : OperatesMonitor
 @enduml

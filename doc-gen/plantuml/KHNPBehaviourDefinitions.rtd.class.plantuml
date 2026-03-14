@@ -1,0 +1,46 @@
+@startuml
+title RuntimeData and behavior
+class Any  {
+}
+class NetworkConnector  {
+	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
+	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, CulpritMalware : **Malware**, )
+	NetworkCompromised(, PrimaryMonitor : **Monitor**, CulpritMalware : **Malware**, )
+}
+class Sensor  {
+}
+class Monitor  {
+}
+class SafeguardSystem  {
+	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, ActuatorComponent : **IndustrialComponent**, )
+}
+class Actuator  {
+	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
+}
+class PLC  {
+}
+class ContainableByAny  {
+}
+class IndustrialComponent  {
+}
+class Malware  {
+}
+class SensitiveFile  {
+}
+class Operator  {
+	PhisingEmailSent(, TargetMonitor : **Monitor**, Connector : **NetworkConnector**, EmailServer : **NetworkConnector**, PhishingMalware : **Malware**, HackerOperator : **Operator**, HackerMonitor : **Monitor**, HackerWifi : **NetworkConnector**, )
+	PhishingEmailOpened(, ComputerOfTarget : **Monitor**, ComputerOfHacker : **Monitor**, Hacker : **Operator**, PhishingVirus : **Malware**, )
+}
+
+
+NetworkConnector -up-|>  Any
+Sensor -up-|>  Any
+Monitor -up-|>  Any
+SafeguardSystem -up-|>  Any
+Actuator -up-|>  Any
+PLC -up-|>  Any
+IndustrialComponent -up-|>  Any
+Malware -up-|>  Any
+SensitiveFile -up-|>  Any
+Operator -up-|>  Any
+@enduml
