@@ -1,72 +1,446 @@
 AtsyraGoalModel {
 	defaults {
-		genericAllLocked {
+			generic { 
+			// Network Connectors
+			ethernet.NetworkCompromised = false,
+			ethernet.ConnectorOnline = true,
+			externalEmailServer.NetworkCompromised = false,
+			externalEmailServer.ConnectorOnline = true,
+			hackerWifi.NetworkCompromised = false,
+			hackerWifi.ConnectorOnline = true,
 			
-			frontdoor.open = false,	
-			welcomeDeskGate.open = false,	
-			welcomeDeskToStorageAccess.open = false,	
-			sideDoor1.open = false,
-			sideDoor1.locked = true,	
-			window1.open = false,	
-			window2.open = false,	
-			storageSideDoor1.open = false,	
-			storageSideDoor2.open = false,
-			storageSideDoor2.locked = true,
+			// Operators
+			controlRoomOperator.Email = "TakDae203@KHNP.go.kr",
+			controlRoomOperator.TrustedEmails1 = "JiTaeyang721@KHNP.go.kr",
+			controlRoomOperator.TrustedEmails2 = "EumHwa-Young632@KHNP.go.kr",
+			controlRoomOperator.TrustedEmails3 = "JongMoon575@KHNP.go.kr",
+			controlRoomOperator.PhishingEmailReceived = false,
+			controlRoomOperator.PhishingEmailOpened = false,
+			controlRoomOperator.isHacker = false,
+			kimsukyHacker.Email = "EumHwa-Young632@KHNP.go.kr",
+			kimsukyHacker.isHacker = true,
+			kimsukyHacker.PhishingEmailReceived = false,
+			kimsukyHacker.PhishingEmailOpened = false,
+			diagnosticsOperator.Email = "JiTaeyang721@KHNP.go.kr",
+			diagnosticsOperator.PhishingEmailReceived = false,
+			diagnosticsOperator.PhishingEmailOpened = false,
+			diagnosticsOperator.isHacker = false,
 			
-			alarm1.triggered = false,
-			alarm1.enabled = true
+			// Monitors
+			kimsukyMonitor.IP = "42.4.7.8",
+			kimsukyMonitor.MonitorOnline = true,
+			kimsukyMonitor.MonitorCompromised = false,
+			kimsukyMonitor.MonitorInfected = false,
+			controlRoom.MonitorSoftwareRelease = 2014,
+			controlRoom.MonitorInfected = false,
+			controlRoom.MonitorCompromised = false,
+			controlRoom.SoftwarePresent = "Hangul Word Processor",
+			controlRoom.MonitorOnline = true,
+			diagnostics.MonitorSoftwareRelease = 2014,
+			diagnostics.MonitorInfected = false,
+			diagnostics.MonitorOnline = true,
+			diagnostics.MonitorCompromised = false,
+			dataAcquisition.MonitorSoftwareRelease = 2014,
+			dataAcquisition.MonitorInfected = false,
+			dataAcquisition.MonitorOnline = true,
+			dataAcquisition.MonitorCompromised = false,
+			
+			// PLCs
+			turbineController.PLCSoftwareRelease = 2014,
+			turbineController.PLCOS = "Siemen's WinCC",
+			turbineController.PLCOnline = true,
+			turbineController.PLCCompromised = false,
+			turbineController.PLCInfected = false,
+			steamFlowController.PLCSoftwareRelease = 2014,
+			steamFlowController.PLCOS = "Siemen's WinCC",
+			steamFlowController.PLCOnline = true,
+			steamFlowController.PLCCompromised = false,
+			steamFlowController.PLCInfected = false,
+			feedwaterController.PLCSoftwareRelease = 2014,
+			feedwaterController.PLCOS = "Siemen's WinCC",
+			feedwaterController.PLCOnline = true,
+			feedwaterController.PLCCompromised = false,
+			feedwaterController.PLCInfected = false,
+			reactorController.PLCSoftwareRelease = 2014,
+			reactorController.PLCOS = "Siemen's WinCC",
+			reactorController.PLCOnline = true,
+			reactorController.PLCCompromised = false,
+			reactorController.PLCInfected = false,
+			
+			// Malware
+			hangman.CompatableSoftwareDate = 2014,
+			hangman.RequiredSoftware = "Hangul Word Processor",
+			hangman.OwnerIP = "42.4.7.8",
+			
+			// Industrial Components
+			turbine.ComponentOnline = true,
+			turbine.ComponentCompromised = false,
+			reactor.ComponentOnline = true,
+			reactor.ComponentCompromised = false,
+			pipe.ComponentOnline = true,
+			pipe.ComponentCompromised = false,
+			steamGenerator.ComponentOnline = true,
+			steamGenerator.ComponentCompromised = false,
+			
+			// Actuators
+			reactorActuator.ActuatorOnline = true,
+			reactorActuator.ActuatorCompromised = false,
+			feedwaterActuator.ActuatorOnline = true,
+			feedwaterActuator.ActuatorCompromised = false,
+			steamFlowActuator.ActuatorOnline = true,
+			steamFlowActuator.ActuatorCompromised = false,
+			turbineActuator.ActuatorOnline = true,
+			turbineActuator.ActuatorCompromised = false,
+			
+			// Sensors
+			reactorSensor.SensorOnline = true,
+			reactorSensor.SensorCompromised = false,
+			feedwaterSensor.SensorOnline = true,
+			feedwaterSensor.SensorCompromised = false,
+			steamFlowSensor.SensorOnline = true,
+			steamFlowSensor.SensorCompromised = false,
+			turbineSensor.SensorOnline = true,
+			turbineSensor.SensorCompromised = false,
+			
+			// Safeguard System
+			safeGuarding.SafeguardOnline = true,
+			// Monitor to NetworkConnector links
+			diagnostics.monitorConnector =  ethernet,
+			controlRoom.monitorConnector =  ethernet ,
+			dataAcquisition.monitorConnector =  ethernet ,
+			kimsukyMonitor.monitorConnector =  hackerWifi ,
+			
+			// NetworkConnector to PLC links
+			ethernet.plcs =  reactorController,   
+			ethernet.plcs =   turbineController,  
+			ethernet.plcs =   steamFlowController  ,
+			ethernet.plcs =   feedwaterController,  
+			// PLC to Actuator links
+			reactorController.childActuator =  reactorActuator ,
+			turbineController.childActuator =  turbineActuator ,
+			steamFlowController.childActuator =  steamFlowActuator ,
+			feedwaterController.childActuator =  feedwaterActuator ,
+			
+			// PLC to Sensor links
+			reactorController.childSensor =  reactorSensor ,
+			turbineController.childSensor =  turbineSensor ,
+			steamFlowController.childSensor =  steamFlowSensor ,
+			feedwaterController.childSensor =  feedwaterSensor ,
+			
+			// PLC to NetworkConnector links (reverse direction)
+			reactorController.plcConnector =  ethernet ,
+			turbineController.plcConnector =  ethernet ,
+			steamFlowController.plcConnector =  ethernet ,
+			feedwaterController.plcConnector =  ethernet ,
+			
+			// Actuator to IndustrialComponent links
+			reactorActuator.childComponent =  reactor ,
+			turbineActuator.childComponent =  turbine ,
+			steamFlowActuator.childComponent =  steamGenerator ,
+			feedwaterActuator.childComponent =  pipe ,
+			
+			// Sensor to IndustrialComponent links
+			reactorSensor.childComponent =  reactor ,
+			turbineSensor.childComponent =  turbine ,
+			steamFlowSensor.childComponent =  steamGenerator ,
+			feedwaterSensor.childComponent =  pipe ,
+			
+			// Sensor to PLC links (reverse direction)
+			reactorSensor.parentPLC =  reactorController ,
+			turbineSensor.parentPLC =  turbineController ,
+			steamFlowSensor.parentPLC =  steamFlowController ,
+			feedwaterSensor.parentPLC =  feedwaterController ,
+			
+			// IndustrialComponent to Sensor links (reverse direction)
+			reactor.parentSensor =  reactorSensor ,
+			turbine.parentSensor =  turbineSensor ,
+			steamGenerator.parentSensor =  steamFlowSensor ,
+			pipe.parentSensor =  feedwaterSensor ,
+			
+			// NetworkConnector to Monitor links
+			ethernet.monitors =  controlRoom, 
+			ethernet.monitors =   dataAcquisition ,
+			ethernet.monitors =   diagnostics ,
+			hackerWifi.monitors =  kimsukyMonitor ,
+			
+			// Monitor sibling links (bidirectional)
+			diagnostics.siblingMonitor =  controlRoom, 
+			diagnostics.siblingMonitor =   dataAcquisition ,
+			dataAcquisition.siblingMonitor =  diagnostics, 
+			dataAcquisition.siblingMonitor =   controlRoom ,
+			controlRoom.siblingMonitor =  diagnostics, 
+			controlRoom.siblingMonitor =   dataAcquisition ,
+			
+			// NetworkConnector linked connections
+			ethernet.linkedNetworkConnectors =  externalEmailServer ,
+			externalEmailServer.linkedNetworkConnectors =  ethernet, 
+			externalEmailServer.linkedNetworkConnectors =   hackerWifi ,
+			hackerWifi.linkedNetworkConnectors =  externalEmailServer ,
+			
+			// SensitiveFile to Monitor links
+			khnpNuclearSecrets.existsOnMonitors =  controlRoom ,
+			
+			// Operator to Monitor links
+			controlRoomOperator.operatesMonitor =  controlRoom ,
+			kimsukyHacker.operatesMonitor =  kimsukyMonitor ,
+			diagnosticsOperator.operatesMonitor =  diagnostics 
+
+			}
 		}
-	}
+
+	
 	types {
 		InternalType Boolean
-		SystemType Access
-		SystemType Alarm
-		SystemType Attacker
-		SystemType Item
-		SystemType Zone
-	}
+		InternalType Integer
+		InternalType String
+		SystemType NetworkConnector
+		SystemType Monitor
+		SystemType monitorConnector
+		SystemType PLC
+		SystemType IndustrialComponent
+		SystemType Actuator
+		SystemType Sensor
+		SystemType Malware
+		SystemType SafeguardSystem
+		SystemType SensitiveFile
+		SystemType Operator
+		}
+	
 	features {
+		// Constants
 		const true(Boolean)
 		const false(Boolean)
-		const exterior(Zone)
-		const lobby(Zone)
-		const welcomeDesk(Zone)
-		const corridor1(Zone)
-		const corridor2(Zone)
-		const lugageStorage(Zone)
-		const inaccessibleZone(Zone)
-		const frontdoor(Access)
-		frontdoor.open(Boolean)
-		const welcomeDeskGate(Access)
-		welcomeDeskGate.open(Boolean)
-		const welcomeDeskToStorageAccess(Access)
-		welcomeDeskToStorageAccess.open(Boolean)
-		const sideDoor1(Access)
-		sideDoor1.open(Boolean)
-		sideDoor1.locked(Boolean)
-		const window1(Access)
-		window1.open(Boolean)
-		const window2(Access)
-		window2.open(Boolean)
-		const storageSideDoor1(Access)
-		storageSideDoor1.open(Boolean)
-		const storageSideDoor2(Access)
-		storageSideDoor2.open(Boolean)
-		storageSideDoor2.locked(Boolean)
-		const alarm1(Alarm)
-		alarm1.triggered(Boolean)
-		alarm1.enabled(Boolean)
-		alarm1.location(Zone)
-		const receptionistBadge(Item)
-		receptionistBadge.location(Zone)
-		receptionistBadge.owner(Attacker)
-		const key1(Item)
-		key1.location(Zone)
-		key1.owner(Attacker)
-		const document(Item)
-		document.location(Zone)
-		document.owner(Attacker)
-		const thief(Attacker)
-		thief.location(Zone)
+		const "TakDae203@KHNP.go.kr"(String)
+		const "JiTaeyang721@KHNP.go.kr"(String)
+		const "EumHwa-Young632@KHNP.go.kr"(String)
+		const "JongMoon575@KHNP.go.kr"(String)
+		
+		// NetworkConnector instances
+		const ethernet(NetworkConnector)
+		ethernet.trafficLevel(Integer)
+		ethernet.trafficCapacity(Integer)
+		ethernet.NetworkCompromised(Boolean)
+		ethernet.ConnectorOnline(Boolean)
+		ethernet.plcs(PLC)
+		ethernet.monitors(Monitor)
+		ethernet.linkedNetworkConnectors(NetworkConnector)
+		
+		const externalEmailServer(NetworkConnector)
+		externalEmailServer.trafficLevel(Integer)
+		externalEmailServer.trafficCapacity(Integer)
+		externalEmailServer.NetworkCompromised(Boolean)
+		externalEmailServer.ConnectorOnline(Boolean)
+		externalEmailServer.plcs(PLC)
+		externalEmailServer.monitors(Monitor)
+		externalEmailServer.linkedNetworkConnectors(NetworkConnector)
+		
+		const hackerWifi(NetworkConnector)
+		hackerWifi.trafficLevel(Integer)
+		hackerWifi.trafficCapacity(Integer)
+		hackerWifi.NetworkCompromised(Boolean)
+		hackerWifi.ConnectorOnline(Boolean)
+		hackerWifi.plcs(PLC)
+		hackerWifi.monitors(Monitor)
+		hackerWifi.linkedNetworkConnectors(NetworkConnector)
+		
+		// Operator instances
+		const controlRoomOperator(Operator)
+		controlRoomOperator.Email(String)
+		controlRoomOperator.TrustedEmails1(String)
+		controlRoomOperator.TrustedEmails2(String)
+		controlRoomOperator.TrustedEmails3(String)
+		controlRoomOperator.PhishingEmailReceived(Boolean)
+		controlRoomOperator.PhishingEmailOpened(Boolean)
+		controlRoomOperator.isHacker(Boolean)
+		controlRoomOperator.operatesMonitor(Monitor)
+		
+		const kimsukyHacker(Operator)
+		kimsukyHacker.Email(String)
+		kimsukyHacker.TrustedEmails(String)
+		kimsukyHacker.PhishingEmailReceived(Boolean)
+		kimsukyHacker.PhishingEmailOpened(Boolean)
+		kimsukyHacker.isHacker(Boolean)
+		kimsukyHacker.operatesMonitor(Monitor)
+		
+		const diagnosticsOperator(Operator)
+		diagnosticsOperator.Email(String)
+		diagnosticsOperator.TrustedEmails(String)
+		diagnosticsOperator.PhishingEmailReceived(Boolean)
+		diagnosticsOperator.PhishingEmailOpened(Boolean)
+		diagnosticsOperator.isHacker(Boolean)
+		diagnosticsOperator.operatesMonitor(Monitor)
+		
+		// Monitor instances
+		const kimsukyMonitor(Monitor)
+		kimsukyMonitor.IP(String)
+		kimsukyMonitor.MonitorOnline(Boolean)
+		kimsukyMonitor.MonitorCompromised(Boolean)
+		kimsukyMonitor.MonitorOS(String)
+		kimsukyMonitor.MonitorSoftwareRelease(Integer)
+		kimsukyMonitor.MonitorInfected(Boolean)
+		kimsukyMonitor.SoftwarePresent(String)
+		kimsukyMonitor.siblingMonitor(Monitor)
+		kimsukyMonitor.monitorConnector(NetworkConnector)
+		
+		const controlRoom(Monitor)
+		controlRoom.IP(String)
+		controlRoom.MonitorOnline(Boolean)
+		controlRoom.MonitorCompromised(Boolean)
+		controlRoom.MonitorOS(String)
+		controlRoom.MonitorSoftwareRelease(Integer)
+		controlRoom.MonitorInfected(Boolean)
+		controlRoom.SoftwarePresent(String)
+		controlRoom.siblingMonitor(Monitor)
+		controlRoom.monitorConnector(NetworkConnector)
+		
+		const diagnostics(Monitor)
+		diagnostics.IP(String)
+		diagnostics.MonitorOnline(Boolean)
+		diagnostics.MonitorCompromised(Boolean)
+		diagnostics.MonitorOS(String)
+		diagnostics.MonitorSoftwareRelease(Integer)
+		diagnostics.MonitorInfected(Boolean)
+		diagnostics.SoftwarePresent(String)
+		diagnostics.siblingMonitor(Monitor)
+		diagnostics.monitorConnector(NetworkConnector)
+		
+		const dataAcquisition(Monitor)
+		dataAcquisition.IP(String)
+		dataAcquisition.MonitorOnline(Boolean)
+		dataAcquisition.MonitorCompromised(Boolean)
+		dataAcquisition.MonitorOS(String)
+		dataAcquisition.MonitorSoftwareRelease(Integer)
+		dataAcquisition.MonitorInfected(Boolean)
+		dataAcquisition.SoftwarePresent(String)
+		dataAcquisition.siblingMonitor(Monitor)
+		dataAcquisition.monitorConnector(NetworkConnector)
+		
+		// PLC instances
+		const turbineController(PLC)
+		turbineController.PLCSoftwareRelease(Integer)
+		turbineController.PLCOS(String)
+		turbineController.PLCOnline(Boolean)
+		turbineController.PLCCompromised(Boolean)
+		turbineController.PLCInfected(Boolean)
+		turbineController.plcConnector(NetworkConnector)
+		turbineController.childActuator(Actuator)
+		turbineController.childSensor(Sensor)
+		
+		const steamFlowController(PLC)
+		steamFlowController.PLCSoftwareRelease(Integer)
+		steamFlowController.PLCOS(String)
+		steamFlowController.PLCOnline(Boolean)
+		steamFlowController.PLCCompromised(Boolean)
+		steamFlowController.PLCInfected(Boolean)
+		steamFlowController.plcConnector(NetworkConnector)
+		steamFlowController.childActuator(Actuator)
+		steamFlowController.childSensor(Sensor)
+		
+		const feedwaterController(PLC)
+		feedwaterController.PLCSoftwareRelease(Integer)
+		feedwaterController.PLCOS(String)
+		feedwaterController.PLCOnline(Boolean)
+		feedwaterController.PLCCompromised(Boolean)
+		feedwaterController.PLCInfected(Boolean)
+		feedwaterController.plcConnector(NetworkConnector)
+		feedwaterController.childActuator(Actuator)
+		feedwaterController.childSensor(Sensor)
+		
+		const reactorController(PLC)
+		reactorController.PLCSoftwareRelease(Integer)
+		reactorController.PLCOS(String)
+		reactorController.PLCOnline(Boolean)
+		reactorController.PLCCompromised(Boolean)
+		reactorController.PLCInfected(Boolean)
+		reactorController.plcConnector(NetworkConnector)
+		reactorController.childActuator(Actuator)
+		reactorController.childSensor(Sensor)
+		
+		// Malware instance
+		const hangman(Malware)
+		hangman.CompatableSoftwareDate(Integer)
+		hangman.RequiredSoftware(String)
+		hangman.OwnerIP(String)
+		hangman.CompatableMonitorOS(String)
+		hangman.CompatablePLCOS(String)
+		hangman.infectedMonitors(Monitor)
+		
+		// IndustrialComponent instances
+		const turbine(IndustrialComponent)
+		turbine.ComponentOnline(Boolean)
+		turbine.ComponentCompromised(Boolean)
+		turbine.parentSensor(Sensor)
+		
+		const reactor(IndustrialComponent)
+		reactor.ComponentOnline(Boolean)
+		reactor.ComponentCompromised(Boolean)
+		reactor.parentSensor(Sensor)
+		
+		const pipe(IndustrialComponent)
+		pipe.ComponentOnline(Boolean)
+		pipe.ComponentCompromised(Boolean)
+		pipe.parentSensor(Sensor)
+		
+		const steamGenerator(IndustrialComponent)
+		steamGenerator.ComponentOnline(Boolean)
+		steamGenerator.ComponentCompromised(Boolean)
+		steamGenerator.parentSensor(Sensor)
+		
+		// Actuator instances
+		const reactorActuator(Actuator)
+		reactorActuator.ActuatorOnline(Boolean)
+		reactorActuator.ActuatorCompromised(Boolean)
+		reactorActuator.childComponent(IndustrialComponent)
+		
+		const feedwaterActuator(Actuator)
+		feedwaterActuator.ActuatorOnline(Boolean)
+		feedwaterActuator.ActuatorCompromised(Boolean)
+		feedwaterActuator.childComponent(IndustrialComponent)
+		
+		const steamFlowActuator(Actuator)
+		steamFlowActuator.ActuatorOnline(Boolean)
+		steamFlowActuator.ActuatorCompromised(Boolean)
+		steamFlowActuator.childComponent(IndustrialComponent)
+		
+		const turbineActuator(Actuator)
+		turbineActuator.ActuatorOnline(Boolean)
+		turbineActuator.ActuatorCompromised(Boolean)
+		turbineActuator.childComponent(IndustrialComponent)
+		
+		// Sensor instances
+		const reactorSensor(Sensor)
+		reactorSensor.SensorOnline(Boolean)
+		reactorSensor.SensorCompromised(Boolean)
+		reactorSensor.childComponent(IndustrialComponent)
+		reactorSensor.parentPLC(PLC)
+		
+		const feedwaterSensor(Sensor)
+		feedwaterSensor.SensorOnline(Boolean)
+		feedwaterSensor.SensorCompromised(Boolean)
+		feedwaterSensor.childComponent(IndustrialComponent)
+		feedwaterSensor.parentPLC(PLC)
+		
+		const steamFlowSensor(Sensor)
+		steamFlowSensor.SensorOnline(Boolean)
+		steamFlowSensor.SensorCompromised(Boolean)
+		steamFlowSensor.childComponent(IndustrialComponent)
+		steamFlowSensor.parentPLC(PLC)
+		
+		const turbineSensor(Sensor)
+		turbineSensor.SensorOnline(Boolean)
+		turbineSensor.SensorCompromised(Boolean)
+		turbineSensor.childComponent(IndustrialComponent)
+		turbineSensor.parentPLC(PLC)
+		
+		// SafeguardSystem instance
+		const safeGuarding(SafeguardSystem)
+		safeGuarding.SafeguardOnline(Boolean)
+		
+		// SensitiveFile instance
+		const khnpNuclearSecrets(SensitiveFile)
+		khnpNuclearSecrets.existsOnMonitors(Monitor)
+		khnpNuclearSecrets.compromisedByMalware(Malware)
+		
 	}
+
 }

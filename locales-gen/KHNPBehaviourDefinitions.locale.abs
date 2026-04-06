@@ -3,9 +3,9 @@ import "platform:/resource/lc2071HonoursProject/NPP Prototype/models/KHNPBehavio
 Locale {
 	locale = ""
 	DefinitionGroup BehaviourDefinitions {
-		Guard PhisingEmailSent = "PhisingEmailSent" {
+		Guard HackerSendsPhishingEmail = "HackerSendsPhishingEmail" {
 		}
-		Guard PhishingEmailOpened = "PhishingEmailOpened" {
+		Guard OperatorOpensPhishingEmail = "OperatorOpensPhishingEmail" {
 		}
 	}
 }

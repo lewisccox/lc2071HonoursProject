@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<resultstore:ResultStore xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resultstore="http://www.irisa.fr/atsyra/resultstore">
+  <goalResults>
+    <reachabilityResult timestamp="2026-04-05T22:40:53.568+0100" duration="1" name="Reachability of goal : KHNPAttack"/>
+    <goal href="../NPP%20Prototype/models/Stuxnet.atg#//@atsyragoals.0"/>
+  </goalResults>
+  <goalResults>
+    <reachabilityResult timestamp="2026-04-05T22:40:25.676+0100" name="Reachability of goal : Step1"/>
+    <goal href="../NPP%20Prototype/models/Stuxnet.atg#//@atsyragoals.1"/>
+  </goalResults>
+  <goalResults>
+    <reachabilityResult timestamp="2026-04-05T22:40:25.682+0100" duration="1" name="Reachability of goal : Step2"/>
+    <goal href="../NPP%20Prototype/models/Stuxnet.atg#//@atsyragoals.2"/>
+  </goalResults>
+</resultstore:ResultStore>

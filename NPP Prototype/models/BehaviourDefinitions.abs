@@ -5,17 +5,6 @@ with NPPModelTemplate::* from "NPPModelTemplate.abs";
 
 
 DefinitionGroup BehaviourDefinitions {
-//	AssetTypeAspect Attacker {
-//		// @runtime
-//		reference location : Zone
-//		reference ownedItems : Item [*] default []
-//	}
-	// Contracts applicable to the dynamic part of the model
-//	dynamic contract itemAreInASingleLocation(item : Item, zone1 : Zone, zone2 : Zone) {
-//		description "An item can be located only in single zone"
-//		// guard = (zone1.itemsInZone.contains(item) && zone2.itemsInZone.contains(item) ) implies  (zone1 == zone2)
-//		guard = ! (zone1.itemsInZone.contains(item) && zone2.itemsInZone.contains(item) &&  (zone1 != zone2) )
-//	}
 	GuardedAction DeviceCompromisesNetwork(VictimNetwork: NetworkConnector, InfectedMonitor: Monitor, CulpritMalware : Malware){
 		guard=
 		InfectedMonitor.MonitorConnector.contains(VictimNetwork)&&
@@ -35,7 +24,6 @@ DefinitionGroup BehaviourDefinitions {
 			PrimaryMonitor.MonitorConnector.contains(AnEthernet)
 		action {
 			PrimaryMonitor.MonitorCompromised.assign(true);
-			//destZone.alarms.filter({alarm  -> alarm.isActive}).forAll({ alarm -> alarm.isTriggered.assign(true)});
 
 		}
 	}

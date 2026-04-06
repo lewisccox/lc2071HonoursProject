@@ -1,0 +1,55 @@
+import "NPP.atg"
+
+AtsyraGoalModel {
+	atsyragoals {
+		Goal KHNPAttack {
+			pre :
+				controlRoomOperator.PhishingEmailReceived = false
+			post:
+				khnpNuclearSecrets.existsOnMonitors = kimsukyMonitor
+		}
+		
+		Goal SendPhishingEmail{
+			pre :
+				controlRoomOperator.PhishingEmailReceived = false
+			post:
+				controlRoomOperator.PhishingEmailReceived = true
+		}
+		
+		Goal Step2 {
+			pre with genericAllLocked:
+				controlRoomOperator.PhishingEmailReceived = true
+			post:
+				controlRoomOperator.PhishingEmailOpened = true
+		}
+		
+		
+	}
+	
+	trees {
+		// Simple linear attack chain
+		attack_tree_linear [KHNPAttack]
+			SAND(	step1_tree [SendPhishingEmail],
+					step2_tree [Step2]
+			)
+		
+		// Alternative: Attack via Diagnostics operator
+		attack_tree_via_diagnostics [KHNPAttack]
+			SAND(	step1_diagnostics [SendPhishingEmail],
+					step2_diagnostics [Step2]
+			)
+		
+		// Alternative: Direct PLC compromise (if PLC is directly accessible)
+		attack_tree_direct_plc [KHNPAttack]
+			SAND(step1_diagnostics [SendPhishingEmail] )
+		
+		// Main attack tree with alternatives
+		main_attack_tree [KHNPAttack]
+			OR(	attack_tree_linear,
+				attack_tree_via_diagnostics,
+				attack_tree_direct_plc
+			)
+	}
+}
+
+// Additional goals needed for the alternative trees

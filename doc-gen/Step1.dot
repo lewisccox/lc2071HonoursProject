@@ -1,5 +1,5 @@
 @startuml
-digraph Stuxnet {
+digraph Step1 {
 	"begin" [shape = doublecircle];
 	"end" [shape = doublecircle];
 	edge [colorscheme = set19];
@@ -15,12 +15,6 @@ digraph Stuxnet {
 	"MonitorInfectsPLC(Ethernet, ControlRoom, ReactorController, Stuxnet)" -> "ReactorMotorDestroyed(ReactorActuator, ReactorController)" [label="1::2"];
 	"ReactorMotorDestroyed(ReactorActuator, ReactorController)" -> "SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" [label="1::3"];
 	"SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" -> "end" [label="1::4"];
-	edge [color = 3];
-	"begin" -> "NetworkCompromised(Ethernet, ControlRoom, Stuxnet)" [label="2::0"];
-	"NetworkCompromised(Ethernet, ControlRoom, Stuxnet)" -> "MonitorInfectsPLC(Ethernet, ControlRoom, ReactorController, Stuxnet)" [label="2::1"];
-	"MonitorInfectsPLC(Ethernet, ControlRoom, ReactorController, Stuxnet)" -> "ReactorMotorDestroyed(ReactorActuator, ReactorController)" [label="2::2"];
-	"ReactorMotorDestroyed(ReactorActuator, ReactorController)" -> "SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" [label="2::3"];
-	"SafeGuardsDeactivateCompromisedSystem(SafeGuarding, ReactorActuator, Reactor)" -> "end" [label="2::4"];
 	{ rank = source; "begin"; }
 	{ rank = sink; "end"; }
 }

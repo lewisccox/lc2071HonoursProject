@@ -6,23 +6,22 @@ with NPPModelTemplate::* from "NPPModel(KHNP).abs";
 DefinitionGroup BehaviourDefinitions {
 	//apologies for poor variable naming convention, ATSyRA appears to generate errors if variable names overlap in the 
 	//same scope	
-	GuardedAction PhisingEmailSent (MonitorOperator : Operator, TargetMonitor : Monitor, Connector : NetworkConnector,
+	GuardedAction HackerSendsPhishingEmail (MonitorOperator : Operator, TargetMonitor : Monitor, MConnector : NetworkConnector,
 	EmailServer : NetworkConnector, PhishingMalware : Malware, HackerOperator : Operator, HackerMonitor : Monitor,
 	HackerWifi : NetworkConnector
 	){
 		//Hacker must have a network connection to the target monitor, 
 		guard= MonitorOperator.PhishingEmailReceived == false &&
 		MonitorOperator.OperatesMonitor == TargetMonitor &&
-		TargetMonitor.MonitorConnector.contains(Connector)&&
-		Connector.LinkedNetworkConnectors.contains(EmailServer)&&
+		TargetMonitor.MonitorConnector.contains(MConnector)&&
+		MConnector.LinkedNetworkConnectors.contains(EmailServer)&&
 		EmailServer.LinkedNetworkConnectors.contains(HackerWifi)&&
 		HackerWifi.Monitors.contains(HackerMonitor) &&
 		PhishingMalware.OwnerIP == HackerMonitor.IP &&
 		HackerOperator.isHacker == true &&
 		HackerOperator.OperatesMonitor == HackerMonitor &&
-		MonitorOperator.OperatesMonitor == TargetMonitor &&
-		Connector != EmailServer &&
-		Connector != HackerWifi &&
+		MConnector != EmailServer &&
+		MConnector != HackerWifi &&
 		HackerWifi != EmailServer 
 		action{
 			
@@ -31,7 +30,7 @@ DefinitionGroup BehaviourDefinitions {
 		}
 	}
 	
-	GuardedAction PhishingEmailOpened (Target : Operator, ComputerOfTarget : Monitor, ComputerOfHacker : Monitor
+	GuardedAction OperatorOpensPhishingEmail (Target : Operator, ComputerOfTarget : Monitor, ComputerOfHacker : Monitor
 		, Hacker : Operator, PhishingVirus : Malware
 	){
 		guard= Target.TrustedEmails.contains(Hacker.Email) &&

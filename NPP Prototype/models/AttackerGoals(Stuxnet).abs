@@ -29,8 +29,6 @@ AssetGroup StuxnetGoals {
 		//ControlRoom.SoftwareRelease > 2008
 		post = //remote code execution enabled, kernel mode rootkit installed 
 		ControlRoom.MonitorCompromised == true
-
-
 	}
 	Goal Step3 {
 		description "PLC software compromised"

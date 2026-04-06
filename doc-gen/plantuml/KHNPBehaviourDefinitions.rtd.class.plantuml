@@ -1,21 +1,30 @@
 @startuml
 title RuntimeData and behavior
-class Any  {
+class IndustrialComponent  {
 }
-class NetworkConnector  {
-	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
-	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, CulpritMalware : **Malware**, )
-	NetworkCompromised(, PrimaryMonitor : **Monitor**, CulpritMalware : **Malware**, )
+class Operator  {
+	OperatorOpensPhishingEmail(, ComputerOfTarget : **Monitor**, ComputerOfHacker : **Monitor**, Hacker : **Operator**, PhishingVirus : **Malware**, )
+	HackerSendsPhishingEmail(, TargetMonitor : **Monitor**, MConnector : **NetworkConnector**, EmailServer : **NetworkConnector**, PhishingMalware : **Malware**, HackerOperator : **Operator**, HackerMonitor : **Monitor**, HackerWifi : **NetworkConnector**, )
+}
+class Actuator  {
+	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
 }
 class Sensor  {
 }
-class Monitor  {
+class NetworkConnector  {
+	NetworkCompromised(, PrimaryMonitor : **Monitor**, CulpritMalware : **Malware**, )
+	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, CulpritMalware : **Malware**, )
+	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
+}
+class Malware  {
 }
 class SafeguardSystem  {
 	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, ActuatorComponent : **IndustrialComponent**, )
 }
-class Actuator  {
-	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
+class NetworkConnector  {
+	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, CulpritMalware : **Malware**, )
+	MonitorInfectsPLC(, InfectedMonitor : **Monitor**, VictimPLC : **PLC**, AMalware : **Malware**, )
+	NetworkCompromised(, PrimaryMonitor : **Monitor**, CulpritMalware : **Malware**, )
 }
 class PLC  {
 }
@@ -23,24 +32,52 @@ class ContainableByAny  {
 }
 class IndustrialComponent  {
 }
+class SafeguardSystem  {
+	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, ActuatorComponent : **IndustrialComponent**, )
+}
+class Monitor  {
+}
+class Any  {
+}
+class Actuator  {
+	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
+}
+class Sensor  {
+}
+class Operator  {
+	HackerSendsPhishingEmail(, TargetMonitor : **Monitor**, MConnector : **NetworkConnector**, EmailServer : **NetworkConnector**, PhishingMalware : **Malware**, HackerOperator : **Operator**, HackerMonitor : **Monitor**, HackerWifi : **NetworkConnector**, )
+	OperatorOpensPhishingEmail(, ComputerOfTarget : **Monitor**, ComputerOfHacker : **Monitor**, Hacker : **Operator**, PhishingVirus : **Malware**, )
+}
 class Malware  {
 }
 class SensitiveFile  {
 }
-class Operator  {
-	PhisingEmailSent(, TargetMonitor : **Monitor**, Connector : **NetworkConnector**, EmailServer : **NetworkConnector**, PhishingMalware : **Malware**, HackerOperator : **Operator**, HackerMonitor : **Monitor**, HackerWifi : **NetworkConnector**, )
-	PhishingEmailOpened(, ComputerOfTarget : **Monitor**, ComputerOfHacker : **Monitor**, Hacker : **Operator**, PhishingVirus : **Malware**, )
+class Monitor  {
+}
+class PLC  {
+}
+class SensitiveFile  {
 }
 
 
-NetworkConnector -up-|>  Any
-Sensor -up-|>  Any
-Monitor -up-|>  Any
-SafeguardSystem -up-|>  Any
+IndustrialComponent -up-|>  Any
+Operator -up-|>  Any
 Actuator -up-|>  Any
+Sensor -up-|>  Any
+NetworkConnector -up-|>  Any
+Malware -up-|>  Any
+SafeguardSystem -up-|>  Any
+NetworkConnector -up-|>  Any
 PLC -up-|>  Any
 IndustrialComponent -up-|>  Any
+SafeguardSystem -up-|>  Any
+Monitor -up-|>  Any
+Actuator -up-|>  Any
+Sensor -up-|>  Any
+Operator -up-|>  Any
 Malware -up-|>  Any
 SensitiveFile -up-|>  Any
-Operator -up-|>  Any
+Monitor -up-|>  Any
+PLC -up-|>  Any
+SensitiveFile -up-|>  Any
 @enduml

@@ -6,17 +6,13 @@ with BehaviourDefinitions::* from "BehaviourDefinitions.abs";
 
 AssetGroup StuxnetGoals {
 	Goal Stuxnet {
-		description "Infect Network"
-		pre = //a PC on or connected to the NPP network is infected with stuxnet 
-		//operating system must be windows 
+		description "Stuxnet Attack"
+		pre = //presuming the Stuxnet malware exists on at least one of the PCs on the network
 		(DataAcquisition.MonitorInfected == true  && DataAcquisition.MonitorOS == Stuxnet.CompatableMonitorOS )||
 		(Diagnostics.MonitorInfected == true  && Diagnostics.MonitorOS == Stuxnet.CompatableMonitorOS )||
 		(ControlRoom.MonitorInfected == true  && ControlRoom.MonitorOS == Stuxnet.CompatableMonitorOS )
-		post = //other PCs on the network will be infected with stuxnet 
-		//control room compromised = true 
-		//Ethernet.NetworkCompromised == true 
-		//ControlRoom.MonitorCompromised == true
-		//ReactorController.compromised == true
+		post = //The malware is able to move through the network and destroy the Reactor generator which initiates
+		//an automated security shutdown
 		Reactor.ComponentOnline == false
 	}
 	

@@ -1,0 +1,11 @@
+@startuml
+digraph Step2 {
+	"begin" [shape = doublecircle];
+	"end" [shape = doublecircle];
+	edge [colorscheme = set19];
+	edge [color = 1];
+	"begin" -> "end" [label="0::0"];
+	{ rank = source; "begin"; }
+	{ rank = sink; "end"; }
+}
+@enduml
