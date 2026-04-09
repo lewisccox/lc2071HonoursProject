@@ -10,67 +10,52 @@ AtsyraGoalModel {
 			hackerWifi.ConnectorOnline = true,
 			
 			// Operators
-			controlRoomOperator.Email = "TakDae203@KHNP.go.kr",
-			controlRoomOperator.TrustedEmails1 = "JiTaeyang721@KHNP.go.kr",
-			controlRoomOperator.TrustedEmails2 = "EumHwa-Young632@KHNP.go.kr",
-			controlRoomOperator.TrustedEmails3 = "JongMoon575@KHNP.go.kr",
+			controlRoomOperator.hasTrustedEmail = true,
 			controlRoomOperator.PhishingEmailReceived = false,
 			controlRoomOperator.PhishingEmailOpened = false,
 			controlRoomOperator.isHacker = false,
-			kimsukyHacker.Email = "EumHwa-Young632@KHNP.go.kr",
+			kimsukyHacker.hasTrustedEmail = true,
 			kimsukyHacker.isHacker = true,
 			kimsukyHacker.PhishingEmailReceived = false,
 			kimsukyHacker.PhishingEmailOpened = false,
-			diagnosticsOperator.Email = "JiTaeyang721@KHNP.go.kr",
+			diagnosticsOperator.hasTrustedEmail = true,
 			diagnosticsOperator.PhishingEmailReceived = false,
 			diagnosticsOperator.PhishingEmailOpened = false,
 			diagnosticsOperator.isHacker = false,
 			
 			// Monitors
-			kimsukyMonitor.IP = "42.4.7.8",
 			kimsukyMonitor.MonitorOnline = true,
 			kimsukyMonitor.MonitorCompromised = false,
 			kimsukyMonitor.MonitorInfected = false,
-			controlRoom.MonitorSoftwareRelease = 2014,
 			controlRoom.MonitorInfected = false,
 			controlRoom.MonitorCompromised = false,
-			controlRoom.SoftwarePresent = "Hangul Word Processor",
+			controlRoom.SoftwareCompatable = true,
 			controlRoom.MonitorOnline = true,
-			diagnostics.MonitorSoftwareRelease = 2014,
 			diagnostics.MonitorInfected = false,
 			diagnostics.MonitorOnline = true,
 			diagnostics.MonitorCompromised = false,
-			dataAcquisition.MonitorSoftwareRelease = 2014,
 			dataAcquisition.MonitorInfected = false,
 			dataAcquisition.MonitorOnline = true,
 			dataAcquisition.MonitorCompromised = false,
 			
 			// PLCs
-			turbineController.PLCSoftwareRelease = 2014,
-			turbineController.PLCOS = "Siemen's WinCC",
+			turbineController.PLCOSCompatable = false,
 			turbineController.PLCOnline = true,
 			turbineController.PLCCompromised = false,
 			turbineController.PLCInfected = false,
-			steamFlowController.PLCSoftwareRelease = 2014,
-			steamFlowController.PLCOS = "Siemen's WinCC",
+			steamFlowController.PLCOSCompatable = false,
 			steamFlowController.PLCOnline = true,
 			steamFlowController.PLCCompromised = false,
 			steamFlowController.PLCInfected = false,
-			feedwaterController.PLCSoftwareRelease = 2014,
-			feedwaterController.PLCOS = "Siemen's WinCC",
+			feedwaterController.PLCOSCompatable = false,
 			feedwaterController.PLCOnline = true,
 			feedwaterController.PLCCompromised = false,
 			feedwaterController.PLCInfected = false,
-			reactorController.PLCSoftwareRelease = 2014,
-			reactorController.PLCOS = "Siemen's WinCC",
+			reactorController.PLCOSCompatable = false,
 			reactorController.PLCOnline = true,
 			reactorController.PLCCompromised = false,
 			reactorController.PLCInfected = false,
 			
-			// Malware
-			hangman.CompatableSoftwareDate = 2014,
-			hangman.RequiredSoftware = "Hangul Word Processor",
-			hangman.OwnerIP = "42.4.7.8",
 			
 			// Industrial Components
 			turbine.ComponentOnline = true,
@@ -210,10 +195,6 @@ AtsyraGoalModel {
 		// Constants
 		const true(Boolean)
 		const false(Boolean)
-		const "TakDae203@KHNP.go.kr"(String)
-		const "JiTaeyang721@KHNP.go.kr"(String)
-		const "EumHwa-Young632@KHNP.go.kr"(String)
-		const "JongMoon575@KHNP.go.kr"(String)
 		
 		// NetworkConnector instances
 		const ethernet(NetworkConnector)
@@ -245,26 +226,21 @@ AtsyraGoalModel {
 		
 		// Operator instances
 		const controlRoomOperator(Operator)
-		controlRoomOperator.Email(String)
-		controlRoomOperator.TrustedEmails1(String)
-		controlRoomOperator.TrustedEmails2(String)
-		controlRoomOperator.TrustedEmails3(String)
+		controlRoomOperator.hasTrustedEmail(Boolean)
 		controlRoomOperator.PhishingEmailReceived(Boolean)
 		controlRoomOperator.PhishingEmailOpened(Boolean)
 		controlRoomOperator.isHacker(Boolean)
 		controlRoomOperator.operatesMonitor(Monitor)
 		
 		const kimsukyHacker(Operator)
-		kimsukyHacker.Email(String)
-		kimsukyHacker.TrustedEmails(String)
+		kimsukyHacker.hasTrustedEmail(Boolean)
 		kimsukyHacker.PhishingEmailReceived(Boolean)
 		kimsukyHacker.PhishingEmailOpened(Boolean)
 		kimsukyHacker.isHacker(Boolean)
 		kimsukyHacker.operatesMonitor(Monitor)
 		
 		const diagnosticsOperator(Operator)
-		diagnosticsOperator.Email(String)
-		diagnosticsOperator.TrustedEmails(String)
+		diagnosticsOperator.hasTrustedEmail(Boolean)
 		diagnosticsOperator.PhishingEmailReceived(Boolean)
 		diagnosticsOperator.PhishingEmailOpened(Boolean)
 		diagnosticsOperator.isHacker(Boolean)
@@ -286,10 +262,8 @@ AtsyraGoalModel {
 		controlRoom.IP(String)
 		controlRoom.MonitorOnline(Boolean)
 		controlRoom.MonitorCompromised(Boolean)
-		controlRoom.MonitorOS(String)
-		controlRoom.MonitorSoftwareRelease(Integer)
 		controlRoom.MonitorInfected(Boolean)
-		controlRoom.SoftwarePresent(String)
+		controlRoom.SoftwareCompatable(Boolean)
 		controlRoom.siblingMonitor(Monitor)
 		controlRoom.monitorConnector(NetworkConnector)
 		
@@ -297,10 +271,8 @@ AtsyraGoalModel {
 		diagnostics.IP(String)
 		diagnostics.MonitorOnline(Boolean)
 		diagnostics.MonitorCompromised(Boolean)
-		diagnostics.MonitorOS(String)
-		diagnostics.MonitorSoftwareRelease(Integer)
 		diagnostics.MonitorInfected(Boolean)
-		diagnostics.SoftwarePresent(String)
+		diagnostics.SoftwareCompatable(Boolean)
 		diagnostics.siblingMonitor(Monitor)
 		diagnostics.monitorConnector(NetworkConnector)
 		
@@ -308,8 +280,7 @@ AtsyraGoalModel {
 		dataAcquisition.IP(String)
 		dataAcquisition.MonitorOnline(Boolean)
 		dataAcquisition.MonitorCompromised(Boolean)
-		dataAcquisition.MonitorOS(String)
-		dataAcquisition.MonitorSoftwareRelease(Integer)
+		dataAcquisition.SoftwareCompatable(Boolean)
 		dataAcquisition.MonitorInfected(Boolean)
 		dataAcquisition.SoftwarePresent(String)
 		dataAcquisition.siblingMonitor(Monitor)
@@ -317,8 +288,7 @@ AtsyraGoalModel {
 		
 		// PLC instances
 		const turbineController(PLC)
-		turbineController.PLCSoftwareRelease(Integer)
-		turbineController.PLCOS(String)
+		turbineController.PLCOSCompatable(Boolean)
 		turbineController.PLCOnline(Boolean)
 		turbineController.PLCCompromised(Boolean)
 		turbineController.PLCInfected(Boolean)
@@ -327,8 +297,7 @@ AtsyraGoalModel {
 		turbineController.childSensor(Sensor)
 		
 		const steamFlowController(PLC)
-		steamFlowController.PLCSoftwareRelease(Integer)
-		steamFlowController.PLCOS(String)
+		steamFlowController.PLCOSCompatable(Boolean)
 		steamFlowController.PLCOnline(Boolean)
 		steamFlowController.PLCCompromised(Boolean)
 		steamFlowController.PLCInfected(Boolean)
@@ -337,8 +306,7 @@ AtsyraGoalModel {
 		steamFlowController.childSensor(Sensor)
 		
 		const feedwaterController(PLC)
-		feedwaterController.PLCSoftwareRelease(Integer)
-		feedwaterController.PLCOS(String)
+		feedwaterController.PLCOSCompatable(Boolean)
 		feedwaterController.PLCOnline(Boolean)
 		feedwaterController.PLCCompromised(Boolean)
 		feedwaterController.PLCInfected(Boolean)
@@ -347,8 +315,7 @@ AtsyraGoalModel {
 		feedwaterController.childSensor(Sensor)
 		
 		const reactorController(PLC)
-		reactorController.PLCSoftwareRelease(Integer)
-		reactorController.PLCOS(String)
+		reactorController.PLCOSCompatable(Boolean)
 		reactorController.PLCOnline(Boolean)
 		reactorController.PLCCompromised(Boolean)
 		reactorController.PLCInfected(Boolean)

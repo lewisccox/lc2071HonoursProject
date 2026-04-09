@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <resultstore:ResultStore xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resultstore="http://www.irisa.fr/atsyra/resultstore">
   <goalResults>
-    <reachabilityResult timestamp="2026-04-06T11:16:14.355+0100" duration="1" name="Reachability of goal : KHNPAttack"/>
+    <reachabilityResult timestamp="2026-04-06T11:43:13.688+0100" duration="1" name="Reachability of goal : KHNPAttack"/>
     <goal href="../NPP%20Prototype/models/KHNP.atg#//@atsyragoals.0"/>
   </goalResults>
   <goalResults>
-    <reachabilityResult timestamp="2026-04-06T11:16:14.369+0100" duration="1" name="Reachability of goal : SendPhishingEmail"/>
+    <reachabilityResult timestamp="2026-04-06T11:47:59.630+0100" name="Reachability of goal : SendPhishingEmail"/>
     <goal href="../NPP%20Prototype/models/KHNP.atg#//@atsyragoals.1"/>
   </goalResults>
   <goalResults>
-    <reachabilityResult timestamp="2026-04-06T11:16:14.375+0100" name="Reachability of goal : Step2"/>
+    <reachabilityResult timestamp="2026-04-06T11:43:13.733+0100" name="Reachability of goal : Step2"/>
     <goal href="../NPP%20Prototype/models/KHNP.atg#//@atsyragoals.2"/>
   </goalResults>
 </resultstore:ResultStore>
