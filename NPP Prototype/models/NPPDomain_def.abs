@@ -76,9 +76,9 @@ DefinitionGroup NPPDomain_def {
 		reference InfectedMonitors : Monitor [*] default []
 		attribute OwnerIP : String [1] default "0.0.0.0"
 		attribute CompatableSoftwareDate : Integer [1] default 2026
-		attribute CompatableMonitorOS : String [1] default ""
+		attribute CompatableMonitorOS : String [1] default "Windows"
 		attribute CompatablePLCOS : String [1] default ""
-		attribute RequiredSoftware : String [*] default []
+		attribute RequiredSoftware : String [1] default ""
 	}
 	AssetType SafeguardSystem extends (Any){
 		description "System responsible for automatic shutdown in the event of a catastrophe"

@@ -1036,13 +1036,13 @@ sprite $water [100x100/16] {
 
 object "<$connector> Ethernet : NetworkConnector" as Ethernet #Wheat
 object "<$virus> Stuxnet : Malware" as Stuxnet #LightBlue
-object "<$monitor> ControlRoom : Monitor" as ControlRoom #Aquamarine
-object "<$monitor> Diagnostics : Monitor" as Diagnostics #Aquamarine
-object "<$monitor> DataAcquisition : Monitor" as DataAcquisition #Aquamarine
-object "<$circuit> TurbineController : PLC" as TurbineController #LightBlue
-object "<$circuit> SteamFlowController : PLC" as SteamFlowController #LightBlue
-object "<$circuit> FeedwaterController : PLC" as FeedwaterController #LightBlue
-object "<$circuit> ReactorController : PLC" as ReactorController #LightBlue
+object "<$monitor> ControlRoom : Monitor" as ControlRoom #Wheat
+object "<$monitor> Diagnostics : Monitor" as Diagnostics #Wheat
+object "<$monitor> DataAcquisition : Monitor" as DataAcquisition #Wheat
+object "<$circuit> TurbineController : PLC" as TurbineController #Aquamarine
+object "<$circuit> SteamFlowController : PLC" as SteamFlowController #Aquamarine
+object "<$circuit> FeedwaterController : PLC" as FeedwaterController #Aquamarine
+object "<$circuit> ReactorController : PLC" as ReactorController #Aquamarine
 object "<$sensor> ReactorSensor : Sensor" as ReactorSensor #LightBlue
 object "<$actuator> ReactorActuator : Actuator" as ReactorActuator #LightBlue
 object "<$sensor> FeedwaterSensor : Sensor" as FeedwaterSensor #LightBlue
@@ -1055,20 +1055,22 @@ object "<$turbine> Turbine : IndustrialComponent" as Turbine #lavender
 object "<$reactor> Reactor : IndustrialComponent" as Reactor #lavender
 object "<$water> Pipe : IndustrialComponent" as Pipe #lavender
 object "<$steam> SteamGenerator : IndustrialComponent" as SteamGenerator #lavender
-Diagnostics -up-> Ethernet : Connector
-ControlRoom -up-> Ethernet : Connector
-DataAcquisition -up-> Ethernet : Connector
+object "SafeGuarding : SafeguardSystem" as SafeGuarding #Aquamarine
+object "KHNPNuclearSecrets : SensitiveFile" as KHNPNuclearSecrets 
+Diagnostics -> Ethernet : MonitorConnector
+ControlRoom -> Ethernet : MonitorConnector
+DataAcquisition -> Ethernet : MonitorConnector
 Ethernet --> ReactorController : PLCs
-ReactorController -> ReactorActuator : ChildActuator
-ReactorController -up-> Ethernet : Connector
+ReactorController --> ReactorActuator : ChildActuator
+ReactorController -up-> Ethernet : PLCConnector
 ReactorActuator --> Reactor : ChildComponent
-ReactorController -> ReactorSensor : ChildSensor
-ReactorSensor -> ReactorController : ParentPLC
+ReactorController --> ReactorSensor : ChildSensor
+ReactorSensor -up-> ReactorController : ParentPLC
 ReactorSensor --> Reactor : ChildComponent
 Reactor -up-> ReactorSensor : ParentSensor
-Ethernet --> ControlRoom : Monitors
-Ethernet --> DataAcquisition : Monitors
-Ethernet --> Diagnostics : Monitors
+Ethernet -> ControlRoom : Monitors
+Ethernet -> DataAcquisition : Monitors
+Ethernet -> Diagnostics : Monitors
 Diagnostics -> ControlRoom : SiblingMonitor
 Diagnostics -> DataAcquisition : SiblingMonitor
 DataAcquisition -> Diagnostics : SiblingMonitor
@@ -1078,24 +1080,24 @@ ControlRoom -> DataAcquisition : SiblingMonitor
 Ethernet --> TurbineController : PLCs
 Ethernet --> SteamFlowController : PLCs
 Ethernet --> FeedwaterController : PLCs
-TurbineController -up-> Ethernet : Connector
-SteamFlowController -up-> Ethernet : Connector
-FeedwaterController -up-> Ethernet : Connector
-TurbineController -> TurbineActuator : ChildActuator
-FeedwaterController -> FeedwaterActuator : ChildActuator
-SteamFlowController -> SteamFlowActuator : ChildActuator
-SteamFlowController -> SteamFlowSensor : ChildSensor
-TurbineController -> TurbineSensor : ChildSensor
-FeedwaterController -> FeedwaterSensor : ChildSensor
+TurbineController -up-> Ethernet : PLCConnector
+SteamFlowController -up-> Ethernet : PLCConnector
+FeedwaterController -up-> Ethernet : PLCConnector
+TurbineController --> TurbineActuator : ChildActuator
+FeedwaterController --> FeedwaterActuator : ChildActuator
+SteamFlowController --> SteamFlowActuator : ChildActuator
+SteamFlowController --> SteamFlowSensor : ChildSensor
+TurbineController --> TurbineSensor : ChildSensor
+FeedwaterController --> FeedwaterSensor : ChildSensor
 FeedwaterActuator --> Pipe : ChildComponent
 SteamFlowActuator --> SteamGenerator : ChildComponent
 TurbineActuator --> Turbine : ChildComponent
 TurbineSensor --> Turbine : ChildComponent
 SteamFlowSensor --> SteamGenerator : ChildComponent
 FeedwaterSensor --> Pipe : ChildComponent
-FeedwaterSensor -> FeedwaterController : ParentPLC
-SteamFlowSensor -> SteamFlowController : ParentPLC
-TurbineSensor -> TurbineController : ParentPLC
+FeedwaterSensor -up-> FeedwaterController : ParentPLC
+SteamFlowSensor -up-> SteamFlowController : ParentPLC
+TurbineSensor -up-> TurbineController : ParentPLC
 Pipe -up-> FeedwaterSensor : ParentSensor
 Turbine -up-> TurbineSensor : ParentSensor
 SteamGenerator -up-> SteamFlowSensor : ParentSensor

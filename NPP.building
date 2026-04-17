@@ -1,0 +1,5 @@
+import "NPP.atg"
+Building NPP
+{
+	Zone exterior{}
+} 

@@ -7,5 +7,9 @@ Locale {
 		}
 		Guard OperatorOpensPhishingEmail = "OperatorOpensPhishingEmail" {
 		}
+		Guard HWPExploitUsed = "HWPExploitUsed" {
+		}
+		Guard UploadAndDeleteSecretFiles = "UploadAndDeleteSecretFiles" {
+		}
 	}
 }

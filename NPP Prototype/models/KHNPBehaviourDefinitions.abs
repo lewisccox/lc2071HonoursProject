@@ -38,9 +38,41 @@ DefinitionGroup BehaviourDefinitions {
 		Hacker.OperatesMonitor == ComputerOfHacker &&
 		Target.OperatesMonitor == ComputerOfTarget &&
 		PhishingVirus.InfectedMonitors.contains(ComputerOfTarget)&&
-		PhishingVirus.OwnerIP == ComputerOfHacker.IP
+		PhishingVirus.OwnerIP == ComputerOfHacker.IP &&
+		Target != Hacker &&
+		ComputerOfHacker != ComputerOfTarget
 		action{
 			Target.PhishingEmailOpened.assign(true);
+		}
+	}
+	GuardedAction HWPExploitUsed (Target : Operator, ComputerOfTarget : Monitor, ComputerOfHacker : Monitor
+		,  PhishingVirus : Malware
+	){
+		guard= 
+		Target.OperatesMonitor == ComputerOfTarget &&
+		PhishingVirus.InfectedMonitors.contains(ComputerOfTarget)&&
+		PhishingVirus.OwnerIP == ComputerOfHacker.IP && 
+		Target.PhishingEmailOpened == true&&
+		ComputerOfTarget.MonitorOS == PhishingVirus.CompatableMonitorOS&&
+		ComputerOfTarget.SoftwarePresent.contains(PhishingVirus.RequiredSoftware)&&
+		Target.isHacker == false &&
+		ComputerOfHacker != ComputerOfTarget
+		action{
+			ComputerOfTarget.MonitorCompromised.assign(true);
+		}
+	}
+	GuardedAction UploadAndDeleteSecretFiles ( ComputerOfTarget : Monitor, ComputerOfHacker : Monitor
+		,  PhishingVirus : Malware , NuclearSecrets : SensitiveFile
+	){
+		guard= 
+		ComputerOfTarget.MonitorCompromised == true &&
+		PhishingVirus.InfectedMonitors.contains(ComputerOfTarget)&&
+		PhishingVirus.OwnerIP == ComputerOfHacker.IP && 
+		ComputerOfTarget.MonitorOS == PhishingVirus.CompatableMonitorOS &&
+		NuclearSecrets.ExistsOnMonitors.contains(ComputerOfTarget)
+		action{
+			NuclearSecrets.ExistsOnMonitors.add(ComputerOfHacker);
+			NuclearSecrets.ExistsOnMonitors.remove(ComputerOfTarget);
 		}
 	}
 	

@@ -5,11 +5,11 @@
     <goal href="../NPP%20Prototype/models/KHNP.atg#//@atsyragoals.0"/>
   </goalResults>
   <goalResults>
-    <reachabilityResult timestamp="2026-04-06T11:47:59.630+0100" name="Reachability of goal : SendPhishingEmail"/>
+    <reachabilityResult timestamp="2026-04-10T14:55:57.138+0100" duration="1706" name="Reachability of goal : SendPhishingEmail"/>
     <goal href="../NPP%20Prototype/models/KHNP.atg#//@atsyragoals.1"/>
   </goalResults>
   <goalResults>
-    <reachabilityResult timestamp="2026-04-06T11:43:13.733+0100" name="Reachability of goal : Step2"/>
+    <reachabilityResult timestamp="2026-04-09T13:01:57.644+0100" duration="1667" name="Reachability of goal : EmailOpenedIfRetiredEmployee"/>
     <goal href="../NPP%20Prototype/models/KHNP.atg#//@atsyragoals.2"/>
   </goalResults>
 </resultstore:ResultStore>

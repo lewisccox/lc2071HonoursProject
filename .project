@@ -10,8 +10,14 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>fr.irisa.atsyra.absystem.ui.absBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
+		<nature>fr.irisa.atsyra.absystem.ui.absNature</nature>
 	</natures>
 </projectDescription>

@@ -3,7 +3,6 @@ AssetBasedSystem
 // namespace shortcuts    
 with core::*; 
 with NPPDomain_def::* from "NPPDomain_def.abs";
-with BehaviourDefinitions::* from "BehaviourDefinitions.abs";
 
 import "platform:/plugin/core.abs.model.lib/models/core.abs";
 import "NPPDomain_def.abs";
@@ -16,20 +15,8 @@ AssetGroup  NPPModelTemplate {
 		attribute trafficCapacity := 1000
 		attribute NetworkCompromised := false
 	}
-	Asset ControlRoomOperator : Operator {
-		attribute Email := "TakDae203@KHNP.go.kr"
-		attribute TrustedEmails := ["JiTaeyang721@KHNP.go.kr","EumHwa-Young632@KHNP.go.kr","JongMoon575@KHNP.go.kr"]
-	}
-	Asset KimsukyHacker : Operator {
-		attribute Email := "EumHwa-Young632@KHNP.go.kr"	
-		attribute isHacker := true
-		}
-	Asset KimsukyMonitor : Monitor {
-		attribute IP := "42.4.7.8"
-		
-	}
 	
-	Asset DiagnosticsOperator : Operator{
+	Asset DOperator : Operator{
 		attribute Email := "JiTaeyang721@KHNP.go.kr"
 	}
 	Asset ExternalEmailServer : NetworkConnector {
@@ -44,7 +31,7 @@ AssetGroup  NPPModelTemplate {
 	}
 	Asset HANGMAN : Malware{
 		attribute CompatableSoftwareDate := 2014
-		attribute RequiredSoftware := ["Hangul Word Processor"]
+		attribute RequiredSoftware := "Hangul Word Processor"
 		attribute OwnerIP := "42.4.7.8"
 	}
 	Asset ControlRoom : Monitor {
@@ -120,6 +107,18 @@ AssetGroup  NPPModelTemplate {
 	Asset KHNPNuclearSecrets : SensitiveFile {
 		
 	}
+	Asset CROperator : Operator {
+		attribute Email := "TakDae203@KHNP.go.kr"
+		attribute TrustedEmails := ["JiTaeyang721@KHNP.go.kr","EumHwa-Young632@KHNP.go.kr","JongMoon575@KHNP.go.kr"]
+	}
+	Asset KimsukyHacker : Operator {
+		attribute Email := "EumHwa-Young632@KHNP.go.kr"	
+		attribute isHacker := true
+		}
+	Asset KimsukyMonitor : Monitor {
+		attribute IP := "42.4.7.8"
+		
+	}
 	
 	
 	link  Diagnostics to Ethernet as Monitor::MonitorConnector
@@ -170,10 +169,10 @@ AssetGroup  NPPModelTemplate {
 	link ExternalEmailServer to HackerWifi as NetworkConnector::LinkedNetworkConnectors
 	link ExternalEmailServer to Ethernet as NetworkConnector::LinkedNetworkConnectors
 	link KHNPNuclearSecrets to ControlRoom as SensitiveFile::ExistsOnMonitors
-	link ControlRoomOperator to ControlRoom as Operator::OperatesMonitor
+	link CROperator to ControlRoom as Operator::OperatesMonitor
 	link KimsukyHacker to KimsukyMonitor as Operator::OperatesMonitor
 	link KimsukyMonitor to HackerWifi as Monitor::MonitorConnector
 	link HackerWifi to KimsukyMonitor as NetworkConnector::Monitors
 	link HackerWifi to ExternalEmailServer as NetworkConnector::LinkedNetworkConnectors
-	link DiagnosticsOperator to Diagnostics as Operator::OperatesMonitor
+	link DOperator to Diagnostics as Operator::OperatesMonitor
 }

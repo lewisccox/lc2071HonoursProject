@@ -1,9 +1,6 @@
 @startuml
 object "Ethernet : NetworkConnector" as Ethernet #Wheat
-object "ControlRoomOperator : Operator" as ControlRoomOperator #Wheat
-object "KimsukyHacker : Operator" as KimsukyHacker #Wheat
-object "KimsukyMonitor : Monitor" as KimsukyMonitor #Wheat
-object "DiagnosticsOperator : Operator" as DiagnosticsOperator #Wheat
+object "DOperator : Operator" as DOperator #Wheat
 object "ExternalEmailServer : NetworkConnector" as ExternalEmailServer #Wheat
 object "HackerWifi : NetworkConnector" as HackerWifi #Wheat
 object "HANGMAN : Malware" as HANGMAN #LightBlue
@@ -28,6 +25,9 @@ object "Pipe : IndustrialComponent" as Pipe #lavender
 object "SteamGenerator : IndustrialComponent" as SteamGenerator #lavender
 object "SafeGuarding : SafeguardSystem" as SafeGuarding #Aquamarine
 object "KHNPNuclearSecrets : SensitiveFile" as KHNPNuclearSecrets 
+object "CROperator : Operator" as CROperator #Wheat
+object "KimsukyHacker : Operator" as KimsukyHacker #Wheat
+object "KimsukyMonitor : Monitor" as KimsukyMonitor #Wheat
 Diagnostics -> Ethernet : MonitorConnector
 ControlRoom -> Ethernet : MonitorConnector
 DataAcquisition -> Ethernet : MonitorConnector
@@ -76,10 +76,10 @@ Ethernet -> ExternalEmailServer : LinkedNetworkConnectors
 ExternalEmailServer -> HackerWifi : LinkedNetworkConnectors
 ExternalEmailServer -> Ethernet : LinkedNetworkConnectors
 KHNPNuclearSecrets -up-> ControlRoom : ExistsOnMonitors
-ControlRoomOperator -> ControlRoom : OperatesMonitor
+CROperator -> ControlRoom : OperatesMonitor
 KimsukyHacker -> KimsukyMonitor : OperatesMonitor
 KimsukyMonitor -> HackerWifi : MonitorConnector
 HackerWifi -> KimsukyMonitor : Monitors
 HackerWifi -> ExternalEmailServer : LinkedNetworkConnectors
-DiagnosticsOperator -> Diagnostics : OperatesMonitor
+DOperator -> Diagnostics : OperatesMonitor
 @enduml

@@ -8,24 +8,25 @@ AssetGroup KHNPGoals {
 	Goal KHNPAttack {
 		description "Infect Network"
 		pre = 
-		ControlRoomOperator.PhishingEmailReceived == false
+		CROperator.PhishingEmailReceived == false
 		post = 
-		KHNPNuclearSecrets.ExistsOnMonitors.contains(KimsukyMonitor)
+		KHNPNuclearSecrets.ExistsOnMonitors.contains(KimsukyMonitor)&&
+		!KHNPNuclearSecrets.ExistsOnMonitors.contains(ControlRoom)
 	}
 	Goal Step1 {
 		description "Send phishing email"
 		pre = //a PC on or connected to the NPP network is infected with stuxnet 
-		ControlRoomOperator.PhishingEmailReceived == false
+		CROperator.PhishingEmailReceived == false
 		post = //other PCs on the network will be infected with stuxnet 
-		ControlRoomOperator.PhishingEmailReceived == true
+		CROperator.PhishingEmailReceived == true
 	}
 	
 	Goal Step2{
 		description "Get Operator to open phishing email"
 		pre = 
-		ControlRoomOperator.PhishingEmailReceived == false
+		CROperator.PhishingEmailReceived == false
 		post = 
-		ControlRoomOperator.PhishingEmailOpened == true
+		CROperator.PhishingEmailOpened == true
 	}
 	
 }

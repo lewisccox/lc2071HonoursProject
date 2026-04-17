@@ -1,0 +1,37 @@
+import "NPP.atg"
+import "KHNP.atg"
+
+AtsyraGoalModel {
+	atsyragoals {
+		Goal KHNPAttack {
+			pre with generic:
+				CROperator.PhishingEmailReceived = false
+			post:
+				khnpNuclearSecrets.existsOnMonitors = kimsukyMonitor
+		}
+		
+		Goal SendPhishingEmail{
+			pre with generic:
+				CROperator.PhishingEmailReceived = false
+			post:
+				CROperator.PhishingEmailReceived = true
+		}
+		
+		Goal EmailOpenedIfRetiredEmployee {
+			pre with generic:
+				CROperator.PhishingEmailReceived = true 
+				and kimsukyHacker.hasTrustedEmail  = true
+			post:
+				CROperator.PhishingEmailOpened = true
+		}
+	}
+	
+	trees {
+		// Simple linear attack chain
+		attack_tree_linear [KHNPAttack]
+			SAND(	step1_tree [SendPhishingEmail],
+					step2_tree [EmailOpenedIfRetiredEmployee]
+			)
+	}
+}
+

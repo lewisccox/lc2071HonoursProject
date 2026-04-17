@@ -10,18 +10,18 @@ AtsyraGoalModel {
 			hackerWifi.ConnectorOnline = true,
 			
 			// Operators
-			controlRoomOperator.hasTrustedEmail = true,
-			controlRoomOperator.PhishingEmailReceived = false,
-			controlRoomOperator.PhishingEmailOpened = false,
-			controlRoomOperator.isHacker = false,
+			CROperator.hasTrustedEmail = true,
+			CROperator.PhishingEmailReceived = false,
+			CROperator.PhishingEmailOpened = false,
+			CROperator.isHacker = false,
 			kimsukyHacker.hasTrustedEmail = true,
 			kimsukyHacker.isHacker = true,
 			kimsukyHacker.PhishingEmailReceived = false,
 			kimsukyHacker.PhishingEmailOpened = false,
-			diagnosticsOperator.hasTrustedEmail = true,
-			diagnosticsOperator.PhishingEmailReceived = false,
-			diagnosticsOperator.PhishingEmailOpened = false,
-			diagnosticsOperator.isHacker = false,
+			DOperator.hasTrustedEmail = true,
+			DOperator.PhishingEmailReceived = false,
+			DOperator.PhishingEmailOpened = false,
+			DOperator.isHacker = false,
 			
 			// Monitors
 			kimsukyMonitor.MonitorOnline = true,
@@ -166,9 +166,9 @@ AtsyraGoalModel {
 			khnpNuclearSecrets.existsOnMonitors =  controlRoom ,
 			
 			// Operator to Monitor links
-			controlRoomOperator.operatesMonitor =  controlRoom ,
+			CROperator.operatesMonitor =  controlRoom ,
 			kimsukyHacker.operatesMonitor =  kimsukyMonitor ,
-			diagnosticsOperator.operatesMonitor =  diagnostics 
+			DOperator.operatesMonitor =  diagnostics 
 
 			}
 		}
@@ -176,8 +176,6 @@ AtsyraGoalModel {
 	
 	types {
 		InternalType Boolean
-		InternalType Integer
-		InternalType String
 		SystemType NetworkConnector
 		SystemType Monitor
 		SystemType monitorConnector
@@ -198,8 +196,6 @@ AtsyraGoalModel {
 		
 		// NetworkConnector instances
 		const ethernet(NetworkConnector)
-		ethernet.trafficLevel(Integer)
-		ethernet.trafficCapacity(Integer)
 		ethernet.NetworkCompromised(Boolean)
 		ethernet.ConnectorOnline(Boolean)
 		ethernet.plcs(PLC)
@@ -207,8 +203,6 @@ AtsyraGoalModel {
 		ethernet.linkedNetworkConnectors(NetworkConnector)
 		
 		const externalEmailServer(NetworkConnector)
-		externalEmailServer.trafficLevel(Integer)
-		externalEmailServer.trafficCapacity(Integer)
 		externalEmailServer.NetworkCompromised(Boolean)
 		externalEmailServer.ConnectorOnline(Boolean)
 		externalEmailServer.plcs(PLC)
@@ -216,8 +210,6 @@ AtsyraGoalModel {
 		externalEmailServer.linkedNetworkConnectors(NetworkConnector)
 		
 		const hackerWifi(NetworkConnector)
-		hackerWifi.trafficLevel(Integer)
-		hackerWifi.trafficCapacity(Integer)
 		hackerWifi.NetworkCompromised(Boolean)
 		hackerWifi.ConnectorOnline(Boolean)
 		hackerWifi.plcs(PLC)
@@ -225,12 +217,12 @@ AtsyraGoalModel {
 		hackerWifi.linkedNetworkConnectors(NetworkConnector)
 		
 		// Operator instances
-		const controlRoomOperator(Operator)
-		controlRoomOperator.hasTrustedEmail(Boolean)
-		controlRoomOperator.PhishingEmailReceived(Boolean)
-		controlRoomOperator.PhishingEmailOpened(Boolean)
-		controlRoomOperator.isHacker(Boolean)
-		controlRoomOperator.operatesMonitor(Monitor)
+		const CROperator(Operator)
+		CROperator.hasTrustedEmail(Boolean)
+		CROperator.PhishingEmailReceived(Boolean)
+		CROperator.PhishingEmailOpened(Boolean)
+		CROperator.isHacker(Boolean)
+		CROperator.operatesMonitor(Monitor)
 		
 		const kimsukyHacker(Operator)
 		kimsukyHacker.hasTrustedEmail(Boolean)
@@ -239,27 +231,22 @@ AtsyraGoalModel {
 		kimsukyHacker.isHacker(Boolean)
 		kimsukyHacker.operatesMonitor(Monitor)
 		
-		const diagnosticsOperator(Operator)
-		diagnosticsOperator.hasTrustedEmail(Boolean)
-		diagnosticsOperator.PhishingEmailReceived(Boolean)
-		diagnosticsOperator.PhishingEmailOpened(Boolean)
-		diagnosticsOperator.isHacker(Boolean)
-		diagnosticsOperator.operatesMonitor(Monitor)
+		const DOperator(Operator)
+		DOperator.hasTrustedEmail(Boolean)
+		DOperator.PhishingEmailReceived(Boolean)
+		DOperator.PhishingEmailOpened(Boolean)
+		DOperator.isHacker(Boolean)
+		DOperator.operatesMonitor(Monitor)
 		
 		// Monitor instances
 		const kimsukyMonitor(Monitor)
-		kimsukyMonitor.IP(String)
 		kimsukyMonitor.MonitorOnline(Boolean)
 		kimsukyMonitor.MonitorCompromised(Boolean)
-		kimsukyMonitor.MonitorOS(String)
-		kimsukyMonitor.MonitorSoftwareRelease(Integer)
 		kimsukyMonitor.MonitorInfected(Boolean)
-		kimsukyMonitor.SoftwarePresent(String)
 		kimsukyMonitor.siblingMonitor(Monitor)
 		kimsukyMonitor.monitorConnector(NetworkConnector)
 		
 		const controlRoom(Monitor)
-		controlRoom.IP(String)
 		controlRoom.MonitorOnline(Boolean)
 		controlRoom.MonitorCompromised(Boolean)
 		controlRoom.MonitorInfected(Boolean)
@@ -268,7 +255,6 @@ AtsyraGoalModel {
 		controlRoom.monitorConnector(NetworkConnector)
 		
 		const diagnostics(Monitor)
-		diagnostics.IP(String)
 		diagnostics.MonitorOnline(Boolean)
 		diagnostics.MonitorCompromised(Boolean)
 		diagnostics.MonitorInfected(Boolean)
@@ -277,12 +263,10 @@ AtsyraGoalModel {
 		diagnostics.monitorConnector(NetworkConnector)
 		
 		const dataAcquisition(Monitor)
-		dataAcquisition.IP(String)
 		dataAcquisition.MonitorOnline(Boolean)
 		dataAcquisition.MonitorCompromised(Boolean)
 		dataAcquisition.SoftwareCompatable(Boolean)
 		dataAcquisition.MonitorInfected(Boolean)
-		dataAcquisition.SoftwarePresent(String)
 		dataAcquisition.siblingMonitor(Monitor)
 		dataAcquisition.monitorConnector(NetworkConnector)
 		
@@ -325,11 +309,6 @@ AtsyraGoalModel {
 		
 		// Malware instance
 		const hangman(Malware)
-		hangman.CompatableSoftwareDate(Integer)
-		hangman.RequiredSoftware(String)
-		hangman.OwnerIP(String)
-		hangman.CompatableMonitorOS(String)
-		hangman.CompatablePLCOS(String)
 		hangman.infectedMonitors(Monitor)
 		
 		// IndustrialComponent instances
