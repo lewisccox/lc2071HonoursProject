@@ -1,5 +1,5 @@
 AssetBasedSystem
-import "platform:/resource/lc2071HonoursProject/NPP Prototype/models/KHNPBehaviourDefinitions.abs";
+import "platform:/resource/lc2071HonoursProject/NPP ABS files/models/KHNPBehaviourDefinitions.abs";
 Locale {
 	locale = ""
 	DefinitionGroup BehaviourDefinitions {
