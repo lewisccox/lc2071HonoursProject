@@ -1,19 +1,8 @@
 @startuml
-class Monitor  {
-	MonitorOnline : Boolean
-	MonitorCompromised : Boolean
-	MonitorOS : String
-	MonitorSoftwareRelease : Integer
-	MonitorInfected : Boolean
-	SoftwarePresent : String
-	IP : String
-	void OperatorOpensPhishingEmail()
-	void DeviceCompromisesNetwork()
-	void UploadAndDeleteSecretFiles()
-	void MonitorInfectsPLC()
-	void NetworkCompromised()
-	void HackerSendsPhishingEmail()
-	void HWPExploitUsed()
+class IndustrialComponent  {
+	ComponentOnline : Boolean
+	ComponentCompromised : Boolean
+	void SafeGuardsDeactivateCompromisedSystem()
 }
 class Actuator  {
 	ActuatorOnline : Boolean
@@ -21,8 +10,62 @@ class Actuator  {
 	void ReactorMotorDestroyed()
 	void SafeGuardsDeactivateCompromisedSystem()
 }
-class SensitiveFile  {
+class Operator  {
+	PhishingEmailReceived : Boolean
+	PhishingEmailOpened : Boolean
+	Email : String
+	TrustedEmails : String
+	isHacker : Boolean
+	void HackerSendsPhishingEmail()
+	void OperatorOpensPhishingEmail()
+	void HWPExploitUsed()
+}
+class Malware  {
+	OwnerIP : String
+	CompatableSoftwareDate : Integer
+	CompatableMonitorOS : String
+	CompatablePLCOS : String
+	RequiredSoftware : String
+	void HackerSendsPhishingEmail()
+	void OperatorOpensPhishingEmail()
+	void NetworkCompromised()
+	void DeviceCompromisesNetwork()
+	void MonitorInfectsPLC()
 	void UploadAndDeleteSecretFiles()
+	void HWPExploitUsed()
+}
+class Sensor  {
+	SensorOnline : Boolean
+	SensorCompromised : Boolean
+}
+class NetworkConnector  {
+	trafficLevel : Integer
+	trafficCapacity : Integer
+	ConnectorOnline : Boolean
+	NetworkCompromised : Boolean
+	void HackerSendsPhishingEmail()
+	void NetworkCompromised()
+	void DeviceCompromisesNetwork()
+	void MonitorInfectsPLC()
+}
+class Any  {
+}
+class SensitiveFile  {
+}
+class ContainableByAny  {
+}
+class IndustrialComponent  {
+	ComponentOnline : Boolean
+	ComponentCompromised : Boolean
+	void SafeGuardsDeactivateCompromisedSystem()
+}
+class SafeguardSystem  {
+	SafeguardOnline : Boolean
+	void SafeGuardsDeactivateCompromisedSystem()
+}
+class SafeguardSystem  {
+	SafeguardOnline : Boolean
+	void SafeGuardsDeactivateCompromisedSystem()
 }
 class NetworkConnector  {
 	trafficLevel : Integer
@@ -32,11 +75,6 @@ class NetworkConnector  {
 	void DeviceCompromisesNetwork()
 	void MonitorInfectsPLC()
 	void NetworkCompromised()
-	void HackerSendsPhishingEmail()
-}
-class SafeguardSystem  {
-	SafeguardOnline : Boolean
-	void SafeGuardsDeactivateCompromisedSystem()
 }
 class Operator  {
 	PhishingEmailReceived : Boolean
@@ -44,27 +82,6 @@ class Operator  {
 	Email : String
 	TrustedEmails : String
 	isHacker : Boolean
-	void OperatorOpensPhishingEmail()
-	void HackerSendsPhishingEmail()
-	void HWPExploitUsed()
-}
-class ContainableByAny  {
-}
-class PLC  {
-	PLCOnline : Boolean
-	PLCCompromised : Boolean
-	PLCOS : String
-	PLCSoftwareRelease : Integer
-	PLCInfected : Boolean
-	void MonitorInfectsPLC()
-	void ReactorMotorDestroyed()
-}
-class IndustrialComponent  {
-	ComponentOnline : Boolean
-	ComponentCompromised : Boolean
-	void SafeGuardsDeactivateCompromisedSystem()
-}
-class Any  {
 }
 class Malware  {
 	OwnerIP : String
@@ -72,45 +89,122 @@ class Malware  {
 	CompatableMonitorOS : String
 	CompatablePLCOS : String
 	RequiredSoftware : String
-	void OperatorOpensPhishingEmail()
 	void DeviceCompromisesNetwork()
-	void UploadAndDeleteSecretFiles()
 	void MonitorInfectsPLC()
 	void NetworkCompromised()
+}
+class Monitor  {
+	MonitorOnline : Boolean
+	MonitorCompromised : Boolean
+	MonitorOS : String
+	MonitorSoftwareRelease : Integer
+	MonitorInfected : Boolean
+	SoftwarePresent : String
+	IP : String
 	void HackerSendsPhishingEmail()
+	void OperatorOpensPhishingEmail()
+	void NetworkCompromised()
+	void DeviceCompromisesNetwork()
+	void MonitorInfectsPLC()
+	void UploadAndDeleteSecretFiles()
 	void HWPExploitUsed()
+}
+class PLC  {
+	PLCOnline : Boolean
+	PLCCompromised : Boolean
+	PLCOS : String
+	PLCSoftwareRelease : Integer
+	PLCInfected : Boolean
+	void ReactorMotorDestroyed()
+	void MonitorInfectsPLC()
+}
+class SensitiveFile  {
+	void UploadAndDeleteSecretFiles()
 }
 class Sensor  {
 	SensorOnline : Boolean
 	SensorCompromised : Boolean
 }
+class Monitor  {
+	MonitorOnline : Boolean
+	MonitorCompromised : Boolean
+	MonitorOS : String
+	MonitorSoftwareRelease : Integer
+	MonitorInfected : Boolean
+	SoftwarePresent : String
+	IP : String
+	void DeviceCompromisesNetwork()
+	void MonitorInfectsPLC()
+	void NetworkCompromised()
+}
+class PLC  {
+	PLCOnline : Boolean
+	PLCCompromised : Boolean
+	PLCOS : String
+	PLCSoftwareRelease : Integer
+	PLCInfected : Boolean
+	void ReactorMotorDestroyed()
+	void MonitorInfectsPLC()
+}
+class Actuator  {
+	ActuatorOnline : Boolean
+	ActuatorCompromised : Boolean
+	void ReactorMotorDestroyed()
+	void SafeGuardsDeactivateCompromisedSystem()
+}
 
-Monitor -> "*" Monitor : SiblingMonitor
-Monitor -> "*" NetworkConnector : MonitorConnector
+IndustrialComponent -> "*" Sensor : ParentSensor
 Actuator -> "*" IndustrialComponent : ChildComponent
+Operator -> "1" Monitor : OperatesMonitor
+Malware -> "*" Monitor : InfectedMonitors
+Sensor -> "*" IndustrialComponent : ChildComponent
+Sensor -> "*" PLC : ParentPLC
+NetworkConnector -> "*" PLC : PLCs
+NetworkConnector -> "*" Monitor : Monitors
+NetworkConnector -> "*" NetworkConnector : LinkedNetworkConnectors
 SensitiveFile -> "*" Monitor : ExistsOnMonitors
 SensitiveFile -> "*" Malware : CompromisedByMalware
+ContainableByAny -> "0..1" Any : containedBy
+IndustrialComponent -> "*" Sensor : ParentSensor
 NetworkConnector -> "*" PLC : PLCs
 NetworkConnector -> "*" Monitor : Monitors
 NetworkConnector -> "*" NetworkConnector : LinkedNetworkConnectors
 Operator -> "1" Monitor : OperatesMonitor
-ContainableByAny -> "0..1" Any : containedBy
+Malware -> "*" Monitor : InfectedMonitors
+Monitor -> "*" Monitor : SiblingMonitor
+Monitor -> "*" NetworkConnector : MonitorConnector
 PLC -> "*" NetworkConnector : PLCConnector
 PLC -> "*" Actuator : ChildActuator
 PLC -> "*" Sensor : ChildSensor
-IndustrialComponent -> "*" Sensor : ParentSensor
-Malware -> "*" Monitor : InfectedMonitors
+SensitiveFile -> "*" Monitor : ExistsOnMonitors
+SensitiveFile -> "*" Malware : CompromisedByMalware
 Sensor -> "*" IndustrialComponent : ChildComponent
 Sensor -> "*" PLC : ParentPLC
+Monitor -> "*" Monitor : SiblingMonitor
+Monitor -> "*" NetworkConnector : MonitorConnector
+PLC -> "*" NetworkConnector : PLCConnector
+PLC -> "*" Actuator : ChildActuator
+PLC -> "*" Sensor : ChildSensor
+Actuator -> "*" IndustrialComponent : ChildComponent
 
-Monitor -up-|>  Any
-Actuator -up-|>  Any
-SensitiveFile -up-|>  Any
-NetworkConnector -up-|>  Any
-SafeguardSystem -up-|>  Any
-Operator -up-|>  Any
-PLC -up-|>  Any
 IndustrialComponent -up-|>  Any
+Actuator -up-|>  Any
+Operator -up-|>  Any
 Malware -up-|>  Any
 Sensor -up-|>  Any
+NetworkConnector -up-|>  Any
+SensitiveFile -up-|>  Any
+IndustrialComponent -up-|>  Any
+SafeguardSystem -up-|>  Any
+SafeguardSystem -up-|>  Any
+NetworkConnector -up-|>  Any
+Operator -up-|>  Any
+Malware -up-|>  Any
+Monitor -up-|>  Any
+PLC -up-|>  Any
+SensitiveFile -up-|>  Any
+Sensor -up-|>  Any
+Monitor -up-|>  Any
+PLC -up-|>  Any
+Actuator -up-|>  Any
 @enduml

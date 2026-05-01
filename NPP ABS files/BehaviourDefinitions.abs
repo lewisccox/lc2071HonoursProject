@@ -1,7 +1,7 @@
 AssetBasedSystem
 with core::*;
 with NPPDomain_def::* from "NPPDomain_def.abs";
-with NPPModelTemplate::* from "NPPModelTemplate.abs";
+with NPPModelTemplate::* from "NPPModel(Stuxnet).abs";
 
 
 DefinitionGroup BehaviourDefinitions {
