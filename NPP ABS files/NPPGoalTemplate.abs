@@ -1,0 +1,18 @@
+AssetBasedSystem
+with core::*;
+with NPPDomain_def::* from "NPPDomain_def.abs";
+with NPPModelTemplate::* from "your NPP instance file here";
+with BehaviourDefinitions::* from "your NPP behaviour definition file here ";
+
+AssetGroup NPPAttackGoals {
+//example goal definition
+//	Goal KHNPAttack {
+//		description "Infect Network"
+//		pre = 
+//		CROperator.PhishingEmailReceived == false
+//		post = 
+//		KHNPNuclearSecrets.ExistsOnMonitors.contains(KimsukyMonitor)&&
+//		!KHNPNuclearSecrets.ExistsOnMonitors.contains(ControlRoom)
+//	}
+	
+}

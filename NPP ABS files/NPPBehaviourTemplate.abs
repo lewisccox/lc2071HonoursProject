@@ -1,0 +1,20 @@
+AssetBasedSystem
+with core::*;
+with NPPDomain_def::* from "NPPDomain_def.abs";
+with NPPModelTemplate::* from "your NPP instance file here"; 
+
+
+DefinitionGroup BehaviourDefinitions {
+//example guarded action definition
+//	GuardedAction SafeGuardsDeactivateCompromisedSystem ( Safeguard : SafeguardSystem,  CompromisedActuator : Actuator, ActuatorComponent : IndustrialComponent){
+//		guard=
+//		CompromisedActuator.ActuatorOnline == false &&
+//		Safeguard.SafeguardOnline == true &&
+//		CompromisedActuator.ChildComponent.contains(ActuatorComponent)
+//		action{
+//			ActuatorComponent.ComponentOnline.assign(false);
+//		}		
+//	}
+	
+	
+}
