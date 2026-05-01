@@ -1,20 +1,12 @@
 @startuml
 title RuntimeData and behavior
-class SensitiveFile  {
-}
-class Any  {
-}
-class Malware  {
-}
 class Monitor  {
 	UploadAndDeleteSecretFiles(, ComputerOfHacker : **Monitor**, PhishingVirus : **Malware**, NuclearSecrets : **SensitiveFile**, )
 }
-class PLC  {
-}
-class Sensor  {
-}
 class Actuator  {
 	ReactorMotorDestroyed(, CompromisedPLC : **PLC**, )
+}
+class SensitiveFile  {
 }
 class NetworkConnector  {
 	DeviceCompromisesNetwork(, InfectedMonitor : **Monitor**, CulpritMalware : **Malware**, )
@@ -25,24 +17,32 @@ class SafeguardSystem  {
 	SafeGuardsDeactivateCompromisedSystem(, CompromisedActuator : **Actuator**, ActuatorComponent : **IndustrialComponent**, )
 }
 class Operator  {
+	OperatorOpensPhishingEmail(, ComputerOfTarget : **Monitor**, ComputerOfHacker : **Monitor**, Hacker : **Operator**, PhishingVirus : **Malware**, )
 	HackerSendsPhishingEmail(, TargetMonitor : **Monitor**, MConnector : **NetworkConnector**, EmailServer : **NetworkConnector**, PhishingMalware : **Malware**, HackerOperator : **Operator**, HackerMonitor : **Monitor**, HackerWifi : **NetworkConnector**, )
 	HWPExploitUsed(, ComputerOfTarget : **Monitor**, ComputerOfHacker : **Monitor**, PhishingVirus : **Malware**, )
-	OperatorOpensPhishingEmail(, ComputerOfTarget : **Monitor**, ComputerOfHacker : **Monitor**, Hacker : **Operator**, PhishingVirus : **Malware**, )
 }
 class ContainableByAny  {
 }
+class PLC  {
+}
 class IndustrialComponent  {
+}
+class Any  {
+}
+class Malware  {
+}
+class Sensor  {
 }
 
 
-SensitiveFile -up-|>  Any
-Malware -up-|>  Any
 Monitor -up-|>  Any
-PLC -up-|>  Any
-Sensor -up-|>  Any
 Actuator -up-|>  Any
+SensitiveFile -up-|>  Any
 NetworkConnector -up-|>  Any
 SafeguardSystem -up-|>  Any
 Operator -up-|>  Any
+PLC -up-|>  Any
 IndustrialComponent -up-|>  Any
+Malware -up-|>  Any
+Sensor -up-|>  Any
 @enduml
